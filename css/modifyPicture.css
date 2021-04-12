@@ -1,0 +1,25 @@
+img {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+form {
+    margin: 0;
+}
+
+textarea {
+    width: 373px;
+    height: 36px;
+    margin: 5px 0px;
+}
+
+input {
+    border-radius: 1em;
+    border-color: transparent;    
+    margin: 5px 0px;
+}
+
+#delete {   
+    color: white; 
+    background-color: red;    
+}
