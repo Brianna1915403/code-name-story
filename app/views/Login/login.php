@@ -12,8 +12,4 @@
     </form>
     Need an account? Register <a href="<?=BASE?>/Login/register">here</a>.<br />
 </body>
-<footer>
-    </br>
-	By: Brianna, Jeeva, Thomas
-</footer>
 </html>

@@ -2,6 +2,8 @@
 	session_start(); // Requirement for server to store data for each user
 	include "autoload.php";
 	require "core/phpqrcode/qrlib.php";
+	require "core/helpers.php";
+	
 	// Determine the folder for yhe project withing htdocs
 	$path = getcwd();
 	$path = preg_replace('/^.+\\\\htdocs\\\\/', '/', $path);

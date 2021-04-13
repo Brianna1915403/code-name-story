@@ -21,14 +21,6 @@
             return $stmt->fetch();
         }
 
-        public function findBySearch($search) {
-            $stmt = self::$connection->prepare("SELECT * FROM user WHERE username LIKE :search");
-            $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "\\App\\models\\User");
-            $search = "%".$search."%";
-            $stmt->execute(['search'=>$search]);
-            return $stmt->fetchAll();
-        }
-
         public function getAll() {
             $stmt = self::$connection->prepare("SELECT * FROM user");
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "\\App\\models\\User");
