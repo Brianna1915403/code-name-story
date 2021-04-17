@@ -2,34 +2,16 @@
     color: var(--text-colour-light);
 }
 
-.text-theme-dark {
-    color: var(--text-colour-dark);
-}
-
 .link-theme-light {
     color: var(--text-colour-light);
-}
-
-.link-theme-dark {
-    color: var(--text-colour-dark);
 }
 
 .link-theme-light:hover {    
     border-bottom: 2px var(--text-colour-light) solid;
 }
 
-.link-theme-dark:hover {    
-    border-bottom: 2px var(--text-colour-dark) solid;
-}
-
 .logo-light-theme {
     content: url("../images/logo-dark.png");
-    width: 200px;
-    height: 38px;
-}
-
-.logo-dark-theme {
-    content: url("../images/logo-light.png");
     width: 200px;
     height: 38px;
 }
@@ -49,29 +31,7 @@
     border-radius: 5px;
 }
 
-.btn-dark-theme-accent {
-    display: inline-block;
-    padding: 10px 30px;
-    margin: 0 5px;
-    cursor: pointer;
-    background: var(--main-accent-colour-dark);
-    color: var(--text-colour-dark);
-    border: none;
-    border-radius: 5px;
-}
-
 .btn-light-theme-main {
-    display: inline-block;
-    padding: 10px 30px;
-    margin: 0 5px;
-    cursor: pointer;
-    background: var(--main-colour-light);
-    color: var(--text-colour-light);
-    border: none;
-    border-radius: 5px;
-}
-
-.btn-dark-theme-main {
     display: inline-block;
     padding: 10px 30px;
     margin: 0 5px;
