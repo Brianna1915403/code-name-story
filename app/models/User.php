@@ -38,9 +38,13 @@
             $stmt->execute(['token'=>$this->token, 'user_id'=>$this->user_id]);
         }        
 
-        public function update(){
+        public function update() {
             $stmt = self::$connection->prepare("UPDATE user SET password_hash = :password_hash WHERE user_id = :user_id");
             $stmt->execute(['user_id'=>$this->user_id, 'password_hash'=>$this->password_hash]);
+        }
+
+        public function delete() {
+            
         }
     }
 ?>

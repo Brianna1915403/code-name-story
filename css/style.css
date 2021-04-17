@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+
+:root {
+    --main-accent-colour-light: #f0f0f0;
+    --main-accent-colour-dark: #272727;
+    --main-colour-light: #ffffff;
+    --main-colour-dark: #313131;
+    --text-colour-light: #333333;
+    --text-colour-dark: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: var(--text-colour-light);
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a { 
+    text-decoration: none;
+    color: var(--main-colour-dark);
+}
+
+h1, h2 {
+    font-weight: 300;
+    line-height: 1.2;
+    margin: 10px 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--main-accent-colour-light);
+    color: var(--text-colour-light);
+    height: 70px;
+}
+
+.navbar ul {
+    display: flex;
+}
+
+.navbar a {
+    padding: 10px;
+    margin: 0 5px;
+}
+
+.navbar input[type="search"] {
+    width: 50%;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 25px;
+    justify-self: center;
+}
+
+.navbar input[type="search"]:focus {
+    outline: none;
+}
+
+.navbar i {    
+    justify-self: flex-end;
+}
+
+.navbar .flex {
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* Reader & Writer 'Description' */
+
+.reader {        
+    height: 400px;
+    background-color: var(--main-accent-colour-light);
+    color: var(--text-colour-light);
+    position: relative;
+}
+
+.writer {        
+    height: 400px;
+    top: 25px;
+    margin-bottom: 75px;
+    color: var(--text-colour-light);
+    position: relative;
+}
+
+.reader .card-main-colour-light-theme, .writer .card-accent-colour-light-theme  {   
+    margin-top: 100px;
+    z-index: 1;
+}
+
+.reader .grid, .writer .grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.reader .grid > *:first-child, .writer .grid > *:first-child {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
+}
+
+.reader .options, .reader i, .writer a, .writer i {
+    text-align: center;
+}
+
+.reader::before, .reader::after {
+    content: '';
+    position: absolute;
+    height: 200px;
+    bottom: -35px;
+    right: 0;
+    left: 0;
+    background: var(--main-accent-colour-light);
+    transform: skewY(-2deg);
+    -webkit-transform: skewY(-2deg);
+    -moz-transform: skewY(-2deg);
+    -ms-transform: skewY(-2deg);
+    z-index: -1;
+}
+
+/* Footer */
+.footer {
+    padding: 30px;
+}
+
+.footer .social a {
+    margin: 0 10px;
+}
