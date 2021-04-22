@@ -22,8 +22,8 @@
         }
     
         public function insert() {
-            $stmt = self::$connection->prepare("INSERT INTO picture(profile_id, filename, caption) VALUES (:profile_id, :filename, :caption)");
-            $stmt->execute(['profile_id'=>$this->profile_id, 'filename'=>$this->filename, 'caption'=>$this->caption]);
+            $stmt = self::$connection->prepare("INSERT INTO picture(filename, profile_id, alt, artist) VALUES (:filename, :profile_id, :alt, :artist)");
+            $stmt->execute(['profile_id'=>$this->profile_id, 'filename'=>$this->filename, 'alt'=>$this->alt, 'artist'=>$this->artist]);
         }
 
         public function delete(){
@@ -32,8 +32,8 @@
         }
 
         public function update(){
-            $stmt = self::$connection->prepare("UPDATE picture SET caption = :caption WHERE picture_id = :picture_id");
-            $stmt->execute(['picture_id'=>$this->picture_id,'caption'=>$this->caption]);
+            $stmt = self::$connection->prepare("UPDATE picture SET alt = :alt, artist = :artist WHERE picture_id = :picture_id");
+            $stmt->execute(['picture_id'=>$this->picture_id,'alt'=>$this->alt, 'artist'=>$this->artist]);
         }
     }
 ?>

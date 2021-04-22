@@ -17,7 +17,7 @@
                         </ul>
                     </nav>
                     <input type='search' name='search' id='search' placeholder='Search'>
-                    <i class='fas fa-user-circle fa-2x'></i>
+                    <a href='#'><i class='fas fa-user-circle fa-2x'></i></a>
                 </div>
             </div>";
     }
@@ -32,7 +32,7 @@
                     </div>        
                     <nav>
                         <ul>
-                            <li><a href='Home.html'>Home</a></li>
+                            <li><a href='Home.php'>Home</a></li>
                             <li><a href='#'>Browse</a></li>
                             <li><a href='#'>Create</a></li>
                         </ul>

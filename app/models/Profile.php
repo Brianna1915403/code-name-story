@@ -2,6 +2,7 @@
     namespace App\models;
 
     class Profile extends \App\core\Model {
+        public $default_picture_id = 0;
 
         public function __construct() { 
             parent::__construct();
@@ -22,13 +23,20 @@
         }
 
         public function insert(){
-            $stmt = self::$connection->prepare("INSERT INTO profile(user_id, first_name, middle_name, last_name) VALUES (:user_id, :first_name, :middle_name, :last_name)");
-            $stmt->execute(['user_id'=>$this->user_id, 'first_name'=>$this->first_name, 'middle_name'=>$this->middle_name, 'last_name'=>$this->last_name]);
+            $stmt = self::$connection->prepare("INSERT INTO profile(user_id, account_type, description, theme, profile_picture_id) 
+                VALUES (:user_id, :account_type, :description, :theme, :profile_picture_id)");
+            $stmt->execute(['user_id'=>$this->user_id, 'account_type'=>$this->account_type, 'description'=>$this->description, 
+                'theme'=>$this->theme, 'profile_picture_id'=>$this->default_picture_id]);
+        }
+
+        public function updateProfilePicture($picture_id){
+            $stmt = self::$connection->prepare("UPDATE profile SET profile_picture_id = :profile_picture_id WHERE profile_id = :profile_id");
+            $stmt->execute(['profile_id'=>$this->profile_id, 'profile_picture_id'=>$picture_id]);
         }
 
         public function update(){
-            $stmt = self::$connection->prepare("UPDATE profile SET first_name = :first_name, middle_name = :middle_name, last_name = :last_name WHERE user_id = :user_id");
-            $stmt->execute(['user_id'=>$this->user_id, 'first_name'=>$this->first_name, 'middle_name'=>$this->middle_name, 'last_name'=>$this->last_name]);
+            $stmt = self::$connection->prepare("UPDATE profile SET account_type = :account_type, description = :description, theme = :theme WHERE profile_id = :profile_id");
+            $stmt->execute(['profile_id'=>$this->profile_id, 'account_type'=>$this->account_type, 'description'=>$this->description, 'theme'=>$this->theme]);
         }
     }
 ?>

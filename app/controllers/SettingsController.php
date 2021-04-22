@@ -13,11 +13,11 @@
         }
 
         function editProfile() {
-            header('location:'.BASE.'/Profile/editProfile/'.$_SESSION['user_id']);
+            header('location:'.BASE.'/Profile/editProfile/'.$_SESSION['profile_id']);
         }
 
         function editPassword() {
-            header('location:'.BASE.'/Login/editPassword/'.$_SESSION['user_id']);
+            header('location:'.BASE.'/Login/editPassword/'.$_SESSION['profile_id']);
         }
     }        
 ?>

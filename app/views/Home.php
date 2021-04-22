@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <?= spawnCSSDependencies() ?>
         <title>Login</title>
     </head>
-    <body>
-        <?= spawnCSSDependencies() ?>
+    <body>        
         <?= spawnNavBar() ?>
         <!-- Reader -->
         <section class="reader">
