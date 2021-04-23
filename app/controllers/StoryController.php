@@ -8,7 +8,7 @@
             
         }
 
-        function createSeries(){
+        function createStory(){
             if(isset($_POST['action'])){
                 $story = new \App\models\Story();
                 $story->profile_id = $_SESSION['profile_id'];
@@ -46,6 +46,22 @@
             $story = new \App\models\Story();
             $story = $story->findBySeries($series_id);
             $this->view('Story/viewAllMyStories', $story);
+        }
+
+        function addTags($story_id){
+            if(isset($_POST['action']) && is_array($_POST['tags'])){
+            $story = new \App\models\Story();
+            $story = $story->findByID($story_id);
+            
+            $tags = array();
+            $tags = implode(', ', $_POST['fruit']);
+            $story->addTagsToStory($story_id, $tags);
+            $this->view('Story/viewStoryInfo', $story);
+            }else{
+                $story = new \App\models\Story();
+                $story = $story->findByID($story_id);
+                $this->view('Story/AddTagsToStory', $story);
+            }
         }
 
 

@@ -18,9 +18,9 @@
                 $story->series_id = $_POST['series_id'];
                 $story->author = $_POST['author'];
                 $story->insert();
-                header('location:'.BASE.'/Story/viewAllStoriesByProfile/'.$_SESSION['profile_id']);
+                header('location:'.BASE.'/Series/viewAllSeriesByProfile/'.$_SESSION['profile_id']);
              } else {
-                 $this->view('Story/createStory');
+                 $this->view('Story/createSeries');
              }
         }
 
