@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <?= spawnDependenciesWithinView() ?>
+        <script src="../js/createProfile.js"></script>
         <title>Profile Creation</title>
     </head>
-    <body>
-        Create your profile!<br /><br />
-        <form action="" method="post">
-            <label>First Name <input type="text" name="first_name"></label><br />
-            <label>Middle Name <input type="text" name="middle_name"></label><br />
-            <label>Last Name <input type="text" name="last_name"></label><br />            
-
-            <input type="submit" name="action" value="Create Profile">
-        </form>
+    <body class="light-theme-bg-accent">
+        <?= spawnNavBar() ?>
+        <div class="container">
+            <div class="hForm card light-theme-bg-main">                
+                <section class="profile-form">
+                    <header>
+                        <h2>Create You Profile</h2>
+                        <p>Let the world know who you are!</p>
+                    </header>                
+                    <form action="" method="post">
+                        <label>Select a profile picture: <input type="file" name="upload" /></label><br>           
+                        <label>What your type would you like to be? <select id="account-type" name="account_type">
+                            <option value="reader">Reader</option>
+                            <option value="writer">Writer</option>
+                        </select></label>
+                        <div id="account-type-description">As a reader you can keep track of all the stories you love, while showing their creatures love in the comments!</div>
+                        <textarea name="description" cols="50" rows="5" maxlength='255' style='resize: none;'></textarea><br /><br />
+                        <input class='btn light-theme-bg-accent light-theme-text' type="submit" name="action" value="Create Profile">
+                    </form>
+                </section>
+            </div>
+        </div>
+        
+        <?= spawnFooter() ?>
     </body>
 </html>

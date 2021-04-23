@@ -57,6 +57,11 @@
     margin: 10px;
 }
 
+.hForm.card {
+    width: max-content;
+    margin: 50px auto;
+}
+
 .dropdown {
     position: relative;
     display: block;    
@@ -78,6 +83,22 @@
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.hForm > * {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.error {
+    display: block;
+    border: 3px solid rgba(255, 0, 0, 0.596);
+    border-radius: 10px;
+    padding: 5px;
+    background-color: rgba(255, 0, 0, 0.801);
+    color: white;
+    font-weight: 600;
+    margin-bottom: 30px;
 }
 
 .flex {

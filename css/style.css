@@ -68,56 +68,7 @@ h1, h2 {
     justify-content: space-between;
 }
 
-/* Reader & Writer 'Description' */
-
-.reader {        
-    height: 400px;
-    background-color: var(--main-accent-colour-light);
-    color: var(--text-colour-light);
-    position: relative;
-}
-
-.writer {        
-    height: 400px;
-    top: 25px;
-    margin-bottom: 75px;
-    color: var(--text-colour-light);
-    position: relative;
-}
-
-.reader .card, .writer .card  {   
-    margin-top: 100px;
-    z-index: 1;
-}
-
-.reader .grid, .writer .grid {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-}
-
-.reader .grid > *:first-child, .writer .grid > *:first-child {
-    grid-column: 1 / span 2;
-    grid-row: 1 / span 2;
-}
-
-.reader .options, .reader i, .writer a, .writer i {
-    text-align: center;
-}
-
-.reader::before, .reader::after {
-    content: '';
-    position: absolute;
-    height: 200px;
-    bottom: -35px;
-    right: 0;
-    left: 0;
-    background: var(--main-accent-colour-light);
-    transform: skewY(-2deg);
-    -webkit-transform: skewY(-2deg);
-    -moz-transform: skewY(-2deg);
-    -ms-transform: skewY(-2deg);
-    z-index: -1;
-}
+/* Navbar Dropdown */
 
 .dropdown {
     position: relative;
@@ -186,6 +137,118 @@ a.browse-options-light {
 
 .dropdown-content {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Reader & Writer 'Description' */
+
+.reader {        
+    height: 400px;
+    background-color: var(--main-accent-colour-light);
+    color: var(--text-colour-light);
+    position: relative;
+}
+
+.writer {        
+    height: 400px;
+    top: 25px;
+    margin-bottom: 75px;
+    color: var(--text-colour-light);
+    position: relative;
+}
+
+.reader .card, .writer .card  {   
+    margin-top: 100px;
+    z-index: 1;
+}
+
+.reader .grid, .writer .grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.reader .grid > *:first-child, .writer .grid > *:first-child {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
+}
+
+.reader .options, .reader i, .writer a, .writer i {
+    text-align: center;
+}
+
+.reader::before, .reader::after {
+    content: '';
+    position: absolute;
+    height: 200px;
+    bottom: -35px;
+    right: 0;
+    left: 0;
+    background: var(--main-accent-colour-light);
+    transform: skewY(-2deg);
+    -webkit-transform: skewY(-2deg);
+    -moz-transform: skewY(-2deg);
+    -ms-transform: skewY(-2deg);
+    z-index: -1;
+}
+
+/* Login & Registration Forms */
+
+.login-form input[type='text'], .login-form input[type='password'],
+.registration-form input[type='text'], .registration-form input[type='password'] {
+    border: 0;
+    border-bottom: 1px solid #B4BECB;
+    width: 100%;
+    padding: 3px;
+    font-size: 16px;
+}
+
+.login-form input:focus, .registration-form input:focus {
+    outline: none;
+}
+
+.login-form, .registration-form {
+    width: 400px;
+    margin: 0 10px;
+}
+
+.login-form {
+    height: 397.6px;
+}
+
+.login-form input[type='submit'] {
+    margin-top: 81px;
+}
+
+.login-form header, .registration-form header {
+    margin-bottom: 10px;
+}
+
+.login-form header p, .registration-form header p {
+    color: rgb(148, 146, 146);
+}
+
+.login-form {
+    padding-right: 20px;
+    border-right: 2px solid var(--main-accent-colour-light);
+}
+
+.login-form footer, .registration-form footer {
+    display: block;
+    margin-top: 20px;
+    color: rgb(148, 146, 146);
+}
+
+.login-form footer {
+    margin-top: 20px;
+}
+
+/* Profile Creation Form */
+
+input[type='file'] {
+    appearance: none;
+}
+
+#account-type {   
+    appearance: none;
 }
 
 /* Footer */

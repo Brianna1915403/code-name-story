@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2021 at 12:46 AM
+-- Generation Time: Apr 23, 2021 at 09:31 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -144,13 +144,67 @@ CREATE TABLE `story` (
   `story_id` int(11) NOT NULL,
   `profile_id` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
-  `tags` set('Comedy','Fantasy','Romance','Slice of Life','Sci-Fi','Drama','Short Story','Action','Superhero','Heart-Warming','Thriller','Horror','Post-Apocalyptic','Zombies','School','Supernatural','Animals','Crime/Mystery','Historical','Informative','Sports','Inspirational','BL','GL','18+','All Ages') NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `favorites` int(11) NOT NULL,
-  `series_id` int(11) NOT NULL,
+  `series_id` int(11) DEFAULT NULL,
   `author` varchar(64) NOT NULL,
   `story_picture_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `story_tags`
+--
+
+DROP TABLE IF EXISTS `story_tags`;
+CREATE TABLE `story_tags` (
+  `tag_id` int(11) NOT NULL,
+  `story_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tag`
+--
+
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE `tag` (
+  `tag_id` int(11) NOT NULL,
+  `name` varchar(24) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tag`
+--
+
+INSERT INTO `tag` (`tag_id`, `name`) VALUES
+(1, 'Action'),
+(2, 'All Ages'),
+(3, 'Animals'),
+(4, 'BL'),
+(5, 'Comedy'),
+(6, 'Crime/Mystery'),
+(7, 'Drama'),
+(8, 'Fantasy'),
+(9, 'GL'),
+(10, 'Heart-Warming'),
+(11, 'Historical'),
+(12, 'Horror'),
+(13, 'Informative'),
+(14, 'Inspirational'),
+(15, 'Mature'),
+(16, 'Post-Apocalyptic'),
+(17, 'Romance'),
+(18, 'School'),
+(19, 'Sci-Fi'),
+(20, 'Short Story'),
+(21, 'Slice of Life'),
+(22, 'Sports'),
+(23, 'Superhero'),
+(24, 'Supernatural'),
+(25, 'Thriller'),
+(26, 'Zombies');
 
 -- --------------------------------------------------------
 
@@ -165,6 +219,13 @@ CREATE TABLE `user` (
   `password_hash` varchar(255) NOT NULL,
   `token` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password_hash`, `token`) VALUES
+(1, 'Jane', '$2y$10$mWSc/wW9YDMcbaHuWRxaDeMjb0LXgj9B2BdPdqiXOjrwUEdcoQxOe', '');
 
 --
 -- Indexes for dumped tables
@@ -237,6 +298,19 @@ ALTER TABLE `story`
   ADD KEY `story_series_FK` (`series_id`);
 
 --
+-- Indexes for table `story_tags`
+--
+ALTER TABLE `story_tags`
+  ADD PRIMARY KEY (`tag_id`,`story_id`),
+  ADD KEY `story-tags_story_FK` (`story_id`);
+
+--
+-- Indexes for table `tag`
+--
+ALTER TABLE `tag`
+  ADD PRIMARY KEY (`tag_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -283,10 +357,16 @@ ALTER TABLE `story`
   MODIFY `story_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tag`
+--
+ALTER TABLE `tag`
+  MODIFY `tag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -346,6 +426,13 @@ ALTER TABLE `story`
   ADD CONSTRAINT `story_picture_FK` FOREIGN KEY (`story_picture_id`) REFERENCES `picture` (`picture_id`),
   ADD CONSTRAINT `story_profile_FK` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`),
   ADD CONSTRAINT `story_series_FK` FOREIGN KEY (`series_id`) REFERENCES `series` (`series_id`);
+
+--
+-- Constraints for table `story_tags`
+--
+ALTER TABLE `story_tags`
+  ADD CONSTRAINT `story-tags_story_FK` FOREIGN KEY (`story_id`) REFERENCES `story` (`story_id`),
+  ADD CONSTRAINT `story-tags_tag_FK` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

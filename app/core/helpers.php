@@ -32,8 +32,7 @@
                                 <li><a href='#' id='by-numbers' class='browse-options-light'>By Numbers</a></li>
                                 <li><a href='#' id='all' class='browse-options-light'>All</a></li>
                             </ul>
-                            <div class='drop-content-tags grid grid-3'>
-                                <a href='#'>18+</a>
+                            <div class='drop-content-tags grid grid-3'>                                
                                 <a href='#'>Action</a>
                                 <a href='#'>All Ages</a>
                                 <a href='#'>Animals</a>
@@ -48,6 +47,7 @@
                                 <a href='#'>Horror</a>
                                 <a href='#'>Informative</a>
                                 <a href='#'>Inspirational</a>
+                                <a href='#'>Mature</a>
                                 <a href='#'>Post-Apocalyptic</a>
                                 <a href='#'>Romance</a>
                                 <a href='#'>School</a>
@@ -84,7 +84,7 @@
                 </ul> ";            
         } else {
             echo "<ul>
-                    <li><a href='".BASE."/Login/login_register'>Login <i class='fas fa-sign-in-alt' style='margin-left: 2px;'></i></a></li>
+                    <li><a href='".BASE."/Login/login'>Login <i class='fas fa-sign-in-alt' style='margin-left: 2px;'></i></a></li>
                 </ul>";
         }
         echo "</div></div></div></div>";
