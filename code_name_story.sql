@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 09:31 PM
+-- Generation Time: Apr 23, 2021 at 10:51 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -105,8 +105,15 @@ CREATE TABLE `profile` (
   `account_type` enum('reader','writer') NOT NULL DEFAULT 'reader',
   `description` text NOT NULL,
   `theme` enum('light','dark','green','blue') NOT NULL DEFAULT 'light',
-  `profile_picture_id` int(11) NOT NULL
+  `profile_picture_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `profile`
+--
+
+INSERT INTO `profile` (`profile_id`, `user_id`, `account_type`, `description`, `theme`, `profile_picture_id`) VALUES
+(1, 1, 'reader', 'I don\'t know who I am...', 'light', NULL);
 
 -- --------------------------------------------------------
 
@@ -336,13 +343,13 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `picture`
 --
 ALTER TABLE `picture`
-  MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `series`

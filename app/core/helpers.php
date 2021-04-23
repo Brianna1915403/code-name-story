@@ -75,12 +75,12 @@
                 <div class='dropdown-content light-theme-bg-main light-theme-text'>
         ";
 
-        if(isset($_SESSION['profile_id'])) {
+        if(isset($_SESSION['user_id'])) {
             echo "<ul>
                     <li><a href='#'>Profile</a></li>
                     <li><a href='#'>Favorites</a></li>
                     <li><a href='#'>Settings</a></li>
-                    <li><a href='#'>Logout <i class='fas fa-sign-out-alt' style='margin-left: 2px;'></i></a></li>
+                    <li><a href='".BASE."/Login/logout'>Logout <i class='fas fa-sign-out-alt' style='margin-left: 2px;'></i></a></li>
                 </ul> ";            
         } else {
             echo "<ul>

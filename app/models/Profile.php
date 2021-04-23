@@ -23,10 +23,9 @@
         }
 
         public function insert(){
-            $stmt = self::$connection->prepare("INSERT INTO profile(user_id, account_type, description, theme, profile_picture_id) 
-                VALUES (:user_id, :account_type, :description, :theme, :profile_picture_id)");
-            $stmt->execute(['user_id'=>$this->user_id, 'account_type'=>$this->account_type, 'description'=>$this->description, 
-                'theme'=>$this->theme, 'profile_picture_id'=>$this->default_picture_id]);
+            $stmt = self::$connection->prepare("INSERT INTO profile(user_id, account_type, description) 
+                VALUES (:user_id, :account_type, :description)");
+            $stmt->execute(['user_id'=>$this->user_id, 'account_type'=>$this->account_type, 'description'=>$this->description]);
         }
 
         public function updateProfilePicture($picture_id){

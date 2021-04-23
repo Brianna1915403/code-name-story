@@ -15,11 +15,10 @@
                $profile->user_id = $_SESSION['user_id'];
                $profile->account_type = $_POST['account_type'];
                $profile->description = $_POST['description'];
-               $profile->theme = $_POST['theme'];
                $profile->insert();
                $profile = $profile->findByUserID($profile->user_id);
                $_SESSION['profile_id'] = $profile->profile_id;
-               header('location:'.BASE.'/Profile/viewProfile/'.$_SESSION['profile_id']);
+               header('location:'.BASE.'/home');
             } else {
                 $this->view('Profile/createProfile');
             }
