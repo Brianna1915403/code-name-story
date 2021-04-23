@@ -1,8 +1,8 @@
 <?php 
 
     function spawnCSSDependencies() {
-        echo "<link rel='stylesheet' href='../css/style.css' type='text/css'>
-                <link rel='stylesheet' href='../css/utilities.css' type='text/css'>
+        echo "<link rel='stylesheet' href='css/style.css' type='text/css'>
+                <link rel='stylesheet' href='css/utilities.css' type='text/css'>
                 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
                 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>";
     }
@@ -14,7 +14,7 @@
             <nav>
                 <ul>
                     <li class='dropdown'>
-                        <a href='#' class='link-theme-light'>Browse</a>
+                        <a href='#' class='light-theme-link'>Browse</a>
                         <div class='dropdown-menu light-theme-bg-main'>
                             <ul class='lg header light-theme-bg-accent'>
                                 <li><a href='#' id='by-tags' class='browse-options-light selected-light'>By Tags</a></li>
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </li>
-                    <li><a href='#' class='link-theme-light'>Create</a></li>
+                    <li><a href='#' class='light-theme-link'>Create</a></li>
                 </ul>
             </nav>
             <input type='search' name='search' id='search' placeholder='Search'>
@@ -80,7 +80,7 @@
     }
 
     function spawnFooter() {
-        echo "<footer class='footer bg-accent-light-theme'>
+        echo "<footer class='footer light-theme-bg-accent'>
                 <div class='container grid grid-3'>
                     <div>
                         <div class='logo-light-theme'></div>

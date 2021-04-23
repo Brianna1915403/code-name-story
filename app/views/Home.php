@@ -10,7 +10,7 @@
         <!-- Reader -->
         <section class="reader">
             <div class="container">
-                <div class="card-main-colour-light-theme grid">
+                <div class="card grid light-theme-bg-main light-theme-text">
                     <div class="description-text text-theme-light">
                         <h2>Dive into Wonderus Adventures!</h2>
                         <p> As a reader explore wonderful and exciting worlds created by users like you! Touching all types of genres from fantasy, to horror and a dash of comedy. We are sure you will find something to enjoy, and look forward to when new chapters are published!</p>
@@ -29,7 +29,7 @@
         <!-- Writer -->
         <section class="writer">
             <div class="container">
-                <div class="card-accent-colour-light-theme grid">
+                <div class="card grid light-theme-bg-accent light-theme-text">
                     <div class="description-text text-theme-light">
                         <h2>Create Marvelous Stories!</h2>
                         <p> If you cannot find the perfect story for you or your creativity is simply bursting. Why not try your hand at writing! Your story can be the perfect touch to brighten someone’s day, and not to mention you can share your world with others!</p>
