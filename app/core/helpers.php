@@ -1,16 +1,27 @@
 <?php 
 
-    function spawnCSSDependencies() {
-        echo "<link rel='stylesheet' href='css/style.css' type='text/css'>
+    function spawnDependencies() {
+        echo "<link rel='icon' type='image/x-ico' href='favicon.ico'/>
+                <link rel='stylesheet' href='css/style.css' type='text/css'>
                 <link rel='stylesheet' href='css/utilities.css' type='text/css'>
                 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
-                <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>";
+                <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+                <script src='js/navbar.js'></script>";
+    }
+
+    function spawnDependenciesWithinView() {
+        echo "<link rel='icon' type='image/x-ico' href='favicon.ico'/>
+                <link rel='stylesheet' href='../css/style.css' type='text/css'>
+                <link rel='stylesheet' href='../css/utilities.css' type='text/css'>
+                <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+                <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+                <script src='../js/navbar.js'></script>";
     }
 
     function spawnNavBar() {
         echo "<div class='navbar'>
         <div class='container flex'>
-            <div class='logo-light-theme'></div>
+            <a href='".BASE."'><div class='logo-light-theme'></div></a>
             <nav>
                 <ul>
                     <li class='dropdown'>
@@ -73,7 +84,7 @@
                 </ul> ";            
         } else {
             echo "<ul>
-                    <li><a href='#'>Login <i class='fas fa-sign-in-alt' style='margin-left: 2px;'></i></a></li>
+                    <li><a href='".BASE."/Login/login_register'>Login <i class='fas fa-sign-in-alt' style='margin-left: 2px;'></i></a></li>
                 </ul>";
         }
         echo "</div></div></div></div>";

@@ -3,8 +3,8 @@
 
     class HomeController extends \App\core\Controller {
         
-        function index() {
-            $this->view('Home');
+        function home() {
+            $this->view('home');
         }
     }        
 ?>

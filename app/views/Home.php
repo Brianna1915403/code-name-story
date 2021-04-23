@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <?= spawnCSSDependencies() ?>
-        <script src="js/home.js"></script>
-        <title>Login</title>
+        <?= spawnDependencies() ?>        
+        <title>Code Name: Story | Home</title>
     </head>
     <body>        
         <?= spawnNavBar() ?>
