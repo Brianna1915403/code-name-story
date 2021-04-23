@@ -16,8 +16,9 @@
                $profile->account_type = $_POST['account_type'];
                $profile->description = $_POST['description'];
                $profile->theme = $_POST['theme'];
-               $_SESSION['profile_id'] = $profile->profile_id;
                $profile->insert();
+               $profile = $profile->findByUserID($profile->user_id);
+               $_SESSION['profile_id'] = $profile->profile_id;
                header('location:'.BASE.'/Profile/viewProfile/'.$_SESSION['profile_id']);
             } else {
                 $this->view('Profile/createProfile');

@@ -8,6 +8,22 @@
             
         }
 
+        function createSeries(){
+            if(isset($_POST['action'])){
+                $story = new \App\models\Story();
+                $story->profile_id = $_SESSION['profile_id'];
+                $story->title = $_POST['title'];
+                $story->tags = $_POST['tags'];
+                $story->favorites = $_POST['favorites'];
+                $story->series_id = $_POST['series_id'];
+                $story->author = $_POST['author'];
+                $story->insert();
+                header('location:'.BASE.'/Story/viewAllStoriesByProfile/'.$_SESSION['profile_id']);
+             } else {
+                 $this->view('Story/createStory');
+             }
+        }
+
         function viewStory($story_id){
             $story = new \App\models\Story();
             $story = $story->findByID($story_id);
