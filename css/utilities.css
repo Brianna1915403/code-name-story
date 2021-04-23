@@ -91,7 +91,7 @@
 }
 
 .error {
-    display: block;
+    display: none;
     border: 3px solid rgba(255, 0, 0, 0.596);
     border-radius: 10px;
     padding: 5px;
@@ -125,6 +125,5 @@
     grid-template-columns: repeat(5, 1fr);
 }
 
-/* Sizing */
-
-.lg { font-size: 16; }
+/* Margin */
+.mb70 { margin-bottom: 70px;}
