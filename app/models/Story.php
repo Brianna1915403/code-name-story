@@ -22,7 +22,14 @@
             $stmt = self::$connection->prepare("SELECT * FROM story WHERE profile_id = :profile_id");
             $stmt->execute(['profile_id'=>$profile_id]);
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Story");
-            return $stmt->fetch();
+            return $stmt->fetchAll();
+        }
+
+        public function findBySeries($series_id){
+            $stmt = self::$connection->prepare("SELECT * FROM story WHERE series_id = :series_id");
+            $stmt->execute(['series_id'=>$series_id]);
+            $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Story");
+            return $stmt->fetchAll();
         }
     }
 ?>
