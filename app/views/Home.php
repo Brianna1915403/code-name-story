@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <?= spawnCSSDependencies() ?>
+        <script src="js/home.js"></script>
         <title>Login</title>
     </head>
     <body>        

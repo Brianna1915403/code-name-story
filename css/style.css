@@ -24,7 +24,7 @@ ul {
 
 a { 
     text-decoration: none;
-    color: var(--text-colour-light);
+    color: var(--main-colour-dark);
 }
 
 h1, h2 {
@@ -34,7 +34,7 @@ h1, h2 {
 }
 
 /* Navbar */
-.navbar {
+.navbar {    
     background-color: var(--main-accent-colour-light);
     color: var(--text-colour-light);
     height: 70px;
@@ -62,11 +62,8 @@ h1, h2 {
     outline: none;
 }
 
-.navbar i {    
-    justify-self: flex-end;
-}
-
 .navbar .flex {
+    overflow: visible;
     width: 100%;
     justify-content: space-between;
 }
@@ -88,7 +85,7 @@ h1, h2 {
     position: relative;
 }
 
-.reader .card-main-colour-light-theme, .writer .card-accent-colour-light-theme  {   
+.reader .card, .writer .card  {   
     margin-top: 100px;
     z-index: 1;
 }
@@ -120,6 +117,75 @@ h1, h2 {
     -moz-transform: skewY(-2deg);
     -ms-transform: skewY(-2deg);
     z-index: -1;
+}
+
+.dropdown {
+    position: relative;
+    display: block;    
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    min-width: 100px;   
+    width: max-content;  
+    max-width: 350px;     
+    z-index: 1;
+}
+
+.dropdown-menu {
+    /* border: 1px red solid; */
+    overflow: clip;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.header {
+    border-radius: 10px;
+    padding: 5px;
+}
+
+a.browse-options-light {
+    padding: 2px 7px;
+    border-radius: 20px;
+}
+
+.browse-options-light:hover {
+    background-color: var(--main-colour-light);
+}
+
+.selected-light {
+    background-color: var(--main-colour-light);
+}
+
+.drop-content-tags, .drop-content-numbers {
+    text-align: center;
+    padding-left: 5px;
+    margin-top: 10px;
+}
+
+.drop-content-tags a, .drop-content-numbers a {
+    border-radius: 20px;
+    padding: 6px;
+} 
+
+.drop-content-tags a:hover, .drop-content-numbers a:hover {
+    background-color: var(--main-accent-colour-light);
+} 
+
+.drop-content-tags.grid.grid-3, .drop-content-numbers.grid.grid-3 {
+    row-gap: 0;
+    grid-template-columns: repeat(3, max-content);    
+}
+
+.dropdown-content {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Footer */

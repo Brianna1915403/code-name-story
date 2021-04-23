@@ -1,13 +1,17 @@
-.text-theme-light {
+.light-theme-text, .light-theme-link {
     color: var(--text-colour-light);
 }
 
-.link-theme-light {
-    color: var(--text-colour-light);
-}
-
-.link-theme-light:hover {    
+.light-theme-link:hover {    
     border-bottom: 2px var(--text-colour-light) solid;
+}
+
+.light-theme-bg-main {
+    background-color: var(--main-colour-light);
+}
+
+.light-theme-bg-accent {
+    background-color: var(--main-accent-colour-light);
 }
 
 .logo-light-theme {
@@ -16,28 +20,21 @@
     height: 38px;
 }
 
-.bg-accent-light-theme {
-    background-color: var(--main-accent-colour-light);
+.logo-dark-theme {
+    content: url("../images/logo-light.png");
+    width: 200px;
+    height: 38px;
 }
 
-.btn-light-theme-accent {
+.light-theme-accent-border {
+    border-bottom: 1px solid var(--main-accent-colour-light);
+}
+
+.btn {
     display: inline-block;
     padding: 10px 30px;
     margin: 0 5px;
     cursor: pointer;
-    background: var(--main-accent-colour-light);
-    color: var(--text-colour-light);
-    border: none;
-    border-radius: 5px;
-}
-
-.btn-light-theme-main {
-    display: inline-block;
-    padding: 10px 30px;
-    margin: 0 5px;
-    cursor: pointer;
-    background: var(--main-colour-light);
-    color: var(--text-colour-light);
     border: none;
     border-radius: 5px;
 }
@@ -53,22 +50,34 @@
     padding: 0 40px;
 }
 
-.card-main-colour-light-theme {
-    background-color: var(--main-colour-light);
-    color: var(--text-colour-light);
+.card {
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
     margin: 10px;
 }
 
-.card-accent-colour-light-theme {
-    background-color: var(--main-accent-colour-light);
-    color: var(--text-colour-light);
+.dropdown {
+    position: relative;
+    display: block;    
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    margin-top: 3px;
+    padding: 5px;
     border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    margin: 10px;
+    min-width: 100px;       
+    z-index: 1;
+}
+
+.dropdown-content ul {
+    display: list-item;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 .flex {
@@ -90,3 +99,11 @@
 .grid-3 {
     grid-template-columns: repeat(3, 1fr);
 }
+
+.grid-5 {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+/* Sizing */
+
+.lg { font-size: 16; }
