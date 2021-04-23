@@ -26,8 +26,7 @@
                     </form>
                 </section>
             </div>
-        </div>
-        
+        </div>        
         <?= spawnFooter() ?>
     </body>
 </html>

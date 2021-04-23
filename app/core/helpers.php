@@ -100,7 +100,7 @@
                     </div>        
                     <nav>
                         <ul>
-                            <li><a href='Home.php'>Home</a></li>
+                            <li><a href='".BASE."/home'>Home</a></li>
                             <li><a href='#'>Browse</a></li>
                             <li><a href='#'>Create</a></li>
                         </ul>
