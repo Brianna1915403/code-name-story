@@ -25,42 +25,23 @@
             <nav>
                 <ul>
                     <li class='dropdown'>
-                        <a href='#' class='light-theme-link'>Browse</a>
+                        <a href='".BASE."/Search/browse' class='light-theme-link'>Browse</a>
                         <div class='dropdown-menu light-theme-bg-main'>
                             <ul class='lg header light-theme-bg-accent'>
                                 <li><a href='#' id='by-tags' class='browse-options-light selected-light'>By Tags</a></li>
                                 <li><a href='#' id='by-numbers' class='browse-options-light'>By Numbers</a></li>
-                                <li><a href='#' id='all' class='browse-options-light'>All</a></li>
+                                <li><a href='".BASE."/Search/browse' id='all' class='browse-options-light'>All</a></li>
                             </ul>
-                            <div class='drop-content-tags grid grid-3'>                                
-                                <a href='#'>Action</a>
-                                <a href='#'>All Ages</a>
-                                <a href='#'>Animals</a>
-                                <a href='#'>BL</a>
-                                <a href='#'>Comedy</a>
-                                <a href='#'>Crime/Mystery</a>
-                                <a href='#'>Drama</a>
-                                <a href='#'>Fantasy</a>
-                                <a href='#'>GL</a>
-                                <a href='#'>Heart-Warming</a>
-                                <a href='#'>Historical</a>
-                                <a href='#'>Horror</a>
-                                <a href='#'>Informative</a>
-                                <a href='#'>Inspirational</a>
-                                <a href='#'>Mature</a>
-                                <a href='#'>Post-Apocalyptic</a>
-                                <a href='#'>Romance</a>
-                                <a href='#'>School</a>
-                                <a href='#'>Sci-Fi</a>
-                                <a href='#'>Short Story</a>
-                                <a href='#'>Slice of Life</a>
-                                <a href='#'>Sports</a>
-                                <a href='#'>Superhero</a>
-                                <a href='#'>Supernatural</a>
-                                <a href='#'>Thriller</a>
-                                <a href='#'>Zombies</a>
-                            </div>
-                            <div class='drop-content-numbers grid grid-3' hidden>
+                            <div class='drop-content-tags grid grid-3'>";     
+        
+        $tag = new \App\models\Tag();
+        $tags = $tag->getAll();
+        foreach ($tags as $tag) {
+            echo "<a href='".BASE."/Search/browse?tags=$tag->name'>$tag->name</a>";
+        }
+                                
+        echo "</div>
+                            <div class='drop-content-numbers grid grid-3' style='display: none;'>
                                 <a href='#'>Most Popular</a>
                                 <a href='#'>Most Recent</a>
                             </div>
@@ -76,10 +57,13 @@
         ";
 
         if(isset($_SESSION['user_id'])) {
+            $user = new \App\models\User();
+            $user = $user->findByUserID($_SESSION['user_id']);
             echo "<ul>
+                    <li>Hi $user->username!</li>
                     <li><a href='#'>Profile</a></li>
                     <li><a href='#'>Favorites</a></li>
-                    <li><a href='#'>Settings</a></li>
+                    <li><a href='".BASE."/Settings/index'>Settings</a></li>
                     <li><a href='".BASE."/Login/logout'>Logout <i class='fas fa-sign-out-alt' style='margin-left: 2px;'></i></a></li>
                 </ul> ";            
         } else {

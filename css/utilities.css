@@ -90,6 +90,18 @@
     vertical-align: top;
 }
 
+input[type='text'], input[type='password'] {
+    border: 0;
+    border-bottom: 1px solid #B4BECB;
+    width: 100%;
+    padding: 3px;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+}
+
 .error {
     display: block;
     border: 3px solid rgba(255, 0, 0, 0.596);
@@ -106,6 +118,10 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.flex-between {
+    justify-content: space-between;
 }
 
 .grid {
@@ -127,3 +143,5 @@
 
 /* Margin */
 .mb70 { margin-bottom: 70px;}
+
+.ilb { display: inline-block;}

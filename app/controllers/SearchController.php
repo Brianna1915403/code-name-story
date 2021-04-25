@@ -3,7 +3,7 @@
 
     class SearchController extends \App\core\Controller {
         
-        #[\App\core\LoginFilter]
+        #[\App\core\ProfileFilter]
         function index() {
             if(isset($_POST['action'])) {
                 $search = $_POST['search'];
@@ -16,5 +16,9 @@
                 $this->view('Search/index', ['search'=>'', 'users'=>$users]);
             }
         } 
+
+        function browse() {
+            $this->view('Search/browse');
+        }
     }   
 ?>
