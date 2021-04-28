@@ -27,6 +27,7 @@
 
         public function addTagsToStory($story_id, $tags){
             $tag = new \App\models\Tag();
+            $tag->deleteAllTagsForStory($story_id);
             for($i = 0; $i < count($tags); $i++){
                 $tag = $tag->findTagByName($tags[0]);
                 $stmt = self::$connection->prepare("INSERT INTO story_tags(tag_id, story_id) VALUES (:tag_id, :story_id)");
@@ -37,6 +38,13 @@
         public function findBySeries($series_id){
             $stmt = self::$connection->prepare("SELECT * FROM story WHERE series_id = :series_id");
             $stmt->execute(['series_id'=>$series_id]);
+            $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Story");
+            return $stmt->fetchAll();
+        }
+
+        public function findAllStoriesByTag($tag_id){
+            $stmt = self::$connection->prepare("SELECT * FROM story WHERE story_id = (SELECT story_id FROM story_tags WHERE tag_id = :tag_id)");
+            $stmt->execute(['tag_id'=>$tag_id]);
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Story");
             return $stmt->fetchAll();
         }

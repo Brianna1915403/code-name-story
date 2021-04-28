@@ -10,14 +10,11 @@
 
         function createSeries(){
             if(isset($_POST['action'])){
-                $story = new \App\models\Story();
-                $story->profile_id = $_SESSION['profile_id'];
-                $story->title = $_POST['title'];
-                $story->tags = $_POST['tags'];
-                $story->favorites = $_POST['favorites'];
-                $story->series_id = $_POST['series_id'];
-                $story->author = $_POST['author'];
-                $story->insert();
+                $series = new \App\models\Series();
+                $series->profile_id = $_SESSION['profile_id'];
+                $series->name = $_POST['name'];
+                $series->description = $_POST['description'];
+                $series->insert();
                 header('location:'.BASE.'/Series/viewAllSeriesByProfile/'.$_SESSION['profile_id']);
              } else {
                  $this->view('Story/createSeries');

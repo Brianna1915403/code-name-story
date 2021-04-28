@@ -45,7 +45,13 @@
         function viewAllStoriesBySeries($series_id){
             $story = new \App\models\Story();
             $story = $story->findBySeries($series_id);
-            $this->view('Story/viewAllMyStories', $story);
+            $this->view('Story/viewStoriesBySeries', $story);
+        }
+
+        function viewAllStoriesForTag($tag_id){
+            $story = new \App\models\Story();
+            $story = $story->findAllStoriesByTag($tag_id);
+
         }
 
         function addTags($story_id){
