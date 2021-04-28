@@ -10,7 +10,7 @@
     }
 
     function spawnDependenciesWithinView() {
-        echo "<link rel='icon' type='image/x-ico' href='favicon.ico'/>
+        echo "<link rel='icon' type='image/x-ico' href='../favicon.ico'/>
                 <link rel='stylesheet' href='../css/style.css' type='text/css'>
                 <link rel='stylesheet' href='../css/utilities.css' type='text/css'>
                 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
@@ -60,7 +60,7 @@
             $user = new \App\models\User();
             $user = $user->findByUserID($_SESSION['user_id']);
             echo "<ul>
-                    <li>Hi $user->username!</li>
+                    <li>Logged in as $user->username!</li>
                     <li><a href='#'>Profile</a></li>
                     <li><a href='#'>Favorites</a></li>
                     <li><a href='".BASE."/Settings/index'>Settings</a></li>
