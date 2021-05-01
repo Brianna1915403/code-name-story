@@ -2,9 +2,9 @@
 
 /* TODO: ADD THEMES */
 :root {
-    --main-accent-colour-light: #030303;
-    --main-colour-light: #1A1A1B;
-    --text-colour-light: #f7f7f8;
+    --main-accent-colour-light: #449342;
+    --main-colour-light: #02353c;
+    --text-colour-light: #d6f1ed;
 }
 
 * {

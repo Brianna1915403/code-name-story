@@ -60,7 +60,7 @@
 
 .card {
     border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(212, 190, 190, 0.2);
+    box-shadow: 0 3px 10px rgba(197, 241, 196, 0.2);
     padding: 20px;
     margin: 10px;
 }
@@ -117,7 +117,7 @@ input:focus, .profile-textarea:focus {
 .profile-textarea {
     resize: none;
     border-radius: 4px;
-    border-color: var(--text-colour-light);
+    border-color: var(--main-accent-colour-light);
     padding: 10px;
     font-family: inherit;
 }

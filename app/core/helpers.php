@@ -5,8 +5,25 @@
         if (isset($_SESSION['profile_id'])) {
             $profile = new \App\models\Profile();
             $profile = $profile->findByID($_SESSION['profile_id']);
-            echo "<link rel='stylesheet' href='".($profile->theme == 'light'? "css/style.css" : "css/style-dark.css")."' type='text/css'>";
-            echo "<link rel='stylesheet' href='".($profile->theme == 'light'? "css/utilities.css" : "css/utilities-dark.css")."' type='text/css'>";
+            switch ($profile->theme) {
+                case "light":
+                    echo "<link rel='stylesheet' href='css/style.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='css/utilities.css' type='text/css'>";
+                  break;
+                case "dark":
+                    echo "<link rel='stylesheet' href='css/style-dark.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='css/utilities-dark.css' type='text/css'>";
+                  break;
+                case "green":
+                    echo "<link rel='stylesheet' href='css/style-green.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='css/utilities-green.css' type='text/css'>";
+                  break;
+
+                case "blue":
+                    echo "<link rel='stylesheet' href='css/style-blue.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='css/utilities-blue.css' type='text/css'>";
+                  break;
+            }   
         } else {
             echo "<link rel='stylesheet' href='css/style.css' type='text/css'>";
             echo "<link rel='stylesheet' href='css/utilities.css' type='text/css'>";
@@ -21,8 +38,25 @@
         if (isset($_SESSION['profile_id'])) {
             $profile = new \App\models\Profile();
             $profile = $profile->findByID($_SESSION['profile_id']);
-            echo "<link rel='stylesheet' href='".($profile->theme == 'light'? "../css/style.css" : "../css/style-dark.css")."' type='text/css'>";
-            echo "<link rel='stylesheet' href='".($profile->theme == 'light'? "../css/utilities.css" : "../css/utilities-dark.css")."' type='text/css'>";
+            switch ($profile->theme) {
+                case "light":
+                    echo "<link rel='stylesheet' href='../css/style.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='../css/utilities.css' type='text/css'>";
+                  break;
+                case "dark":
+                    echo "<link rel='stylesheet' href='../css/style-dark.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='../css/utilities-dark.css' type='text/css'>";
+                  break;
+                case "green":
+                    echo "<link rel='stylesheet' href='../css/style-green.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='../css/utilities-green.css' type='text/css'>";
+                  break;
+
+                case "blue":
+                    echo "<link rel='stylesheet' href='../css/style-blue.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='../css/utilities-blue.css' type='text/css'>";
+                  break;
+            }   
         } else {
             echo "<link rel='stylesheet' href='../css/style.css' type='text/css'>";
             echo "<link rel='stylesheet' href='../css/utilities.css' type='text/css'>";
