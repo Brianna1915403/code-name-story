@@ -7,8 +7,8 @@
             parent::__construct();
         }
         public function insert(){
-            $stmt = self::$connection->prepare("INSERT INTO chapter(story_id, chapter_text, date_created, likes, chapter_picture_id) VALUES (:story_id, :chapter_text, :date_created, :likes, ;chapter_picture_id)");
-            $stmt->execute(["story_id"=>$this->story_id, "chapter_text"=>$this->chapter_text, "date_created"=>$this->date_created, "likes"=>$this->likes, "chapter_picture_id"=>$this->chapter_picture_id]);
+            $stmt = self::$connection->prepare("INSERT INTO chapter(story_id, chapter_title, chapter_text, date_created, likes, chapter_picture_id) VALUES (:story_id, :chapter_text, :date_created, :likes, ;chapter_picture_id)");
+            $stmt->execute(["story_id"=>$this->story_id, "chapter_title"=>$this->chapter_title,"chapter_text"=>$this->chapter_text, "date_created"=>$this->date_created, "likes"=>$this->likes, "chapter_picture_id"=>$this->chapter_picture_id]);
         }
 
         public function findByID($chapter_id){

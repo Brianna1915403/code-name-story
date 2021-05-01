@@ -8,8 +8,8 @@
         }
 
         public function insert(){
-            $stmt = self::$connection->prepare("INSERT INTO comment(chapter_id, text, date_commented) VALUES (:chapter_id, :text, :date_commented)");
-            $stmt->execute(["chapter_id"=>$this->chapter_id, "text"=>$this->text, "date_commented"=>$this->date_commented]);
+            $stmt = self::$connection->prepare("INSERT INTO comment(chapter_id, profile_id, text, date_commented) VALUES (:chapter_id, :profile_id, :text, :date_commented)");
+            $stmt->execute(["chapter_id"=>$this->chapter_id, "text"=>$this->text, "date_commented"=>$this->date_commented, "profile_id"=>$this->profile_id]);
         }
 
         public function findCommentByID($comment_id){
