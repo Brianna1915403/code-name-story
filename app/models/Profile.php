@@ -35,7 +35,7 @@
 
         public function updateTheme(){
             $stmt = self::$connection->prepare("UPDATE profile SET theme = :theme WHERE profile_id = :profile_id");
-            $stmt->execute(['profile_id'=>$this->profile_id, 'theme'=>$this->theme]);
+            $stmt->execute(['theme'=>$this->theme, 'profile_id'=>$this->profile_id]);
         }
 
         public function update(){
