@@ -14,7 +14,7 @@
             return $stmt->fetch();
         }
 
-        public function getAllByProfileID($profile_id){
+        public function getAllByProfileID($profile_id) {
             $stmt = self::$connection->prepare("SELECT * FROM picture WHERE profile_id = :profile_id ORDER BY picture_id DESC");
             $stmt->execute(['profile_id'=>$profile_id]);
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Picture");

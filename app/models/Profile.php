@@ -42,5 +42,10 @@
             $stmt = self::$connection->prepare("UPDATE profile SET account_type = :account_type, description = :description WHERE profile_id = :profile_id");
             $stmt->execute(['profile_id'=>$this->profile_id, 'account_type'=>$this->account_type, 'description'=>$this->description]);
         }
+
+        public function unsetProfilePicture() {
+            $stmt = self::$connection->prepare("UPDATE profile SET profile_picture_id = NULL WHERE profile_id = :profile_id");
+            $stmt->execute(['profile_id'=>$this->profile_id]);
+        }
     }
 ?>

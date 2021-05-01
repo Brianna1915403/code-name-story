@@ -40,12 +40,12 @@
                                 $picture = $picture->findByPictureID($data['profile']->profile_picture_id);
                                 echo "<img id='preview-img' class='profile-img' src='".BASE."/uploads/$picture->filename' alt='$picture->alt'>";
                                 echo "<div class='pic-upload'>";
-                                echo "<label>Upload a profile picture: <input id='upload' type='file' name='picture'></label><br>";
-                                echo "<label>Image Alt Text: <input type='text' name='alt' value='$picture->alt'></lable>";
+                                echo "<label>Upload a profile picture: <input id='upload' type='file' name='upload'></label><br>";
+                                echo "<label>Image Alt Text: <input type='text' name='alt' value=\"$picture->alt\"></lable>";
                             } else {
                                 echo "<img id='preview-img' class='profile-img' src='".BASE."/uploads/DefaultPicture.png' alt='Default Profile Picture'>";
                                 echo "<div class='pic-upload'>";
-                                echo "<label>Upload a profile picture: <input id='upload' type='file' name='picture'></label><br>";
+                                echo "<label>Upload a profile picture: <input id='upload' type='file' name='upload'></label><br>";
                                 echo "<label>Image Alt Text: <input type='text' name='alt' value=\"".$data['user']->username."'s Profile Picture\"></lable>";
                             }   
                             echo "</div><br>";

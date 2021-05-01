@@ -1,21 +1,35 @@
 <?php 
 
     function spawnDependencies() {
-        echo "<link rel='icon' type='image/x-ico' href='favicon.ico'/>
-                <link rel='stylesheet' href='css/style.css' type='text/css'>
-                <link rel='stylesheet' href='css/utilities.css' type='text/css'>
-                <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
-                <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
-                <script src='js/navbar.js'></script>";
+        echo "<link rel='icon' type='image/x-ico' href='favicon.ico'/>";
+        if (isset($_SESSION['profile_id'])) {
+            $profile = new \App\models\Profile();
+            $profile = $profile->findByID($_SESSION['profile_id']);
+            echo "<link rel='stylesheet' href='".($profile->theme == 'light'? "css/style.css" : "css/style-dark.css")."' type='text/css'>";
+            echo "<link rel='stylesheet' href='".($profile->theme == 'light'? "css/utilities.css" : "css/utilities-dark.css")."' type='text/css'>";
+        } else {
+            echo "<link rel='stylesheet' href='css/style.css' type='text/css'>";
+            echo "<link rel='stylesheet' href='css/utilities.css' type='text/css'>";
+        }
+        echo "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>";
+        echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>";
+        echo "<script src='js/navbar.js'></script>";
     }
 
     function spawnDependenciesWithinView() {
-        echo "<link rel='icon' type='image/x-ico' href='../favicon.ico'/>
-                <link rel='stylesheet' href='../css/style.css' type='text/css'>
-                <link rel='stylesheet' href='../css/utilities.css' type='text/css'>
-                <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
-                <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
-                <script src='../js/navbar.js'></script>";
+        echo "<link rel='icon' type='image/x-ico' href='../favicon.ico'/>";
+        if (isset($_SESSION['profile_id'])) {
+            $profile = new \App\models\Profile();
+            $profile = $profile->findByID($_SESSION['profile_id']);
+            echo "<link rel='stylesheet' href='".($profile->theme == 'light'? "../css/style.css" : "../css/style-dark.css")."' type='text/css'>";
+            echo "<link rel='stylesheet' href='".($profile->theme == 'light'? "../css/utilities.css" : "../css/utilities-dark.css")."' type='text/css'>";
+        } else {
+            echo "<link rel='stylesheet' href='../css/style.css' type='text/css'>";
+            echo "<link rel='stylesheet' href='../css/utilities.css' type='text/css'>";
+        }
+        echo "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>";
+        echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>";
+        echo "<script src='../js/navbar.js'></script>";
     }
 
     function spawnNavBar() {

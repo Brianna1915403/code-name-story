@@ -11,7 +11,27 @@
             $user = $user->findByUserID($_SESSION['user_id']);
 
             if (isset($_POST['profile'])) {
-                var_dump($_POST['picture']);
+                $picture_controller = new \App\controllers\PictureController();
+                if ($picture_controller->upload($_FILES['upload'], $_POST['alt'], "")) {
+                    $picture = new \App\models\Picture();
+                    if ($profile->profile_picture_id != null ) {
+                        $profile->unsetProfilePicture();
+                        $picture_controller->delete($profile->profile_picture_id);
+                    }
+                    $pictures = $picture->getAllByProfileID($profile->profile_id);
+                    $profile->updateProfilePicture($pictures[0]->picture_id);   
+                    $profile->description = $_POST['description'];
+                    $profile->account_type = $_POST['account_type']; 
+                    $profile->update();
+                    header('location:'.BASE.'/Settings/index?success=Profile Updated');          
+                } else if ($_FILES['upload']['tmp_name'] == "") {
+                    $profile->description = $_POST['description'];
+                    $profile->account_type = $_POST['account_type'];
+                    $profile->update();
+                    header('location:'.BASE.'/Settings/index?success=Profile Updated');
+                } else {
+                    header('location:'.BASE.'/Settings/index?error=Picture Invalid');
+                }
             } else if (isset($_POST['account'])) {
                 if(password_verify($_POST['old-password'], $user->password_hash)) {
                     if ($_POST['new-password'] == $_POST['confirm-new-password']) {
