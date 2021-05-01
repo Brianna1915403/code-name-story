@@ -6,8 +6,21 @@
         <title>Code Name: Story | Settings</title>
     </head>
     <body>    
-        <?= spawnNavBar() ?>
-        <div class="settings container flex flex-between">
+        <?= spawnNavBar() ?>   
+        <div class="notice">
+            <?php 
+                if(isset($_GET['error'])) {
+                    echo "<div class='error'>
+                        <i class='fas fa-info-circle'></i>
+                        <span id='#error-text' style='margin-left: 5px;'>".$_GET['error']."!</span></div>";
+                } else if(isset($_GET['success'])) {
+                    echo "<div class='success'>
+                        <i class='fas fa-check'></i>
+                        <span id='#success-text' style='margin-left: 5px;'>".$_GET['success']."!</span></div>";
+                }
+            ?>
+        </div>     
+        <div class="settings container flex flex-between">            
             <aside class="card menu">
                 <ul>
                     <li id='profile' class="menu-item">Update Profile</li>
@@ -16,27 +29,26 @@
                     <li id='2fa' class="menu-item">2-Factor Authentication</li>
                 </ul>
             </aside>
+            <!-- FIX: Section stops $_POST from seeing upload -->
             <div class="card content">
                 <div id="profile-settings">
                     <h2 class='setting-header'>Update Profile</h2>
                     <form action="" method="post" enctype="multipart/form-data">
-                        <?php 
-                            echo "<section class='image-setting'>";   
+                        <?php  
                             if ($data['profile']->profile_picture_id != null) {                      
                                 $picture = new \App\models\Picture();
                                 $picture = $picture->findByPictureID($data['profile']->profile_picture_id);
                                 echo "<img id='preview-img' class='profile-img' src='".BASE."/uploads/$picture->filename' alt='$picture->alt'>";
                                 echo "<div class='pic-upload'>";
-                                echo "<label>Upload a profile picture: <input id='upload' type='file' name='upload'></label><br>";
+                                echo "<label>Upload a profile picture: <input id='upload' type='file' name='picture'></label><br>";
                                 echo "<label>Image Alt Text: <input type='text' name='alt' value='$picture->alt'></lable>";
                             } else {
                                 echo "<img id='preview-img' class='profile-img' src='".BASE."/uploads/DefaultPicture.png' alt='Default Profile Picture'>";
                                 echo "<div class='pic-upload'>";
-                                echo "<label>Upload a profile picture: <input id='upload' type='file' name='upload'></label><br>";
+                                echo "<label>Upload a profile picture: <input id='upload' type='file' name='picture'></label><br>";
                                 echo "<label>Image Alt Text: <input type='text' name='alt' value=\"".$data['user']->username."'s Profile Picture\"></lable>";
                             }   
-                            echo "</div>";
-                            echo "</section><br>";
+                            echo "</div><br>";
                         ?>
                             <label for="description">Description</label><br>
                             <textarea class='profile-textarea update-textarea'  name="description" cols="50" rows="5" maxlength='255' placeholder="Describe Yourself"><?= $data['profile']->description?></textarea><br><br>
@@ -54,7 +66,7 @@
                         <label>Old Password <input type="password" name="old-password" id=""></label><br><br>
                         <label>New Password <input type="password" name="new-password" id=""></label><br><br>
                         <label>Confirm New Password <input type="password" name="confirm-new-password" id=""></label><br><br>
-                        <input class="btn btn-accent-light" type="submit" name='password' value="Change Password">
+                        <input class="btn btn-accent-light" type="submit" name='account' value="Change Password">
                     </form>
                 </div>
                 <div id="theme-settings" style="display:none;">
@@ -77,6 +89,16 @@
                             </div>
                         </div><br><br>
                         <input class="btn btn-accent-light" type="submit" name='theme' value="Change Theme">
+                    </form>
+                </div>
+                <div id="2fa-settings" style="display:none;">
+                    <h2 class='setting-header'>2-Factor Authentication</h2>
+                    <form action="" method="post">  
+                        <label>Enter your password to confirm it's you: <input type="password" name="password" id=""></label><br><br>
+                        <?php     
+                            $hasToken = $data['user']->token == null;        
+                            echo "<input class='btn btn-accent-light".($hasToken? "" : "caution-btn")."' type='submit' name='2fa' value='".($hasToken? "Activate 2-Factor Authentication" : "Deactivate 2-Factor Authentication")."'>";
+                        ?>
                     </form>
                 </div>
             </div>

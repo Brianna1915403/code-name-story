@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
 
+/* TODO: ADD THEMES */
 :root {
     --main-accent-colour-light: #f0f0f0;
     --main-colour-light: #ffffff;
@@ -334,6 +335,10 @@ a.browse-options-light {
     width: max-content;
     height: auto;
     border-radius: 4px;
+}
+
+.radio-button > * {    
+    cursor: pointer;
 }
 
 .radio-button img {

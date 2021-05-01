@@ -3,42 +3,56 @@ $(document).ready(function() {
         $('#profile-settings').show();
         $('#account-settings').hide();
         $('#theme-settings').hide();
-        // $('#profile-settings').hide();
+        $('#2fa-settings').hide();
     });
     $('#password').click(function(){
         $('#profile-settings').hide();
         $('#account-settings').show();
         $('#theme-settings').hide();
-        // $('#profile-settings').hide();
+        $('#2fa-settings').hide();
     });
     $('#appearance').click(function(){
         $('#profile-settings').hide();
         $('#account-settings').hide();
         $('#theme-settings').show();
-        // $('#profile-settings').hide();
+        $('#2fa-settings').hide();
     });
 
-    $('#theme-form input').ready(function() {
-        console.log($('input[name=theme]:checked').val());
-        if ($('input[name=theme]:checked').val() == 'light') {
-            $('#light-theme').addClass('light-theme-outline-selected');
-            $('#dark-theme').removeClass('light-theme-outline-selected');
-        } else {
-            $('#light-theme').removeClass('light-theme-outline-selected');
-            $('#dark-theme').addClass('light-theme-outline-selected');
-        }
+    $('#2fa').click(function(){
+        $('#profile-settings').hide();
+        $('#account-settings').hide();
+        $('#theme-settings').hide();
+        $('#2fa-settings').show();
     });
-    
-    $('#theme-form input').click(function() {
-        console.log($('input[name=theme]:checked').val());
-        if ($('input[name=theme]:checked').val() == 'light') {
-            $('#light-theme').addClass('light-theme-outline-selected');
-            $('#dark-theme').removeClass('light-theme-outline-selected');
-        } else {
-            $('#light-theme').removeClass('light-theme-outline-selected');
-            $('#dark-theme').addClass('light-theme-outline-selected');
-        }
-    });
+
+    // FIX: The radio buttons don't get checked/unchecked
+    // $('#theme-form .radio-button').click(function() {
+    //     console.log($('input[name=theme]:checked').val());
+    //     var radio = $('input[name=theme]:checked');
+    //     var clicked = $(this).attr('id');
+    //     console.log(clicked);
+    //     switch(radio.val()) {
+    //         case 'light': 
+    //             if (clicked == 'dark-theme') {
+    //                 $('#light-theme').removeClass('light-theme-outline-selected');
+    //                 $('#dark-theme').addClass('light-theme-outline-selected');
+    //                 $('#light-theme-radio').attr('checked', false);
+    //                 $('#dark-theme-radio').attr('checked', true);
+    //             } else if (clicked == 'light-theme' && $('#dark-theme').hasClass('light-theme-outline-selected')) {
+    //                 $('#light-theme').addClass('light-theme-outline-selected');
+    //                 $('#dark-theme').removeClass('light-theme-outline-selected');
+    //                 $('#light-theme-radio').attr('checked', true);
+    //                 $('#dark-theme-radio').attr('checked', false);
+    //             }
+    //         break;
+    //         case 'dark': 
+    //             if (clicked == 'light-theme') {
+    //                 $('#light-theme').addClass('light-theme-outline-selected');
+    //                 $('#dark-theme').removeClass('light-theme-outline-selected');
+    //             }
+    //         break;
+    //     }
+    // });
     
     $('#upload').change(function(){
         read(this);

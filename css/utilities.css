@@ -122,12 +122,33 @@ input:focus, .profile-textarea:focus {
     font-family: inherit;
 }
 
+.notice {
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+}
+
+.notice > * {
+    margin: 0px !important;
+}
+
 .error {
     display: block;
     border: 3px solid rgba(255, 0, 0, 0.596);
     border-radius: 10px;
     padding: 5px;
     background-color: rgba(255, 0, 0, 0.801);
+    color: white;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.success {
+    display: block;
+    border: 3px solid rgba(16, 218, 16, 0.596);
+    border-radius: 10px;
+    padding: 5px;
+    background-color: rgba(16, 218, 16, 0.801);
     color: white;
     font-weight: 600;
     margin-bottom: 30px;

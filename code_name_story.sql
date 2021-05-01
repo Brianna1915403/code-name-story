@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 10:51 PM
+-- Generation Time: May 01, 2021 at 02:38 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS `chapter`;
 CREATE TABLE `chapter` (
   `chapter_id` int(11) NOT NULL,
   `story_id` int(11) NOT NULL,
-  `text` text NOT NULL,
+  `chapter_text` text NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp(),
   `likes` int(11) NOT NULL,
   `chapter_picture_id` int(11) NOT NULL
@@ -49,8 +49,9 @@ DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `comment_id` int(11) NOT NULL,
   `chapter_id` int(11) NOT NULL,
+  `profile_id` int(11) NOT NULL,
   `text` text NOT NULL,
-  `date_commened` timestamp NOT NULL DEFAULT current_timestamp()
+  `date_commented` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -113,7 +114,8 @@ CREATE TABLE `profile` (
 --
 
 INSERT INTO `profile` (`profile_id`, `user_id`, `account_type`, `description`, `theme`, `profile_picture_id`) VALUES
-(1, 1, 'reader', 'I don\'t know who I am...', 'light', NULL);
+(1, 1, 'reader', 'I don\'t know who I am...', 'light', NULL),
+(2, 1, 'writer', 'Oink Oink', 'light', NULL);
 
 -- --------------------------------------------------------
 
@@ -136,6 +138,7 @@ CREATE TABLE `reply` (
 DROP TABLE IF EXISTS `series`;
 CREATE TABLE `series` (
   `series_id` int(11) NOT NULL,
+  `profile_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -211,7 +214,8 @@ INSERT INTO `tag` (`tag_id`, `name`) VALUES
 (23, 'Superhero'),
 (24, 'Supernatural'),
 (25, 'Thriller'),
-(26, 'Zombies');
+(26, 'Zombies'),
+(27, 'Fanfiction');
 
 -- --------------------------------------------------------
 
@@ -251,7 +255,8 @@ ALTER TABLE `chapter`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`comment_id`,`chapter_id`),
-  ADD KEY `comment_chapter_FK` (`chapter_id`);
+  ADD KEY `comment_chapter_FK` (`chapter_id`),
+  ADD KEY `comment_profile_FK` (`profile_id`);
 
 --
 -- Indexes for table `favorite_story`
@@ -293,7 +298,8 @@ ALTER TABLE `reply`
 -- Indexes for table `series`
 --
 ALTER TABLE `series`
-  ADD PRIMARY KEY (`series_id`);
+  ADD PRIMARY KEY (`series_id`),
+  ADD KEY `Series_Profile_FK` (`profile_id`);
 
 --
 -- Indexes for table `story`
@@ -349,7 +355,7 @@ ALTER TABLE `picture`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `series`
@@ -367,7 +373,7 @@ ALTER TABLE `story`
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `tag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `tag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -390,7 +396,8 @@ ALTER TABLE `chapter`
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_chapter_FK` FOREIGN KEY (`chapter_id`) REFERENCES `chapter` (`chapter_id`);
+  ADD CONSTRAINT `comment_chapter_FK` FOREIGN KEY (`chapter_id`) REFERENCES `chapter` (`chapter_id`),
+  ADD CONSTRAINT `comment_profile_FK` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`);
 
 --
 -- Constraints for table `favorite_story`
@@ -425,6 +432,12 @@ ALTER TABLE `profile`
 ALTER TABLE `reply`
   ADD CONSTRAINT `reply-original_comment_FK` FOREIGN KEY (`original_comment_id`) REFERENCES `comment` (`comment_id`),
   ADD CONSTRAINT `reply_comment_FK` FOREIGN KEY (`reply_id`) REFERENCES `comment` (`comment_id`);
+
+--
+-- Constraints for table `series`
+--
+ALTER TABLE `series`
+  ADD CONSTRAINT `Series_Profile_FK` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`);
 
 --
 -- Constraints for table `story`

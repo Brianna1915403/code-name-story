@@ -33,9 +33,14 @@
             $stmt->execute(['profile_id'=>$this->profile_id, 'profile_picture_id'=>$picture_id]);
         }
 
+        public function updateTheme(){
+            $stmt = self::$connection->prepare("UPDATE profile SET theme = :theme WHERE profile_id = :profile_id");
+            $stmt->execute(['profile_id'=>$this->profile_id, 'theme'=>$this->theme]);
+        }
+
         public function update(){
-            $stmt = self::$connection->prepare("UPDATE profile SET account_type = :account_type, description = :description, theme = :theme WHERE profile_id = :profile_id");
-            $stmt->execute(['profile_id'=>$this->profile_id, 'account_type'=>$this->account_type, 'description'=>$this->description, 'theme'=>$this->theme]);
+            $stmt = self::$connection->prepare("UPDATE profile SET account_type = :account_type, description = :description WHERE profile_id = :profile_id");
+            $stmt->execute(['profile_id'=>$this->profile_id, 'account_type'=>$this->account_type, 'description'=>$this->description]);
         }
     }
 ?>
