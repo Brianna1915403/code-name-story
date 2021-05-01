@@ -154,6 +154,13 @@ input:focus, .profile-textarea:focus {
     margin-bottom: 30px;
 }
 
+.profile-img-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    clip-path: circle(50%);
+}
+
 .profile-img {
     width: 100px;
     height: 100px;

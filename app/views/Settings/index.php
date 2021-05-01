@@ -29,7 +29,6 @@
                     <li id='2fa' class="menu-item">2-Factor Authentication</li>
                 </ul>
             </aside>
-            <!-- FIX: Section stops $_POST from seeing upload -->
             <div class="card content">
                 <div id="profile-settings">
                     <h2 class='setting-header'>Update Profile</h2>
@@ -38,12 +37,12 @@
                             if ($data['profile']->profile_picture_id != null) {                      
                                 $picture = new \App\models\Picture();
                                 $picture = $picture->findByPictureID($data['profile']->profile_picture_id);
-                                echo "<img id='preview-img' class='profile-img' src='".BASE."/uploads/$picture->filename' alt='$picture->alt'>";
+                                echo "<img id='preview-img' class='profile-img-preview' src='".BASE."/uploads/$picture->filename' alt='$picture->alt'>";
                                 echo "<div class='pic-upload'>";
                                 echo "<label>Upload a profile picture: <input id='upload' type='file' name='upload'></label><br>";
                                 echo "<label>Image Alt Text: <input type='text' name='alt' value=\"$picture->alt\"></lable>";
                             } else {
-                                echo "<img id='preview-img' class='profile-img' src='".BASE."/uploads/DefaultPicture.png' alt='Default Profile Picture'>";
+                                echo "<img id='preview-img' class='profile-img-preview' src='".BASE."/uploads/DefaultPicture.png' alt='Default Profile Picture'>";
                                 echo "<div class='pic-upload'>";
                                 echo "<label>Upload a profile picture: <input id='upload' type='file' name='upload'></label><br>";
                                 echo "<label>Image Alt Text: <input type='text' name='alt' value=\"".$data['user']->username."'s Profile Picture\"></lable>";

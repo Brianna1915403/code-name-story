@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <?= spawnCSSDependencies() ?>
+        <?= spawnDependenciesWithinView(); ?>
         <title>Profile</title>
-        <link rel="stylesheet" href="../../css/viewProfile.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="../../js/like.js"></script>
     </head>
     <body>
-        <?= spawnNavBar() ?>
-        <?= $data['profile']->first_name." ".$data['profile']->middle_name." ".$data['profile']->last_name ?>'s Profile </br>
-
+        <?= spawnNavBar(); ?>
+        
+        <div class="container">
+            <div class="hform">
+                <?php 
+                    $profile = new \App\models\Profile();
+                    $profile = $profile->findByID($data);
+                    if ($profile->profile_picture_id != null) {
+                        $picture = new \App\models\Picture();
+                        $picture = $picture->findByPictureID($profile->profile_picture_id);
+                        echo "<img class='profile-img' src='".BASE."/uploads/$picture->filename' alt='$picture->alt'>";
+                    } else {
+                        echo "<img class='profile-img' src='".BASE."/uploads/DefaultPicture.png' alt='Default Profile Picture'>";
+                    }
+                ?>
+                <div class="profile-info">
+                    <h2 class="header">
+                        <?php 
+                            
+                        ?>    
+                    </h2>
+                </div>
+            </div>
+        </div>
         <?php 
             // $profile = new \App\models\Profile();            
             // $user = new \App\models\User();
@@ -52,5 +70,6 @@
             // echo "</div>";
             // echo "<br><a href='".BASE."/Profile/viewProfile/".$data['profile']->user_id."'>Back to the Top</a>";
         ?>
+        <?= spawnFooter(); ?>
     </body>
 </html>

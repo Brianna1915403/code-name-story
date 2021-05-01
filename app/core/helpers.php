@@ -111,7 +111,7 @@
         if(isset($_SESSION['user_id'])) {            
             echo "<ul>
                     <li>Logged in as ".$_SESSION['username']."!</li>
-                    <li><a href='#'>Profile</a></li>
+                    <li><a href='".BASE."/Profile/home'>Profile</a></li>
                     <li><a href='#'>Favorites</a></li>
                     <li><a href='".BASE."/Settings/index'>Settings</a></li>
                     <li><a href='".BASE."/Login/logout'>Logout <i class='fas fa-sign-out-alt' style='margin-left: 2px;'></i></a></li>
