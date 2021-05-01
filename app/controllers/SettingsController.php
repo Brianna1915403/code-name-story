@@ -45,25 +45,18 @@
                     header('location:'.BASE.'/Settings/index?error=Incorrect Password');
                 }
             } else if (isset($_POST['theme'])) {
-
+                $profile->theme = $_POST['color_scheme'];
+                $profile->updateTheme();
+                header('location:'.BASE.'/Settings/index');
             } else if (isset($_POST['2fa'])) {
-
+                if(password_verify($_POST['password'], $user->password_hash)) {
+                    header('location:'.BASE.'/Login/setup2fa');
+                } else {
+                    header('location:'.BASE.'/Settings/index?error=Incorrect Password');
+                }
             } else {                
                 $this->view('Settings/index', ['profile'=>$profile, 'user'=>$user]);
             }
         }
-
-        // function setup2fa() {
-        //     $_SESSION['source'] = "Settings";
-        //     header('location:'.BASE.'/Login/setup2fa');
-        // }
-
-        // function updateProfile() {
-        //     header('location:'.BASE.'/Profile/editProfile/'.$_SESSION['profile_id']);
-        // }
-
-        // function editPassword() {
-        //     header('location:'.BASE.'/Login/editPassword/'.$_SESSION['profile_id']);
-        // }
     }        
 ?>

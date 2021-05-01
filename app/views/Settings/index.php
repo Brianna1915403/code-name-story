@@ -78,14 +78,28 @@
                                     <img src="../images/light_theme_preview.png" alt="">
                                     <span class='mr5 ml5'>Light</span>
                                 </label>
-                                <input type="radio" name="theme" id="light-theme-radio" value='light' <?php echo $data['profile']->theme == 'light'? "checked" : ""; ?>>
+                                <input type="radio" name="color_scheme" id="light-theme-radio" value='light' <?php echo $data['profile']->theme == 'light'? "checked" : ""; ?>>
                             </div>
                             <div id='dark-theme' class="radio-button light-theme-outline">              
                                 <label for="dark-theme">
                                     <img src="../images/dark_theme_preview.png" alt="">
                                     <span class='mr5 ml5'>Dark</span>
                                 </label>
-                                <input type="radio" name="theme" id="dark-theme-radio" value='dark' <?php echo $data['profile']->theme == 'dark'? "checked" : ""; ?>>
+                                <input type="radio" name="color_scheme" id="dark-theme-radio" value='dark' <?php echo $data['profile']->theme == 'dark'? "checked" : ""; ?>>
+                            </div>
+                            <div id='blue-theme' class="radio-button light-theme-outline">              
+                                <label for="light-theme">
+                                    <img src="../images/light_theme_preview.png" alt="">
+                                    <span class='mr5 ml5'>Blue</span>
+                                </label>
+                                <input type="radio" name="color_scheme" id="blue-theme-radio" value='blue' <?php echo $data['profile']->theme == 'blue'? "checked" : ""; ?>>
+                            </div>
+                            <div id='green-theme' class="radio-button light-theme-outline">              
+                                <label for="light-theme">
+                                    <img src="../images/light_theme_preview.png" alt="">
+                                    <span class='mr5 ml5'>Green</span>
+                                </label>
+                                <input type="radio" name="color_scheme" id="green-theme-radio" value='green' <?php echo $data['profile']->theme == 'green'? "checked" : ""; ?>>
                             </div>
                         </div><br><br>
                         <input class="btn btn-accent-light" type="submit" name='theme' value="Change Theme">
@@ -94,10 +108,10 @@
                 <div id="2fa-settings" style="display:none;">
                     <h2 class='setting-header'>2-Factor Authentication</h2>
                     <form action="" method="post">  
-                        <label>Enter your password to confirm it's you: <input type="password" name="password" id=""></label><br><br>
+                        <label>Enter your password to confirm it's you: <input type="password" name="password" id="" require></label><br><br>
                         <?php     
                             $hasToken = $data['user']->token == null;        
-                            echo "<input class='btn btn-accent-light".($hasToken? "" : "caution-btn")."' type='submit' name='2fa' value='".($hasToken? "Activate 2-Factor Authentication" : "Deactivate 2-Factor Authentication")."'>";
+                            echo "<input class='btn light-theme-bg-accent".($hasToken? "" : "caution-btn")."' type='submit' name='2fa' value='".($hasToken? "Activate 2-Factor Authentication" : "Deactivate 2-Factor Authentication")."'>";
                         ?>
                     </form>
                 </div>

@@ -22,13 +22,13 @@
     border: 2px solid greenyellow;
 }
 
-.logo-light-theme {
+.logo-dark {
     content: url("../images/logo-dark.png");
     width: 200px;
     height: 38px;
 }
 
-.logo-dark-theme {
+.logo-light {
     content: url("../images/logo-light.png");
     width: 200px;
     height: 38px;
@@ -161,6 +161,18 @@ input:focus, .profile-textarea:focus {
     clip-path: circle(50%);
 }
 
+/* Footer */
+.footer {
+    padding: 30px;
+    height: 150px;
+}
+
+.footer .social a {
+    margin: 0 10px;
+}
+
+/* Layout */
+
 .flex {
     display: flex;
     justify-content: center;
@@ -171,8 +183,6 @@ input:focus, .profile-textarea:focus {
 .flex-wrap {
     flex-wrap: wrap;
 }
-
-.overflow-v {overflow: visible;}
 
 .flex-between {
     justify-content: space-between;
@@ -195,187 +205,21 @@ input:focus, .profile-textarea:focus {
     grid-template-columns: repeat(5, 1fr);
 }
 
+.ilb { display: inline-block;}
+
 /* Margin */
 
 .mr5 { margin-right: 5px;}
+
+.mr20 {margin-right: 20px;}
 
 .ml5 { margin-left: 5px;}
 
 .mb70 { margin-bottom: 70px;}
 
-.ilb { display: inline-block;}
-
-/* This is for each card associated with every story displayed after the search */
-
-.main_daily_wrap .card_lst {
-    padding-top: 18px;
-    padding-bottom: 25px;
-}
-
-.card_lst {
-    width: 1125px;
-    margin: 0 auto;
-    padding-left: 15px;
-}
-
-li, ol, ul {
-    list-style: none;
-}
-
-.card_lst li {
-    float: left;
-    position: relative;
-    width: 210px;
-    height: 210px;
-    margin: 0 15px 15px 0;
-}
-
-.card_item {
-    display: block;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-}
-
-.card_item .card_back, .card_item:hover .card_front {
-    opacity: 0;
-}
-
-.card_item .card_front {
-    z-index: 10;
-    opacity: 1;
-}
-
-img {
-    vertical-align: top;
-}
-
-.card_item .info {
-    position: absolute;
-    top: 14px;
-    left: 18px;
-    width: 157px;
-    height: 178px;
-}
-
-.card_item .info .subj {
-    width: 157px;
-    font-size: 18px;
-    line-height: 18px;
-    padding-top: 5px;
-    font-weight: 400;
-    font-family: hind_m,simhei,verdana,Helvetica,sans-serif;
-    word-wrap: break-word;
-}
-
-.card_item .info .grade_area {
-    height: 17px;
-    margin: 3px 0 0 -1px;
-}
-
-.grade_area .ico_like3 {
-    margin: 4px 2px 0 1px;
-}
-
-.ico_like3 {
-    width: 13px;
-    height: 11px;
-    background-position: -843px -597px;
-}
-
-.grade_num {
-    display: inline-block;
-    height: 16px;
-    margin-left: 3px;
-    font-size: 14px;
-    line-height: 17px;
-    font-family: verdana !important;
-    color: #00dc64;
-    vertical-align: top;
-}
-
-.card_item .info .icon_area {
-    margin: 9px 0 0 -2px;
-}
-
-.card_item .info .icon_area span {
-    margin-right: 3px;
-}
-
-.txt_ico_up {
-    width: 30px;
-    height: 30px;
-    background-position: -758px -699px;
-}
-
-.card_item .genre {
-    position: absolute;
-    left: 18px;
-    bottom: 15px;
-    line-height: 16px;
-}
-
-.genre {
-    color: blue;
-    font-size: 14px;
-}
-
-.card_item .card_back {
-    background: white;
-}
-
-.card_item:hover .card_back {
-    z-index: 20;
-    opacity: 1;
-}
-
-.card_item .card_back, .card_item .card_front {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    -webkit-transition: .3s;
-    transition: .3s;
-        transition-property: all;
-        transition-duration: 0.3s;
-        transition-timing-function: ease;
-        transition-delay: 0s;
-}
-
-.card_item .card_back .info {
-    overflow: hidden;
-    color: #000;
-}
-
-.card_item .card_back .info .author {
-    margin-top: 5px;
-    padding: 0;
-    font-size: 13px;
-}
-
-.card_item .info .author {
-    margin-top: 4px;
-    font-size: 14px;
-    line-height: 14px;
-    font-family: hind_m,simhei,verdana,Helvetica,sans-serif;
-    word-wrap: break-word;
-}
-
-.card_item .card_back .info .line {
-    display: block;
-    width: 16px;
-    height: 1px;
-    margin: 12px 0 15px;
-    background: #000;
-    opacity: .5;
-    filter: alpha(opacity=50);
-}
-
-.card_item .card_back .info .summary {
-    font-size: 13px;
-    line-height: 15px;
-}
+.mtb50 {margin-top: 50px; margin-bottom: 50px;}
 
 
+/* Float */
 
+.floatR {float: right;}

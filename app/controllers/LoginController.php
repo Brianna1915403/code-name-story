@@ -16,13 +16,13 @@
                     $user->user_id = $_SESSION['user_id']; 
                     $user->token = $_SESSION['token'];
                     $user->update2fa();
-                    header('location:'.BASE.'/Login/home');
+                    header('location:'.BASE.'/Settings/index?success=2-Factor Authentication Activated');
                 } else
                     header('location:'.BASE.'/Login/setup2fa?error=Token Not Verified!');
             } else {
                 $token = \App\core\TokenAuth::generateRandomClue();
                 $_SESSION['token'] = $token;
-                $url = \App\core\TokenAuth::getLocalCodeUrl($_SESSION['username'],'localhost', $token,'eCommerce%20Assignment%202');
+                $url = \App\core\TokenAuth::getLocalCodeUrl($_SESSION['username'],'localhost', $token,'Code%20Name:%20Story');
                 $this->view('Login/setup2fa', $url);
             }
         }
@@ -80,10 +80,13 @@
                     $_SESSION['username'] = $_SESSION['tmp_username'];
                     $_SESSION['user_id'] = $_SESSION['tmp_user_id'];
                     $_SESSION['tmp_token'] = '';
-                    header('location:'.BASE.'/Login/home');
+                    $profile = new \App\models\Profile();
+                    $profile = $profile->findByUserID($_SESSION['user_id']);
+                    $_SESSION['profile_id'] = $profile->profile_id;
+                    header('location:'.BASE.'/home');
                 } else {
                     session_destroy();
-                    header('location:'.BASE.'/Login/login?error=Username/Password Mismatch');
+                    header('location:'.BASE.'/Login/login?error=Invalid Token');
                 }
             } else {
                 $this->view('Login/validateLogin');

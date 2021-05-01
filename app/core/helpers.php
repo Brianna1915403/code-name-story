@@ -42,20 +42,24 @@
                 case "light":
                     echo "<link rel='stylesheet' href='../css/style.css' type='text/css'>";
                     echo "<link rel='stylesheet' href='../css/utilities.css' type='text/css'>";
-                  break;
+                    break;
                 case "dark":
                     echo "<link rel='stylesheet' href='../css/style-dark.css' type='text/css'>";
                     echo "<link rel='stylesheet' href='../css/utilities-dark.css' type='text/css'>";
-                  break;
+                    break;
                 case "green":
                     echo "<link rel='stylesheet' href='../css/style-green.css' type='text/css'>";
                     echo "<link rel='stylesheet' href='../css/utilities-green.css' type='text/css'>";
-                  break;
+                    break;
 
                 case "blue":
                     echo "<link rel='stylesheet' href='../css/style-blue.css' type='text/css'>";
                     echo "<link rel='stylesheet' href='../css/utilities-blue.css' type='text/css'>";
-                  break;
+                    break;
+                default:
+                    echo "<link rel='stylesheet' href='../css/style.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='../css/utilities.css' type='text/css'>";
+                    break;
             }   
         } else {
             echo "<link rel='stylesheet' href='../css/style.css' type='text/css'>";
@@ -67,20 +71,29 @@
     }
 
     function spawnNavBar() {
-        echo "<div class='navbar'>
-        <div class='container flex'>
-            <a href='".BASE."'><div class='logo-light-theme'></div></a>
-            <nav>
-                <ul>
-                    <li class='dropdown'>
-                        <a href='".BASE."/Search/browse' class='light-theme-link'>Browse</a>
-                        <div class='dropdown-menu light-theme-bg-main'>
-                            <ul class='lg header light-theme-bg-accent'>
-                                <li><a href='#' id='by-tags' class='browse-options-light selected-light'>By Tags</a></li>
-                                <li><a href='#' id='by-numbers' class='browse-options-light'>By Numbers</a></li>
-                                <li><a href='".BASE."/Search/browse' id='all' class='browse-options-light'>All</a></li>
-                            </ul>
-                            <div class='drop-content-tags grid grid-3'>";     
+        echo "<div class='navbar'><div class='container flex'>";
+        if (isset($_SESSION['profile_id'])) {
+            $profile = new \App\models\Profile();
+            $profile = $profile->findByID($_SESSION['profile_id']);
+            switch ($profile->theme) {
+                case "light": echo "<a href='".BASE."'><div class='logo-dark'></div></a>"; break;
+                case "dark": echo "<a href='".BASE."'><div class='logo-light'></div></a>"; break;
+                case "green": echo "<a href='".BASE."'><div class='logo-light'></div></a>"; break;
+                case "blue": echo "<a href='".BASE."'><div class='logo-light'></div></a>"; break;
+                default: echo "<a href='".BASE."'><div class='logo-dark'></div></a>"; break;
+            }   
+        } else {
+            echo "<a href='".BASE."'><div class='logo-dark'></div></a>";
+        }
+
+        echo "<nav><ul><li class='dropdown'>";
+        echo "<a href='".BASE."/Search/browse' class='light-theme-link'>Browse</a>";
+        echo "<div class='dropdown-menu light-theme-bg-main'>";
+        echo "<ul class='lg header light-theme-bg-accent'>";
+        echo "<li><a href='#' id='by-tags' class='browse-options-light selected-light'>By Tags</a></li>";
+        echo "<li><a href='#' id='by-numbers' class='browse-options-light'>By Numbers</a></li>";
+        echo "<li><a href='".BASE."/Search/browse' id='all' class='browse-options-light'>All</a></li>";
+        echo "</ul><div class='drop-content-tags grid grid-3'>";         
         
         $tag = new \App\models\Tag();
         $tags = $tag->getAll();
@@ -88,27 +101,16 @@
             echo "<a href='".BASE."/Search/browse?tags=$tag->name'>$tag->name</a>";
         }
                                 
-        echo "</div>
-                            <div class='drop-content-numbers grid grid-3' style='display: none;'>
-                                <a href='#'>Most Popular</a>
-                                <a href='#'>Most Recent</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href='#' class='light-theme-link'>Create</a></li>
-                </ul>
-            </nav>
-            <input type='search' name='search' id='search' placeholder='Search'>
-            <div class='dropdown'>
-                <i class='fas fa-user-circle fa-2x'></i>
-                <div class='dropdown-content light-theme-bg-main light-theme-text'>
-        ";
+        echo "</div><div class='drop-content-numbers grid grid-3' style='display: none;'>";
+        echo "<a href='#'>Most Popular</a><a href='#'>Most Recent</a></div></div></li>";
+        echo "<li><a href='#' class='light-theme-link'>Create</a></li></ul></nav>";
+        echo "<input type='search' name='search' id='search' placeholder='Search'>";
+        echo "<div class='dropdown'><i class='fas fa-user-circle fa-2x'></i>";
+        echo "<div class='dropdown-content light-theme-bg-main light-theme-text'>";
 
-        if(isset($_SESSION['user_id'])) {
-            $user = new \App\models\User();
-            $user = $user->findByUserID($_SESSION['user_id']);
+        if(isset($_SESSION['user_id'])) {            
             echo "<ul>
-                    <li>Logged in as $user->username!</li>
+                    <li>Logged in as ".$_SESSION['username']."!</li>
                     <li><a href='#'>Profile</a></li>
                     <li><a href='#'>Favorites</a></li>
                     <li><a href='".BASE."/Settings/index'>Settings</a></li>
@@ -125,10 +127,21 @@
     function spawnFooter() {
         echo "<footer class='footer light-theme-bg-accent'>
                 <div class='container grid grid-3'>
-                    <div>
-                        <div class='logo-light-theme'></div>
-                        <br>
-                        <p>Copyright &copy; 2021</p>
+                    <div>";
+        if (isset($_SESSION['profile_id'])) {
+            $profile = new \App\models\Profile();
+            $profile = $profile->findByID($_SESSION['profile_id']);
+            switch ($profile->theme) {
+                case "light": echo "<a href='".BASE."'><div class='logo-dark'></div></a>"; break;
+                case "dark": echo "<a href='".BASE."'><div class='logo-light'></div></a>"; break;
+                case "green": echo "<a href='".BASE."'><div class='logo-light'></div></a>"; break;
+                case "blue": echo "<a href='".BASE."'><div class='logo-light'></div></a>"; break;
+                default: echo "<a href='".BASE."'><div class='logo-dark'></div></a>"; break;
+            }   
+        } else {
+            echo "<a href='".BASE."'><div class='logo-dark'></div></a>";
+        }
+        echo "<br><p>Copyright &copy; 2021</p>
                     </div>        
                     <nav>
                         <ul>
