@@ -65,7 +65,7 @@
     // // }
     
         function viewMyProfile(){
-            if(isset($_SESSION['user_id'])){
+            if(isset($_SESSION['profile_id'])){
         
                 $profile = new \App\models\Profile();
                 $profile = $profile->findByID($_SESSION['profile_id']);

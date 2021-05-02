@@ -398,5 +398,132 @@ img {
     line-height: 15px;
 }
 
+/* CSS For displaying the chapters list */
 
+.detail_body.banner .detail_lst {
+    padding-bottom: 175px;
+}
+
+.detail_body .detail_lst {
+    float: left;
+    position: relative;
+    width: 761px;
+    min-height: 742px;
+    padding: 31px 20px 66px;
+        padding-bottom: 66px;
+    background: var(--main-colour-light);
+}
+
+.detail_body .detail_lst li:first-child {
+    border-top: 1px solid #f5f5f5;
+}
+
+.detail_body .detail_lst li {
+    position: relative;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.detail_body .detail_lst li > a {
+    display: block;
+    height: 73px;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #000;
+}
+
+.detail_body .detail_lst li > a:hover {
+    display: block;
+    height: 73px;
+    white-space: nowrap;
+    cursor: pointer;
+    background-color: var(--main-accent-colour-light)
+}
+
+.detail_body .detail_lst .subj {
+    width: 424px;
+    margin-left: 12px;
+    padding-top: 24px;
+    font-size: 17px;
+}
+
+.detail_body .detail_lst ul span {
+    display: inline-block;
+    padding-top: 26px;
+    vertical-align: top;
+}
+
+.detail_body .detail_lst .subj span {
+    overflow: hidden;
+    width: auto;
+    max-width: 370px;
+    padding: 0;
+    color: var(--text-colour-light);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.detail_body .detail_lst ul span {
+    display: inline-block;
+    padding-top: 26px;
+    vertical-align: top;
+}
+
+.detail_body .detail_lst .date {
+    width: 102px;
+    font-size: 14px;
+    color: #b1b1b1;
+    letter-spacing: 1px;
+}
+
+.detail_body .detail_lst ul span {
+    display: inline-block;
+    padding-top: 26px;
+    vertical-align: top;
+}
+
+.detail_body .detail_lst .like_area {
+    width: 76px;
+    font-size: 14px;
+    color: #00dc64;
+    letter-spacing: 1px;
+}
+
+.detail_body .detail_lst ul span {
+    display: inline-block;
+    padding-top: 26px;
+    vertical-align: top;
+}
+
+.detail_body .detail_lst .ico_like {
+    margin: 4px 5px 0 0;
+}
+
+.ico_like {
+    width: 16px;
+    height: 14px;
+    background-position: -606px -946px;
+}
+
+.detail_body .detail_lst .tx {
+    width: 59px;
+    padding-top: 25px;
+    font-size: 17px;
+    color: #3d3d3d;
+    letter-spacing: 1px;
+    text-align: right;
+}
+
+.detail_body .detail_lst ul span {
+    display: inline-block;
+    padding-top: 26px;
+    vertical-align: top;
+}
+
+.detail_body .detail_lst .manage_blank {
+    display: none;
+    width: 114px;
+    height: 100%;
+    padding: 0;
+    vertical-align: top;
+}
 

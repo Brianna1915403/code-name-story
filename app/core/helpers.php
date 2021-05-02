@@ -70,6 +70,43 @@
         echo "<script src='../js/navbar.js'></script>";
     }
 
+    function spawnDependenciesWithinViewWithArgument(){
+        echo "<link rel='icon' type='image/x-ico' href='../favicon.ico'/>";
+        if (isset($_SESSION['profile_id'])) {
+            $profile = new \App\models\Profile();
+            $profile = $profile->findByID($_SESSION['profile_id']);
+            switch ($profile->theme) {
+                case "light":
+                    echo "<link rel='stylesheet' href='../../css/style.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='../../css/utilities.css' type='text/css'>";
+                    break;
+                case "dark":
+                    echo "<link rel='stylesheet' href='../../css/style-dark.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='../../css/utilities-dark.css' type='text/css'>";
+                    break;
+                case "green":
+                    echo "<link rel='stylesheet' href='../../css/style-green.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='../../css/utilities-green.css' type='text/css'>";
+                    break;
+
+                case "blue":
+                    echo "<link rel='stylesheet' href='../../css/style-blue.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='../../css/utilities-blue.css' type='text/css'>";
+                    break;
+                default:
+                    echo "<link rel='stylesheet' href='../../css/style.css' type='text/css'>";
+                    echo "<link rel='stylesheet' href='../../css/utilities.css' type='text/css'>";
+                    break;
+            }   
+        } else {
+            echo "<link rel='stylesheet' href='../../css/style.css' type='text/css'>";
+            echo "<link rel='stylesheet' href='../../css/utilities.css' type='text/css'>";
+        }
+        echo "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>";
+        echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>";
+        echo "<script src='../../js/navbar.js'></script>";
+    }
+
     function spawnNavBar() {
         echo "<div class='navbar'><div class='container flex'>";
         if (isset($_SESSION['profile_id'])) {
@@ -88,7 +125,7 @@
 
         echo "<nav><ul><li class='dropdown'>";
         echo "<a href='".BASE."/Search/browse' class='light-theme-link'>Browse</a>";
-        echo "<div class='dropdown-menu light-theme-bg-main'>";
+        echo "<div class='dropdown-menu light-theme-bg-main'  style='z-index: 30;'>";
         echo "<ul class='lg header light-theme-bg-accent'>";
         echo "<li><a href='#' id='by-tags' class='browse-options-light selected-light'>By Tags</a></li>";
         echo "<li><a href='#' id='by-numbers' class='browse-options-light'>By Numbers</a></li>";
@@ -98,7 +135,7 @@
         $tag = new \App\models\Tag();
         $tags = $tag->getAll();
         foreach ($tags as $tag) {
-            echo "<a href='".BASE."/Search/browse?tags=$tag->name'>$tag->name</a>";
+            echo "<a href='".BASE."/Search/browseByTag/$tag->tag_id'>$tag->name</a>";
         }
                                 
         echo "</div><div class='drop-content-numbers grid grid-3' style='display: none;'>";

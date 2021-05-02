@@ -13,12 +13,13 @@
                 $story = new \App\models\Story();
                 $story->profile_id = $_SESSION['profile_id'];
                 $story->title = $_POST['title'];
+                $story->description = $_POST['description'];
                 $story->tags = $_POST['tags'];
                 $story->favorites = $_POST['favorites'];
                 $story->series_id = $_POST['series_id'];
                 $story->author = $_POST['author'];
                 $story->insert();
-                header('location:'.BASE.'/Story/viewAllStoriesByProfile/'.$_SESSION['profile_id']);
+                header('location:'.BASE.'/Story/viewAllMyStories/');
              } else {
                  $this->view('Story/createStory');
              }
@@ -27,7 +28,9 @@
         function viewStory($story_id){
             $story = new \App\models\Story();
             $story = $story->findByID($story_id);
-            $this->view('Story/viewStoryInfo', $story);
+            $chapter = new \App\models\Chapter();
+            $chapter = $chapter->findByStoryID($story_id);
+            $this->view('Story/viewStory', ['story'=>$story, 'chapter'=>$chapter]);
         }
 
         function viewAllStoriesByProfile($profile_id){
@@ -51,7 +54,7 @@
         function viewAllStoriesForTag($tag_id){
             $story = new \App\models\Story();
             $story = $story->findAllStoriesByTag($tag_id);
-
+            $this->view('Story/viewAllStoriesForTag', $story);
         }
 
         function addTags($story_id){

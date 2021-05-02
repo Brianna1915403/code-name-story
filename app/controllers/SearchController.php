@@ -17,8 +17,14 @@
             }
         } 
 
-        function browse() {
+        function browse($tag_id) {
             $this->view('Search/browse');
+        }
+
+        function browseBytag($tag_id){
+            $story = new \App\models\Story();
+            $story = $story->findAllStoriesByTag($tag_id);
+            $this->view('Search/browse', $story);
         }
     }   
 ?>

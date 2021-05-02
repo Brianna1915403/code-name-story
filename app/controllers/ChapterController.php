@@ -31,7 +31,9 @@
         function viewChapter($chapter_id){
             $chapter = new \App\models\Chapter();
             $chapter = $chapter->findByID($chapter_id);
-            $this->view('Chapter/viewChapterInfo', $chapter);
+            $comments = new \App\models\Comment();
+            $comments = $comments->getCommentsForChapter($chapter_id);
+            $this->view('Chapter/viewChapterInfo', ['chapter'=>$chapter, 'comments'=>$comments]);
         }
     } 
 ?>
