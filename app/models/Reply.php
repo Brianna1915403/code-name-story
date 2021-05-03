@@ -13,7 +13,8 @@
         }
 
         public function getRepliesForComment($comment_id){
-            $stmt = self::$connection->prepare("SELECT * FROM comment WHERE comment_id = (SELECT reply_id FROM reply WHERE original_comment_id = :original_comment_id)");
+            $stmt = self::$connection->prepare("SELECT * FROM comment WHERE comment_id = 
+            (SELECT reply_id FROM reply WHERE original_comment_id = :original_comment_id) ORDER BY date_commented DESC");
             $stmt->execute(['original_comment_id'=>$comment_id0]);
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Comment");
             return $stmt->fetchAll();

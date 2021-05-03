@@ -13,23 +13,15 @@
 
         <?php
         echo"<div class=\"container\" style=\"overflow: hidden\">";
-            $story = $data['chapter'];
-                if ($story->story_picture_id != null) {
-                    $picture = new \App\models\Picture();
-                    $picture = $picture->findByPictureID($story->story_picture_id);
-                }
+            $chapter = $data['chapter'];
                 echo"
-                
                     <div class=\"info\">
-                        <h3 class=\"subj\">$story->title</h3>
-                        <p class=\"author\">$story->author</p>
+                        <h3 class=\"subj\">$chapter->chapter_title</h3>
+                        <p class=\"date\">$chapter->date_created</p>
+                        <p class=\"text\">$chapter->chapter_text</p>
                         <p class=\"grade_area\">
-                            <span class=\"ico_like3\">Likes: </span><em class=\"grade_num\">UNKNOWN</em>
+                            <span class=\"ico_like3\">Likes: </span><em class=\"grade_num\">$chapter->likes</em>
                         </p>
-                    <span class=\"genre\" style=\"position: unset\">GENRE</span>
-                    
-                        <p class=\"summary\">Description: $story->description</p>
-                        <img src=\"../../uploads/$picture->filename\" alt=\"$picture->alt\" width=\"550\" height=\"550\">
                     </div>
                 </div>";
             
@@ -43,24 +35,30 @@
                 <div class=\"detail_lst\">
                     <ul id=\"_listUl\">";
         if($data['chapter'] != null){
-        foreach($data['comment'] as $chapter){
-            echo"<li>
+        foreach($data['comment'] as $comment){
+            $profile = new \App\models\Profile();
+            $profile = $profile->findByID($comment->profile_id);
+
+            $picture = new \App\models\Picture();
+            $picture = $picture->findByPictureID($profile->profile_picture_id);
+
+            $user = new \App\models\User();
+            $user = $user->findByUserID($profile->user_id);
             
-                <a href='".BASE."/Chapter/viewChapter/$chapter->chapter_id' class=\"NPI=a:list,i=1022,r=133,g:en_en\">
-                    
-                    <span class=\"subj\"><span>$chapter->chapter_title</span></span>
-                    <span class=\"manage_blank\"></span>
-                    <span class=\"date\">$chapter->date_created</span>
-                    
-                    
-                    
-                    <span class=\"like_area _likeitArea\"><em class=\"ico_like _btnLike _likeMark\">Likes</em>$chapter->likes</span>
-                </a>
+            echo"<li>
+            <a href='".BASE."/Comment/viewComment/$profile->profile_id'>
+            <img src=\"../../uploads/$picture->filename\" alt=\"$picture->alt\" width=\"50\" height=\"50\">
+            <h3 style=\"color: white; display: inline\">$user->username</h3>
+                <span class=\"subj\"><span>$comment->text</span></span>
+                <span class=\"manage_blank\"></span>
+            <h3 class=\"date\">Commented on: $comment->date_commented</h3>
+            
+            </a>
             </li>";
         }
     }
     else{
-        echo"<h3>There are no chapters added to the story yet...</h3>";
+        echo"<h3>There are no comments...</h3>";
     }
 
 

@@ -20,7 +20,7 @@
         }
         
         public function getCommentsForChapter($chapter_id){
-            $stmt = self::$connection->prepare("SELECT * FROM comment WHERE chapter_id = :chapter_id AND comment_id NOT IN (SELECT reply_id FROM reply)");
+            $stmt = self::$connection->prepare("SELECT * FROM comment WHERE chapter_id = :chapter_id AND comment_id NOT IN (SELECT reply_id FROM reply) ORDER BY date_commented ASC");
             $stmt->execute(['chapter_id'=>$chapter_id]);
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Comment");
             return $stmt->fetchAll();

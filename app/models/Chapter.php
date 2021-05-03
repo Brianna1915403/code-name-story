@@ -19,14 +19,14 @@
         }
 
         public function findByStoryID($story_id){
-            $stmt = self::$connection->prepare("SELECT * FROM chapter WHERE story_id = :story_id");
+            $stmt = self::$connection->prepare("SELECT * FROM chapter WHERE story_id = :story_id ORDER BY date_created DESC");
             $stmt->execute(['story_id'=>$story_id]);
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Chapter");
             return $stmt->fetchAll();
         }
 
         public function selectEssentialInfoByStoryID($story_id){
-            $stmt = self::$connection->prepare("SELECT chapter_id, story_id, chapter_title, date_created, likes FROM chapter WHERE story_id = :story_id");
+            $stmt = self::$connection->prepare("SELECT chapter_id, story_id, chapter_title, date_created, likes FROM chapter WHERE story_id = :story_id ORDER BY date_created DESC");
             $stmt->execute(['story_id'=>$story_id]);
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Chapter");
             return $stmt->fetchAll();

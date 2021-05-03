@@ -19,7 +19,6 @@
                     $picture = $picture->findByPictureID($story->story_picture_id);
                 }
                 echo"
-                
                     <div class=\"info\">
                         <h3 class=\"subj\">$story->title</h3>
                         <p class=\"author\">$story->author</p>
