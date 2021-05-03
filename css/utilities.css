@@ -114,7 +114,7 @@
     position: absolute;
     z-index: 1;
     top: -5px;
-    left: 105%;
+    left: 110%;
     /* margin-left: calc((max-content/2) * -1px); */
 }
 

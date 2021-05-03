@@ -203,10 +203,11 @@
                 $picture = new \App\models\Picture();
                 $picture = $picture->findByPictureID($story->story_picture_id);
             }
+            echo "<li>";
             echo "<a href'".BASE."/Story/viewStory/$story->story_id' class='card_item NPI=a:list,i:2574,r:2,g:en_en'";
             echo "<div class='card_flipper'>";
             echo "<div class='card_front'>";
-            echo "<img src='../../uploads/$picture->filename' alt='$picture->alt' width='210' height='210'>";
+            echo "<img src='../../uploads/$picture->filename' alt=\"$picture->alt\" width='210' height='210'>";
             echo "</div>";
             echo "<div class='card_back'>";
             echo "<div class='info'>";
@@ -218,7 +219,7 @@
             echo "<span class='genre'>GENRE</span>";
             echo "<p class='line'></p>";
             echo "<p class='summary'>$story->description</p>";
-            echo "</div></div></div></a>";
+            echo "</div></div></div></a></li>";
         }
     }
 ?>
