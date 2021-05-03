@@ -29,7 +29,7 @@
             $story = new \App\models\Story();
             $story = $story->findByID($story_id);
             $chapter = new \App\models\Chapter();
-            $chapter = $chapter->findByStoryID($story_id);
+            $chapter = $chapter->selectEssentialInfoByStoryID($story_id);
             $this->view('Story/viewStory', ['story'=>$story, 'chapter'=>$chapter]);
         }
 

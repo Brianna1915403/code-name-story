@@ -33,7 +33,7 @@
             $chapter = $chapter->findByID($chapter_id);
             $comments = new \App\models\Comment();
             $comments = $comments->getCommentsForChapter($chapter_id);
-            $this->view('Chapter/viewChapterInfo', ['chapter'=>$chapter, 'comments'=>$comments]);
+            $this->view('Chapter/viewChapter', ['chapter'=>$chapter, 'comments'=>$comments]);
         }
     } 
 ?>

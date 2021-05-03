@@ -13,7 +13,7 @@
 
         <?php
         echo"<div class=\"container\" style=\"overflow: hidden\">";
-            $story = $data['story'];
+            $story = $data['chapter'];
                 if ($story->story_picture_id != null) {
                     $picture = new \App\models\Picture();
                     $picture = $picture->findByPictureID($story->story_picture_id);
@@ -43,7 +43,7 @@
                 <div class=\"detail_lst\">
                     <ul id=\"_listUl\">";
         if($data['chapter'] != null){
-        foreach($data['chapter'] as $chapter){
+        foreach($data['comment'] as $chapter){
             echo"<li>
             
                 <a href='".BASE."/Chapter/viewChapter/$chapter->chapter_id' class=\"NPI=a:list,i=1022,r=133,g:en_en\">
