@@ -8,25 +8,60 @@
         <?= spawnNavBar(); ?>
         
         <div class="container">
-            <div class="hform">
-                <?php 
-                    $profile = new \App\models\Profile();
-                    $profile = $profile->findByID($data);
-                    if ($profile->profile_picture_id != null) {
-                        $picture = new \App\models\Picture();
-                        $picture = $picture->findByPictureID($profile->profile_picture_id);
-                        echo "<img class='profile-img' src='".BASE."/uploads/$picture->filename' alt='$picture->alt'>";
-                    } else {
-                        echo "<img class='profile-img' src='".BASE."/uploads/DefaultPicture.png' alt='Default Profile Picture'>";
-                    }
-                ?>
-                <div class="profile-info">
-                    <h2 class="header">
-                        <?php 
-                            
-                        ?>    
-                    </h2>
+            <div class="banner">
+                <div class="hForm">
+                    <?php 
+                        $profile = new \App\models\Profile();
+                        $profile = $profile->findByID($data);
+                        if ($profile->profile_picture_id != null) {
+                            $picture = new \App\models\Picture();
+                            $picture = $picture->findByPictureID($profile->profile_picture_id);
+                            echo "<img class='profile-img mr20' src='".BASE."/uploads/$picture->filename' alt='$picture->alt'>";
+                        } else {
+                            echo "<img class='profile-img mr20' src='".BASE."/uploads/DefaultPicture.png' alt='Default Profile Picture'>";
+                        }
+                    ?>
+                    <div class="profile-info">
+                        <h2 class="header grid">
+                            <?= $_SESSION['username'] ?>  
+                            <?php echo ($profile->account_type == 'reader')? "<i class='fas fa-book-open tooltip'><span class='tooltip-text'>This user is a Reader.</span></i>" : "<i class='fas fa-pen tooltip'><span class='tooltip-text'>This user is a Writer.</span></i>"; ?> 
+                        </h2>
+                        <p class="description"><?= $profile->description ?></p>
+                    </div>
                 </div>
+            </div>
+            <div class="shelves">
+                <div class="story-shelf">
+                        <?php 
+                            $story = new \App\models\Story();
+                            $stories = $story->findByProfile($profile->profile_id);
+                            echo "$profile->profile_id";
+                            // spawnStoryCard($stories);
+                            foreach ($stories as $story) {
+                                if ($story->story_picture_id != null) {
+                                    $picture = new \App\models\Picture();
+                                    $picture = $picture->findByPictureID($story->story_picture_id);
+                                }
+                                echo "<a href'".BASE."/Story/viewStory/$story->story_id' class='card_item NPI=a:list,i:2574,r:2,g:en_en'";
+                                echo "<div class='card_flipper'>";
+                                echo "<div class='card_front'>";
+                                echo "<img src='../../uploads/$picture->filename' alt='$picture->alt' width='210' height='210'>";
+                                echo "</div>";
+                                echo "<div class='card_back'>";
+                                echo "<div class='info'>";
+                                echo "<h3 class='subj'>$story->title</h3>";
+                                echo "<p class='author'>$story->author</p>";
+                                echo "<p class='grade_area'>";
+                                echo "<span class='ico_like3'>Likes: </span><em class='grade_num'>UNKNOWN</em>";
+                                echo "</p>";
+                                echo "<span class='genre'>GENRE</span>";
+                                echo "<p class='line'></p>";
+                                echo "<p class='summary'>$story->description</p>";
+                                echo "</div></div></div></a>";
+                            }
+                        ?>
+                </div>
+                <div class="favorite-shelf"></div>
             </div>
         </div>
         <?php 

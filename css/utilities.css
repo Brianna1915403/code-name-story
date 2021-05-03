@@ -89,7 +89,36 @@
     display: list-item;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content, .dropdown:focus-within .dropdown-content {
+    display: block;
+}
+
+.tooltip {
+    position: relative;
+    border-bottom: 1px dotted var(--main-accent-colour-light);
+}
+
+.tooltip .tooltip-text {
+    display: none;
+    width: max-content;
+    background-color: var(--main-accent-colour-light);
+    color: var(--text-colour-light);
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: small;
+    font-weight: 300;
+    text-align: center;
+
+    border-radius: 6px;
+    padding: 5px;
+
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+    /* margin-left: calc((max-content/2) * -1px); */
+}
+
+.tooltip:hover .tooltip-text {
     display: block;
 }
 

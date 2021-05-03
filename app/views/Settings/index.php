@@ -71,7 +71,7 @@
                 <div id="theme-settings" style="display:none;">
                     <h2 class='setting-header'>Theme</h2>
                     <form id="theme-form" action="" method="post">      
-                        <div id='theme-options' class="flex flex-wrap">
+                        <div id='theme-options' class="flex flex-even">
                             <div id='light-theme' class="radio-button light-theme-outline">              
                                 <label for="light-theme">
                                     <img src="../images/light_theme_preview.png" alt="">

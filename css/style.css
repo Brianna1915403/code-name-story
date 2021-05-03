@@ -325,10 +325,7 @@ a.browse-options-light {
 /* Appearance Settings */
 #theme-form {
     display: inline-table;
-}
-
-#theme-options > * {
-    margin-right: 8px;
+    width: 100%;
 }
 
 .radio-button {
@@ -350,4 +347,25 @@ a.browse-options-light {
 /* Setup 2fa */
 .form-2fa {
     width: 100%;
+}
+
+/* Profile */
+.banner {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.hForm {
+    width: max-content;
+    margin: 10px;
+}
+
+.profile-info .header.grid {
+    grid-template-columns: max-content 1fr;
+}
+
+.profile-info .header.grid i {
+    justify-self: end;
+    padding: 2px;
 }

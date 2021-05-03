@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2021 at 08:19 PM
+-- Generation Time: May 03, 2021 at 07:00 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -124,8 +124,7 @@ CREATE TABLE `profile` (
 --
 
 INSERT INTO `profile` (`profile_id`, `user_id`, `account_type`, `description`, `theme`, `profile_picture_id`) VALUES
-(1, 1, 'reader', 'I don\'t know who I am...', 'dark', 6),
-(2, 1, 'writer', 'Oink Oink', 'light', NULL),
+(1, 1, 'reader', 'I don\'t know who I am...', 'light', 6),
 (3, 2, 'writer', 'I am a writer!', 'light', 4);
 
 -- --------------------------------------------------------
@@ -177,7 +176,7 @@ CREATE TABLE `story` (
 --
 
 INSERT INTO `story` (`story_id`, `profile_id`, `title`, `description`, `date_created`, `series_id`, `author`, `story_picture_id`) VALUES
-(1, 2, 'Trapped', 'Eren Jaeger lived in a world of fear, until he woke up in a cramped room with a bunch of strangers. Confused, he asked what was going on, but no one seemed to know the answer. Where is he? Who are they? And why aren\'t they fearing the worst?', '2021-05-01 13:55:01', NULL, 'Émilie Mayodon', 5);
+(1, 1, 'Trapped', 'Eren Jaeger lived in a world of fear, until he woke up in a cramped room with a bunch of strangers. Confused, he asked what was going on, but no one seemed to know the answer. Where is he? Who are they? And why aren\'t they fearing the worst?', '2021-05-01 13:55:01', NULL, 'Émilie Mayodon', 5);
 
 -- --------------------------------------------------------
 
@@ -311,6 +310,7 @@ ALTER TABLE `picture`
 --
 ALTER TABLE `profile`
   ADD PRIMARY KEY (`profile_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`),
   ADD KEY `profile_user_FK` (`user_id`),
   ADD KEY `profile_picture_FK` (`profile_picture_id`);
 
