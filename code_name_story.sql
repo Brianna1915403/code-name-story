@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2021 at 02:38 PM
+-- Generation Time: May 03, 2021 at 08:19 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -33,10 +33,10 @@ DROP TABLE IF EXISTS `chapter`;
 CREATE TABLE `chapter` (
   `chapter_id` int(11) NOT NULL,
   `story_id` int(11) NOT NULL,
+  `chapter_title` varchar(64) NOT NULL,
   `chapter_text` text NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `likes` int(11) NOT NULL,
-  `chapter_picture_id` int(11) NOT NULL
+  `likes` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -93,6 +93,16 @@ CREATE TABLE `picture` (
   `profile_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `picture`
+--
+
+INSERT INTO `picture` (`picture_id`, `filename`, `alt`, `artist`, `profile_id`) VALUES
+(3, '608d7c3fc5a4f.jpg', 'Jane\'s Profile Picture', '', 1),
+(4, '608dee4388ca1.png', 'E\'s Profile Picture', '', 3),
+(5, '608f2980ca883.jpg', 'Jane\'s Profile Picture', '', 1),
+(6, '608f29bdc5608.jpg', 'Jane\'s Profile Picture', '', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -114,8 +124,9 @@ CREATE TABLE `profile` (
 --
 
 INSERT INTO `profile` (`profile_id`, `user_id`, `account_type`, `description`, `theme`, `profile_picture_id`) VALUES
-(1, 1, 'reader', 'I don\'t know who I am...', 'light', NULL),
-(2, 1, 'writer', 'Oink Oink', 'light', NULL);
+(1, 1, 'reader', 'I don\'t know who I am...', 'dark', 6),
+(2, 1, 'writer', 'Oink Oink', 'light', NULL),
+(3, 2, 'writer', 'I am a writer!', 'light', 4);
 
 -- --------------------------------------------------------
 
@@ -154,11 +165,19 @@ CREATE TABLE `story` (
   `story_id` int(11) NOT NULL,
   `profile_id` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
+  `description` text NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp(),
   `series_id` int(11) DEFAULT NULL,
   `author` varchar(64) NOT NULL,
-  `story_picture_id` int(11) NOT NULL
+  `story_picture_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `story`
+--
+
+INSERT INTO `story` (`story_id`, `profile_id`, `title`, `description`, `date_created`, `series_id`, `author`, `story_picture_id`) VALUES
+(1, 2, 'Trapped', 'Eren Jaeger lived in a world of fear, until he woke up in a cramped room with a bunch of strangers. Confused, he asked what was going on, but no one seemed to know the answer. Where is he? Who are they? And why aren\'t they fearing the worst?', '2021-05-01 13:55:01', NULL, 'Émilie Mayodon', 5);
 
 -- --------------------------------------------------------
 
@@ -171,6 +190,14 @@ CREATE TABLE `story_tags` (
   `tag_id` int(11) NOT NULL,
   `story_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `story_tags`
+--
+
+INSERT INTO `story_tags` (`tag_id`, `story_id`) VALUES
+(12, 1),
+(27, 1);
 
 -- --------------------------------------------------------
 
@@ -236,7 +263,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password_hash`, `token`) VALUES
-(1, 'Jane', '$2y$10$mWSc/wW9YDMcbaHuWRxaDeMjb0LXgj9B2BdPdqiXOjrwUEdcoQxOe', '');
+(1, 'Jane', '$2y$10$mWSc/wW9YDMcbaHuWRxaDeMjb0LXgj9B2BdPdqiXOjrwUEdcoQxOe', ''),
+(2, 'E', '$2y$10$VeyYaIypjvJHyojSl11C1upN5Fv1YWCNXhMMB28jQDLC967amC4Hi', '');
 
 --
 -- Indexes for dumped tables
@@ -247,8 +275,7 @@ INSERT INTO `user` (`user_id`, `username`, `password_hash`, `token`) VALUES
 --
 ALTER TABLE `chapter`
   ADD PRIMARY KEY (`chapter_id`,`story_id`),
-  ADD KEY `chapter_story_FK` (`story_id`),
-  ADD KEY `chapter_picture_FK` (`chapter_picture_id`);
+  ADD KEY `chapter_story_FK` (`story_id`);
 
 --
 -- Indexes for table `comment`
@@ -349,13 +376,13 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `picture`
 --
 ALTER TABLE `picture`
-  MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `series`
@@ -367,7 +394,7 @@ ALTER TABLE `series`
 -- AUTO_INCREMENT for table `story`
 --
 ALTER TABLE `story`
-  MODIFY `story_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `story_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tag`
@@ -379,7 +406,7 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -389,7 +416,6 @@ ALTER TABLE `user`
 -- Constraints for table `chapter`
 --
 ALTER TABLE `chapter`
-  ADD CONSTRAINT `chapter_picture_FK` FOREIGN KEY (`chapter_picture_id`) REFERENCES `picture` (`picture_id`),
   ADD CONSTRAINT `chapter_story_FK` FOREIGN KEY (`story_id`) REFERENCES `story` (`story_id`);
 
 --
