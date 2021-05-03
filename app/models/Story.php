@@ -6,6 +6,7 @@
         public function __construct() { 
             parent::__construct();
         }
+        
         public function insert(){
             $stmt = self::$connection->prepare("INSERT INTO story(profile_id, title, description, series_id, author) VALUES (:profile_id, :title, :description, :series_id, :author)");
             $stmt->execute(["profile_id"=>$this->profile_id, "title"=>$this->title, "description"=>$this->description,"series_id"=>$this->series_id, "author"=>$this->author]);
