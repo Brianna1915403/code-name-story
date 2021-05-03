@@ -314,9 +314,8 @@ img {
     background-position: -758px -699px;
 }
 
-.info .genre {
-    position: absolute;
-    left: 16px;
+.card_item .genre {
+    left: 18px;
     bottom: 15px;
     line-height: 16px;
 }

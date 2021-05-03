@@ -330,7 +330,6 @@ img {
 }
 
 .card_item .genre {
-    position: absolute;
     left: 18px;
     bottom: 15px;
     line-height: 16px;
