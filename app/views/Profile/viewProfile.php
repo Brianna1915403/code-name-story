@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <?= spawnDependenciesWithinView(); ?>
+        <?= spawnDependenciesWithinViewWithArgument(); ?>
         <title>Profile</title>
     </head>
     <body>
@@ -22,9 +22,13 @@
                         }
                     ?>
                     <div class="profile-info">
-                        <h2 class="header grid">
-                            <?= $_SESSION['username'] ?>  
-                            <?php echo ($profile->account_type == 'reader')? "<i class='fas fa-book-open tooltip'><span class='tooltip-text'>This user is a Reader.</span></i>" : "<i class='fas fa-pen tooltip'><span class='tooltip-text'>This user is a Writer.</span></i>"; ?> 
+                        <h2 class="header grid">                            
+                            <?php 
+                                $user = new \App\models\User();
+                                $user = $user->findByUserID($profile->user_id);
+                                echo "$user->username";
+                                echo ($profile->account_type == 'reader')? "<i class='fas fa-book-open tooltip'><span class='tooltip-text'>This user is a Reader.</span></i>" : "<i class='fas fa-pen tooltip'><span class='tooltip-text'>This user is a Writer.</span></i>"; 
+                            ?> 
                         </h2>
                         <p class="description"><?= $profile->description ?></p>
                     </div>

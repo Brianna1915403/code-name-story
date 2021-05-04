@@ -65,6 +65,8 @@
             echo "<link rel='stylesheet' href='../css/style.css' type='text/css'>";
             echo "<link rel='stylesheet' href='../css/utilities.css' type='text/css'>";
         }
+        echo "<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.4.1/css/all.css' integrity='sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz'
+        crossorigin='anonymous'>";
         echo "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>";
         echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>";
         echo "<script src='../js/navbar.js'></script>";
@@ -140,7 +142,7 @@
                                 
         echo "</div><div class='drop-content-numbers grid grid-3' style='display: none;'>";
         echo "<a href='#'>Most Popular</a><a href='#'>Most Recent</a></div></div></li>";
-        echo "<li><a href='#' class='light-theme-link'>Create</a></li></ul></nav>";
+        echo "<li><a href='".BASE."/Story/storyList' class='light-theme-link'>Create</a></li></ul></nav>";
         echo "<input type='search' name='search' id='search' placeholder='Search'>";
         echo "<div class='dropdown'><i class='fas fa-user-circle fa-2x'></i>";
         echo "<div class='dropdown-content light-theme-bg-main light-theme-text'>";
@@ -148,7 +150,7 @@
         if(isset($_SESSION['user_id'])) {            
             echo "<ul>
                     <li>Logged in as ".$_SESSION['username']."!</li>
-                    <li><a href='".BASE."/Profile/home'>Profile</a></li>
+                    <li><a href='".BASE."/Profile/viewProfile/".$_SESSION['profile_id']."'>Profile</a></li>
                     <li><a href='#'>Favorites</a></li>
                     <li><a href='".BASE."/Settings/index'>Settings</a></li>
                     <li><a href='".BASE."/Login/logout'>Logout <i class='fas fa-sign-out-alt' style='margin-left: 2px;'></i></a></li>
@@ -198,16 +200,18 @@
     }
 
     function spawnStoryCard($stories) {
+        $story_tag = new \App\models\StoryTag();
+        $picture = new \App\models\Picture();
         foreach ($stories as $story) {
+            $story_tags = $story_tag->getAllFromStory($story->story_id);
             if ($story->story_picture_id != null) {
-                $picture = new \App\models\Picture();
                 $picture = $picture->findByPictureID($story->story_picture_id);
             }
             echo "<li>";
             echo "<a href'".BASE."/Story/viewStory/$story->story_id' class='card_item NPI=a:list,i:2574,r:2,g:en_en'";
             echo "<div class='card_flipper'>";
             echo "<div class='card_front'>";
-            echo "<img src='../../uploads/$picture->filename' alt=\"$picture->alt\" width='210' height='210'>";
+            echo $story->story_picture_id == null? "" : "<img src='../../uploads/$picture->filename' alt=\"$picture->alt\" width='210' height='210'>";
             echo "</div>";
             echo "<div class='card_back'>";
             echo "<div class='info'>";
@@ -216,10 +220,48 @@
             echo "<p class='grade_area'>";
             echo "<span class='ico_like3'>Likes: </span><em class='grade_num'>UNKNOWN</em>";
             echo "</p>";
-            echo "<span class='genre'>GENRE</span>";
+            echo "<span class='genre'>";
+            foreach($story_tags as $story_tag) {
+                echo "#".$story_tag->getTagName()." ";
+            }
+            echo "</span>";
             echo "<p class='line'></p>";
             echo "<p class='summary'>$story->description</p>";
             echo "</div></div></div></a></li>";
+            $story_tags = [];
+        }
+    }
+
+    function spawnStoryCardWithinCreate($stories) {
+        $story_tag = new \App\models\StoryTag();
+        $picture = new \App\models\Picture();
+        foreach ($stories as $story) {
+            $story_tags = $story_tag->getAllFromStory($story->story_id);
+            if ($story->story_picture_id != null) {
+                $picture = $picture->findByPictureID($story->story_picture_id);
+            }
+            echo "<li>";
+            echo "<a href'".BASE."/Story/viewStory/$story->story_id' class='card_item NPI=a:list,i:2574,r:2,g:en_en'";
+            echo "<div class='card_flipper'>";
+            echo "<div class='card_front'>";
+            echo $story->story_picture_id == null? "" : "<img src='../uploads/$picture->filename' alt=\"$picture->alt\" width='210' height='210'>";
+            echo "</div>";
+            echo "<div class='card_back'>";
+            echo "<div class='info'>";
+            echo "<h3 class='subj'>$story->title</h3>";
+            echo "<p class='author'>$story->author</p>";
+            echo "<p class='grade_area'>";
+            echo "<span class='ico_like3'>Likes: </span><em class='grade_num'>UNKNOWN</em>";
+            echo "</p>";
+            echo "<span class='genre'>";
+            foreach($story_tags as $story_tag) {
+                echo "#".$story_tag->getTagName()." ";
+            }
+            echo "</span>";
+            echo "<p class='line'></p>";
+            echo "<p class='summary'>$story->description</p>";
+            echo "</div></div></div></a></li>";
+            $story_tags = [];
         }
     }
 ?>

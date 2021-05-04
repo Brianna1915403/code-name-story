@@ -14,14 +14,19 @@
                 $story->profile_id = $_SESSION['profile_id'];
                 $story->title = $_POST['title'];
                 $story->description = $_POST['description'];
-                $story->tags = $_POST['tags'];
-                $story->favorites = $_POST['favorites'];
-                $story->series_id = $_POST['series_id'];
                 $story->author = $_POST['author'];
                 $story->insert();
-                header('location:'.BASE.'/Story/viewAllMyStories/');
+                $stories = $story->findByProfile($_SESSION['profile_id']);
+                $story = $stories[count($stories) - 1];
+                foreach ($_POST['tag'] as $tag) {                    
+                    $story_tag = new \App\models\StoryTag();
+                    $story_tag->tag_id = $tag;
+                    $story_tag->story_id = $story->story_id;
+                    $story_tag->insert();
+                }
+                $this->view('Story/storyList', $stories);
              } else {
-                 $this->view('Story/createStory');
+                $this->view('Story/createStory');
              }
         }
 
@@ -39,10 +44,12 @@
             $this->view('Story/viewAllStoriesForUser', $story);
         }
 
-        function viewAllMyStories(){
+        #[\App\core\LoginFilter]        
+        #[\App\core\ProfileFilter]        
+        function storyList(){
             $story = new \App\models\Story();
-            $story = $story->findByProfile($_SESSION['profile_id']);
-            $this->view('Story/viewAllMyStories', $story);
+            $stories = $story->findByProfile($_SESSION['profile_id']);
+            $this->view('Story/storyList', $stories);
         }
 
         function viewAllStoriesBySeries($series_id){
@@ -59,13 +66,13 @@
 
         function addTags($story_id){
             if(isset($_POST['action']) && is_array($_POST['tags'])){
-            $story = new \App\models\Story();
-            $story = $story->findByID($story_id);
-            
-            $tags = array();
-            $tags = implode(', ', $_POST['fruit']);
-            $story->addTagsToStory($story_id, $tags);
-            $this->view('Story/viewStoryInfo', $story);
+                $story = new \App\models\Story();
+                $story = $story->findByID($story_id);
+                
+                $tags = array();
+                $tags = implode(', ', $_POST['fruit']);
+                $story->addTagsToStory($story_id, $tags);
+                $this->view('Story/viewStoryInfo', $story);
             }else{
                 $story = new \App\models\Story();
                 $story = $story->findByID($story_id);

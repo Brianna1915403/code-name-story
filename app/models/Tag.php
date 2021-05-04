@@ -14,11 +14,6 @@
             return $stmt->fetch();
         }
 
-        public function deleteAllTagsForStory($story_id){
-            $stmt = self::$connection->prepare("DELETE FROM story_tags WHERE story_id = :story_id");
-            $stmt->execute(["story_id"=>$this->story_id]);
-        }
-
         public function getAll() {
             $stmt = self::$connection->prepare("SELECT * FROM tag ORDER BY name ASC");
             $stmt->execute();

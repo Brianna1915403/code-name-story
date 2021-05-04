@@ -243,6 +243,9 @@ input:focus, .profile-textarea:focus {
 
 .ilb { display: inline-block;}
 
+/* Alignment */
+.right-align { justify-content: flex-end;}
+
 /* Margin */
 
 .mr5 { margin-right: 5px;}
@@ -252,6 +255,10 @@ input:focus, .profile-textarea:focus {
 .ml5 { margin-left: 5px;}
 
 .mb70 { margin-bottom: 70px;}
+
+.mt10 {margin-top: 10px;}
+
+.mtb50 { margin-top: 50px; margin-bottom: 50px; }
 
 .ilb { display: inline-block;}
 
