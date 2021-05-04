@@ -44,7 +44,7 @@
         }
 
         public function findAllStoriesByTag($tag_id){
-            $stmt = self::$connection->prepare("SELECT * FROM story WHERE story_id = (SELECT story_id FROM story_tags WHERE tag_id = :tag_id)");
+            $stmt = self::$connection->prepare("SELECT * FROM story WHERE story_id IN (SELECT story_id FROM story_tags WHERE tag_id = :tag_id)");
             $stmt->execute(['tag_id'=>$tag_id]);
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Story");
             return $stmt->fetchAll();

@@ -12,12 +12,14 @@
     </div>
     <h2 class="setting-header">All My Stories</h2>
         <?php 
+            $story = new \App\models\Story();
+            $stories = $story->findByProfile($_SESSION['profile_id']);
             echo "<div class='container' style='overflow: hidden'>";
-            echo "<ul class='card_lst' style='' >";
-            spawnStoryCardWithinCreate($data);                            
-            echo "</ul></div>";
+                echo "<ul class='card_lst' style='' >";
+                    spawnStoryCardWithinCreate($stories);
+                echo "</ul>";
+            echo "</div>";
         ?>
-    </div>
     <?= spawnFooter() ?>
 </body>
 </html>

@@ -200,68 +200,76 @@
     }
 
     function spawnStoryCard($stories) {
-        $story_tag = new \App\models\StoryTag();
-        $picture = new \App\models\Picture();
         foreach ($stories as $story) {
+            $story_tag = new \App\models\StoryTag();
             $story_tags = $story_tag->getAllFromStory($story->story_id);
             if ($story->story_picture_id != null) {
+                $picture = new \App\models\Picture();
                 $picture = $picture->findByPictureID($story->story_picture_id);
             }
             echo "<li>";
-            echo "<a href'".BASE."/Story/viewStory/$story->story_id' class='card_item NPI=a:list,i:2574,r:2,g:en_en'";
-            echo "<div class='card_flipper'>";
-            echo "<div class='card_front'>";
-            echo $story->story_picture_id == null? "" : "<img src='../../uploads/$picture->filename' alt=\"$picture->alt\" width='210' height='210'>";
-            echo "</div>";
-            echo "<div class='card_back'>";
-            echo "<div class='info'>";
-            echo "<h3 class='subj'>$story->title</h3>";
-            echo "<p class='author'>$story->author</p>";
-            echo "<p class='grade_area'>";
-            echo "<span class='ico_like3'>Likes: </span><em class='grade_num'>UNKNOWN</em>";
-            echo "</p>";
-            echo "<span class='genre'>";
-            foreach($story_tags as $story_tag) {
-                echo "#".$story_tag->getTagName()." ";
-            }
-            echo "</span>";
-            echo "<p class='line'></p>";
-            echo "<p class='summary'>$story->description</p>";
-            echo "</div></div></div></a></li>";
+                echo "<a href='".BASE."/Story/viewStory/$story->story_id' class='card_item NPI=a:list,i:2574,r:2,g:en_en' >";
+                    echo "<div class='card_flipper'>";
+                        echo "<div class='card_front'>";
+                            echo $story->story_picture_id == null? "<img src='' alt='' width='210' height='210'>" : "<img src='../../uploads/$picture->filename' alt=\"$picture->alt\" width='210' height='210'>";
+                        echo "</div>";
+                        echo "<div class='card_back'>";
+                            echo "<div class='info'>";
+                                echo "<h3 class='subj'>$story->title</h3>";
+                                echo "<p class='author'>$story->author</p>";
+                                echo "<p class='grade_area'>";
+                                    echo "<span class='ico_like3'>Likes: </span><em class='grade_num'>UNKNOWN</em>";
+                                echo "</p>";
+                                echo "<span class='genre'>";
+                                    foreach($story_tags as $story_tag) {
+                                        echo "#".$story_tag->getTagName()." ";
+                                    }
+                                echo "</span>";
+                                echo "<p class='line'></p>";
+                                echo "<p class='summary'>$story->description</p>";
+                            echo "</div>";
+                        echo "</div>"; 
+                    echo "</div>";
+                echo "</a>"; 
+            echo "</li>";
             $story_tags = [];
-        }
+        } 
     }
 
     function spawnStoryCardWithinCreate($stories) {
-        $story_tag = new \App\models\StoryTag();
-        $picture = new \App\models\Picture();
         foreach ($stories as $story) {
+            $story_tag = new \App\models\StoryTag();
             $story_tags = $story_tag->getAllFromStory($story->story_id);
             if ($story->story_picture_id != null) {
+                $picture = new \App\models\Picture();
                 $picture = $picture->findByPictureID($story->story_picture_id);
             }
             echo "<li>";
-            echo "<a href'".BASE."/Story/viewStory/$story->story_id' class='card_item NPI=a:list,i:2574,r:2,g:en_en'";
-            echo "<div class='card_flipper'>";
-            echo "<div class='card_front'>";
-            echo $story->story_picture_id == null? "" : "<img src='../uploads/$picture->filename' alt=\"$picture->alt\" width='210' height='210'>";
-            echo "</div>";
-            echo "<div class='card_back'>";
-            echo "<div class='info'>";
-            echo "<h3 class='subj'>$story->title</h3>";
-            echo "<p class='author'>$story->author</p>";
-            echo "<p class='grade_area'>";
-            echo "<span class='ico_like3'>Likes: </span><em class='grade_num'>UNKNOWN</em>";
-            echo "</p>";
-            echo "<span class='genre'>";
-            foreach($story_tags as $story_tag) {
-                echo "#".$story_tag->getTagName()." ";
-            }
-            echo "</span>";
-            echo "<p class='line'></p>";
-            echo "<p class='summary'>$story->description</p>";
-            echo "</div></div></div></a></li>";
+                echo "<a href='".BASE."/Story/viewStory/$story->story_id' class='card_item NPI=a:list,i:2574,r:2,g:en_en' >";
+                    echo "<div class='card_flipper'>";
+                        echo "<div class='card_front'>";
+                            echo $story->story_picture_id == null? "<img src='' alt='' width='210' height='210'>" : "<img src='../uploads/$picture->filename' alt=\"$picture->alt\" width='210' height='210'>";
+                        echo "</div>";
+                        echo "<div class='card_back'>";
+                            echo "<div class='info'>";
+                                echo "<h3 class='subj'>$story->title</h3>";
+                                echo "<p class='author'>$story->author</p>";
+                                echo "<p class='grade_area'>";
+                                    echo "<span class='ico_like3'>Likes: </span><em class='grade_num'>UNKNOWN</em>";
+                                echo "</p>";
+                                echo "<span class='genre'>";
+                                    foreach($story_tags as $story_tag) {
+                                        echo "#".$story_tag->getTagName()." ";
+                                    }
+                                echo "</span>";
+                                echo "<p class='line'></p>";
+                                echo "<p class='summary'>$story->description</p>";
+                            echo "</div>";
+                        echo "</div>"; 
+                    echo "</div>";
+                echo "</a>"; 
+            echo "</li>";
             $story_tags = [];
-        }
+        } 
     }
 ?>
