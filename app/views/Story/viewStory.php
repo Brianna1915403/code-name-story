@@ -18,6 +18,15 @@
                     $picture = new \App\models\Picture();
                     $picture = $picture->findByPictureID($story->story_picture_id);
                 }
+                if(isset($_SESSION['profile_id']))
+                    if($story->profile_id == $_SESSION['profile_id']){
+                        echo"
+                            <button href='".BASE."/Chapter/addChapter/$story->story_id'>Add Chapter</button>
+                            <button href='".BASE."/Story/editStory/$story->story_id'>Edit Story Info</button>
+                            <button href='".BASE."/Story/deleteStory/$story->story_id'>Delete Story</button>
+                        ";
+                    }
+
                 echo"
                     <div class=\"info\">
                         <h3 class=\"subj\">$story->title</h3>

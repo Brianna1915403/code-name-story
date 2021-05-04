@@ -14,6 +14,16 @@
         <?php
         echo"<div class=\"container\" style=\"overflow: hidden\">";
             $chapter = $data['chapter'];
+            $story = new \App\models\Story();
+            $story = $story->findByID($chapter->story_id);
+
+            if(isset($_SESSION['profile_id']))
+                    if($story->profile_id == $_SESSION['profile_id']){
+                        echo"
+                            <button href='".BASE."/Chapter/editChapter/$chapter->chapter_id'>Edit Chapter</button>
+                            <button href='".BASE."/Chapter/deleteChapter/$chapter->chapter_id'>Delete Chapter</button>
+                        ";
+                    }
                 echo"
                     <div class=\"info\">
                         <h3 class=\"subj\">$chapter->chapter_title</h3>
@@ -44,6 +54,15 @@
 
             $user = new \App\models\User();
             $user = $user->findByUserID($profile->user_id);
+
+            if(isset($_SESSION['profile_id'])){
+                        echo"
+                    <form action=\"\" method=\"post\">                                  
+                        <textarea class='comment-textarea' name=\"text\" cols=\"50\" rows=\"5\" maxlength='255' placeholder=\"What is on your mind\"></textarea><br /><br />
+                        <input class='btn light-theme-bg-accent light-theme-text' type=\"submit\" name=\"action\" value=\"Comment\">
+                    </form>
+                        ";
+                    }
             
             echo"<li>
             <a href='".BASE."/Comment/viewComment/$profile->profile_id'>
