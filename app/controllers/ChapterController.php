@@ -1,7 +1,6 @@
 <?php
     namespace App\controllers;
 
-    #[\App\core\LoginFilter]
     class ChapterController extends \App\core\Controller {
 
         function index() {
