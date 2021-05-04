@@ -1,12 +1,9 @@
 <?php
     namespace App\controllers;
 
-    #[\App\core\LoginFilter]
     class StoryController extends \App\core\Controller {
 
-        function index() {
-            
-        }
+        function index() { }
 
         function createStory(){
             if(isset($_POST['action'])){
@@ -23,6 +20,17 @@
                     $story_tag->tag_id = $tag;
                     $story_tag->story_id = $story->story_id;
                     $story_tag->insert();
+                }
+                $picture_controller = new \App\controllers\PictureController();
+                if ($picture_controller->upload($_FILES['upload'], "$story->title cover", $_SESSION['username'])) {
+                    $picture = new \App\models\Picture();
+                    $pictures = $picture->getAllByProfileID($_SESSION['profile_id']);
+                    $story->story_picture_id = $pictures[0]->picture_id;
+                    $story->updateCoverPicture();                    
+                } else if ($_FILES['upload']['tmp_name'] == "") {
+                    // Set default picture?
+                } else {
+                    header('location:'.BASE.'/Story/createStory?error=Picture Invalid');
                 }
                 $this->view('Story/storyList', $stories);
              } else {

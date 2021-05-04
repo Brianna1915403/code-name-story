@@ -49,5 +49,12 @@
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Story");
             return $stmt->fetchAll();
         }
+
+        public function updateCoverPicture() {
+            $stmt = self::$connection->prepare("UPDATE story SET story_picture_id = :story_picture_id WHERE story_id = :story_id");
+            $stmt->execute(['story_picture_id'=>$this->story_picture_id, 'story_id'=>$this->story_id]);
+            $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Story");
+            return $stmt->fetchAll();
+        }
     }
 ?>

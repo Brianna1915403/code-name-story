@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?= spawnDependenciesWithinView() ?>    
+    <?= spawnDependenciesWithinView() ?>   
+    <script src="../js/createStory.js"></script>
     <title>Code Name: Story | Story List</title>
 </head>
 <body>
@@ -10,10 +11,16 @@
         <div class="card mtb50">
             <h2 class='setting-header'>Create Your Story</h2>
             <form action="" method="post">
-                <section class="story-container">
-                    <label>Story Title: <input type="text" name="title"></label><br><br>
-                    <label>Author: <input type="text" name="author" value='<?= $_SESSION['username'] ?>'></label><br><br>
-                    <textarea name="description" placeholder="Story description/synopsis" maxlength=255></textarea>
+                <section class="story-container hForm">
+                    <div class="story-meta mr20">
+                        <label>Story Title: <input type="text" name="title"></label><br><br>
+                        <label>Author: <input type="text" name="author" value='<?= $_SESSION['username'] ?>'></label><br><br>
+                        <textarea name="description" placeholder="Story description/synopsis" maxlength=255></textarea>
+                    </div>
+                    <div class="cover-img float-right">
+                        <img id='preview-img' src='' alt='' width='210' height='210'><br>
+                        <label>Upload a cover picture: <input id='upload' type='file' name='upload'></label><br>
+                    </div>
                 </section class='tag-container'>
                 <section>
                     <ul class='tag-list'>

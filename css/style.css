@@ -375,6 +375,11 @@ a.browse-options-light {
 .story-container {
     padding-left: 20px;
     padding-right: 20px;
+    width: 100%;
+}
+
+.story-meta {
+    width: 50%;
 }
 
 textarea[name='description'] {

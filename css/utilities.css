@@ -246,6 +246,8 @@ input:focus, .profile-textarea:focus {
 /* Alignment */
 .right-align { justify-content: flex-end;}
 
+.float-right { float: right; }
+
 /* Margin */
 
 .mr5 { margin-right: 5px;}
