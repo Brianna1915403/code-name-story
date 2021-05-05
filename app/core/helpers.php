@@ -152,7 +152,7 @@
             echo "<ul>
                     <li>Logged in as ".$_SESSION['username']."!</li>
                     <li><a href='".BASE."/Profile/viewProfile/".$_SESSION['profile_id']."'>Profile</a></li>
-                    <li><a href='#'>Favorites</a></li>
+                    <li><a href='".BASE."/Profile/viewProfile/".$_SESSION['profile_id']."'>Favorites</a></li>
                     <li><a href='".BASE."/Settings/index'>Settings</a></li>
                     <li><a href='".BASE."/Login/logout'>Logout <i class='fas fa-sign-out-alt' style='margin-left: 2px;'></i></a></li>
                 </ul> ";            

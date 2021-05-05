@@ -11,7 +11,7 @@
             if(isset($_POST['action'])){
                 $story = new \App\models\Story();                
                 $picture_controller = new \App\controllers\PictureController();
-                if ($picture_controller->upload($_FILES['upload'], "$story->title cover", $_SESSION['username'])) {
+                if ($picture_controller->upload($_FILES['upload'], $_POST['title']." cover", $_SESSION['username'])) {
                     $picture = new \App\models\Picture();
                     $pictures = $picture->getAllByProfileID($_SESSION['profile_id']);
                     $story->profile_id = $_SESSION['profile_id'];
@@ -98,6 +98,12 @@
             $story = $story->getAll();
             $story = $story[rand(0, (count($story) - 1))];
             header('location:'.BASE.'/Story/viewStory/'.$story->story_id);
+        }
+
+        function delete($story_id) {
+            $story = new \App\models\Story();
+            $story = $story->findByID($story_id);
+            $story->delete();
         }
 
         #[\App\core\LoginFilter]        
