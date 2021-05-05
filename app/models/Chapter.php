@@ -7,8 +7,8 @@
             parent::__construct();
         }
         public function insert(){
-            $stmt = self::$connection->prepare("INSERT INTO chapter(story_id, chapter_title, chapter_text, date_created, likes, chapter_picture_id) VALUES (:story_id, :chapter_text, :date_created)");
-            $stmt->execute(["story_id"=>$this->story_id, "chapter_title"=>$this->chapter_title,"chapter_text"=>$this->chapter_text, "date_created"=>$this->date_created]);
+            $stmt = self::$connection->prepare("INSERT INTO chapter(story_id, chapter_title, chapter_text) VALUES (:story_id, :chapter_title, :chapter_text)");
+            $stmt->execute(["story_id"=>$this->story_id, "chapter_title"=>$this->chapter_title,"chapter_text"=>$this->chapter_text]);
         }
 
         public function findByID($chapter_id){
@@ -30,6 +30,16 @@
             $stmt->execute(['story_id'=>$story_id]);
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Chapter");
             return $stmt->fetchAll();
+        }
+
+        public function update() {
+            $stmt = self::$connection->prepare("UPDATE chapter SET chapter_title = :chapter_title WHERE chapter_id = :chapter_id");
+            $stmt->execute(["chapter_id"=>$this->chapter_id, "chapter_title"=>$this->chapter_title]);
+        }
+
+        public function delete() {
+            $stmt = self::$connection->prepare("DELETE FROM chapter WHERE chapter_id = :chapter_id");
+            $stmt->execute(['chapter_id'=>$this->chapter_id]);
         }
     }
 ?>

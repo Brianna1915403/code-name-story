@@ -7,32 +7,25 @@
 
         function createStory(){
             if(isset($_POST['action'])){
-                $story = new \App\models\Story();
-                $story->profile_id = $_SESSION['profile_id'];
-                $story->title = $_POST['title'];
-                $story->description = $_POST['description'];
-                $story->author = $_POST['author'];
-                $story->insert();
-                $stories = $story->findByProfile($_SESSION['profile_id']);
-                $story = $stories[count($stories) - 1];
-                if (isset($_POST['tag'])) {
-                    foreach ($_POST['tag'] as $tag) {                    
-                        $story_tag = new \App\models\StoryTag();
-                        $story_tag->tag_id = $tag;
-                        $story_tag->story_id = $story->story_id;
-                        $story_tag->insert();
-                    }
-                }
+                $story = new \App\models\Story();                
                 $picture_controller = new \App\controllers\PictureController();
                 if ($picture_controller->upload($_FILES['upload'], "$story->title cover", $_SESSION['username'])) {
                     $picture = new \App\models\Picture();
                     $pictures = $picture->getAllByProfileID($_SESSION['profile_id']);
+                    $story->profile_id = $_SESSION['profile_id'];
+                    $story->title = $_POST['title'];
+                    $story->description = $_POST['description'];
+                    $story->author = $_POST['author'];
+                    $story->insert();
+                    $stories = $story->findByProfile($_SESSION['profile_id']);
+                    $story = $stories[count($stories) - 1];
+                    if (isset($_POST['tag'])) {                   
+                        $story->addTagsToStory($story->story_id, $_POST['tag']);
+                    }
                     $story->story_picture_id = $pictures[0]->picture_id;
                     $story->updateCoverPicture();                    
-                } else if ($_FILES['upload']['tmp_name'] == "") {
-                    // Set default picture?
                 } else {
-                    header('location:'.BASE.'/Story/createStory?error=Picture Invalid');
+                    header('location:'.BASE.'/Story/createStory?error=Invalid Picture, allowed extensions are: .png, .jpg/.jpeg and .gif.');
                 }
                 $this->view('Story/storyList', $stories);
              } else {
@@ -42,7 +35,31 @@
 
         function editStory($story_id) {
             if(isset($_POST['action'])) {
-                var_dump($_FILES['upload']);
+                $story = new \App\models\Story();
+                $story = $story->findByID($story_id);
+                $story->title = $_POST['title'];
+                $story->author = $_POST['author'];
+                $story->description = $_POST['description'];
+                $story->update();
+                if (isset($_POST['tag'])) {
+                    $story->addTagsToStory($story_id, $_POST['tag']);
+                }
+                if ($_FILES['upload']['tmp_name'] != "") {
+                    if ($picture_controller->upload($_FILES['upload'], $_POST['title']." cover", $_POST['author'])) {
+                        $picture = new \App\models\Picture();
+                        if ($story->story_picture_id != null ) {
+                            $picture_id = $story->story_picture_id;
+                            $story->unsetCoverPicture();
+                            $picture_controller->delete($picture_id);
+                        }
+                        $pictures = $picture->getAllByProfileID($_SESSION['profile_id']);
+                        $story->story_picture_id = $pictures[0]->picture_id;
+                        $story->updateCoverPicture();          
+                    } else {
+                        header('location:'.BASE.'/Story/editStory/'.$story_id.'?error=Picture Invalid');
+                    }
+                }
+                header('location:'.BASE.'/Story/viewStory/'.$story_id.'?success=Story Editied');
             } else {
                 $story = new \App\models\Story();
                 $story = $story->findByID($story_id);

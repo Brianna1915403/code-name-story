@@ -456,6 +456,7 @@ textarea[name='description']:focus {
 .tag-list li input[type="checkbox"] {
   display: absolute;
 }
+
 .tag-list li input[type="checkbox"] {
   position: absolute;
   opacity: 0;

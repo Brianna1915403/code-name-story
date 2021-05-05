@@ -8,22 +8,20 @@
         }
 
         function createChapter($story_id){
-            $chapter = new \App\models\Chapter();
-            $chapter = $chapter->findByID($chapter_id);
-            if($chapter->profile_id == $_SESSION['profile_id']){
-                if(isset($_POST['action'])){
-                    $chapter = new \App\models\Chapter();
-                    $chapter->story_id = $story_id;
-                    $chapter->chapter_title = $_POST['chapter_title'];
-                    $chapter->chapter_text = $_POST['chapter_text'];
-                    $chapter->chapter_picture_id = $_POST['chapter_picture_id'];
-                    $chapter->insert();
-                    header('location:'.BASE.'/Chapter/viewAllChaptersByStory/'.$story_id);
-                } else {
-                    $this->view('Chapter/createChapter');
-                }
-            }else{
-                $this->view('Home');
+            if(isset($_POST['action'])) {
+                $chapter = new \App\models\Chapter();
+                $chapter->story_id = $story_id;
+                $chapter->chapter_title = $_POST['chapter_title'];
+                $targetFolder = 'stories/';
+                $targetFile = uniqid().'.txt';
+                file_put_contents($targetFolder.$targetFile, $_POST['chapter_text']);
+                $chapter->chapter_text = $targetFile;
+                $chapter->insert();
+                header('location:'.BASE.'/Story/viewStory/'.$story_id);
+            } else {
+                $chapter = new \App\models\Chapter();
+                $chapters = $chapter->findByStoryID($story_id);
+                $this->view('Chapter/createChapter', count($chapters));
             }
         }
 
@@ -47,6 +45,32 @@
                     $comment->insert();
                 }
             }
+        }
+
+        function editChapter($chapter_id) {
+            if(isset($_POST['action'])) {
+                $chapter = new \App\models\Chapter();
+                $chapter = $chapter->findByID($chapter_id);
+                $chapter->chapter_title = $_POST['chapter_title'];
+                $targetFolder = 'stories/';
+                $targetFile = $chapter->chapter_text;
+                file_put_contents($targetFolder.$targetFile, $_POST['chapter_text']);
+                $chapter->update();
+                header('location:'.BASE.'/Story/viewStory/'.$chapter->story_id);
+            } else {
+                $chapter = new \App\models\Chapter();
+                $chapter = $chapter->findByID($chapter_id);
+                $this->view('Chapter/editChapter', $chapter);
+            }
+        }
+
+        function deleteChapter($chapter_id) {
+            $chapter = new \App\models\Chapter();
+            $chapter = $chapter->findByID($chapter_id);                
+            $path = getcwd().DIRECTORY_SEPARATOR.'stories'.DIRECTORY_SEPARATOR.$chapter->chapter_text;
+            unlink($path);
+            $chapter->delete();
+            header('location:'.BASE.'/Story/viewStory/'.$chapter->story_id);
         }
 
         function like($chapter_id){

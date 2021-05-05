@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <?= spawnDependenciesWithinView() ?>   
-    <script src="../js/createStory.js"></script>
-    <title>Code Name: Story | Story List</title>
+    <script src="../js/storyCoverLoader.js"></script>
+    <title>Code Name: Story | Create Story</title>
 </head>
 <body>
     <?= spawnNavBar() ?>
@@ -15,7 +15,7 @@
                     <div class="story-meta mr20">
                         <label>Story Title: <input type="text" name="title" required></label><br><br>
                         <label>Author: <input type="text" name="author" value='<?= $_SESSION['username'] ?>' required></label><br><br>
-                        <textarea name="description" placeholder="Story description/synopsis" maxlength=255 required></textarea>
+                        <textarea name="description" placeholder="Write the synopsis/description of your story." maxlength=255 required></textarea>
                     </div>
                     <img id='preview-img' class='float-right mr100' src='' alt='' width='210' height='210'><br>
                     <br><label>Upload a cover picture: <input id='upload' type='file' name='upload' required></label>

@@ -28,7 +28,7 @@
 
         public function deleteAllTagsForStory($story_id){
             $stmt = self::$connection->prepare("DELETE FROM story_tags WHERE story_id = :story_id");
-            $stmt->execute(["story_id"=>$this->story_id]);
+            $stmt->execute(["story_id"=>$story_id]);
         }        
     }
 ?>

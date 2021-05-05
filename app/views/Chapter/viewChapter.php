@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <?= spawnDependenciesWithinViewWithArgument() ?>  
+        <script src="../../js/chapter.js"></script>
         <title>Code Name: Story | Browse</title>
     </head>
     <body>
@@ -24,15 +25,16 @@
             if(isset($_SESSION['profile_id']))
                     if($story->profile_id == $_SESSION['profile_id']){
                         echo"
-                        <a class='btn caution-btn float-right mt10' href='".BASE."/Chapter/editChapter/$chapter->chapter_id'>Edit Chapter</a>
-                        <a class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Chapter/deleteChapter/$chapter->chapter_id'>Delete Chapter</a>
+                        <a class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Chapter/editChapter/$chapter->chapter_id'>Edit Chapter</a>
+                        <a class='btn caution-btn float-right mt10' href='".BASE."/Chapter/deleteChapter/$chapter->chapter_id'>Delete Chapter</a>
                         ";
                     }
+                $text = file_get_contents('stories/'.$chapter->chapter_text);
                 echo"
                     <div class=\"info\">
                         <h3 class=\"subj\">$chapter->chapter_title</h3>
                         <p class=\"date\">$chapter->date_created</p>
-                        <p class=\"text\">$chapter->chapter_text</p><br>
+                        <div id='text'>$text</div><br>
                         <p class=\"grade_area\" style=\"display: inline\">
                             <span class=\"ico_like3\">Likes: </span><em class=\"grade_num\">$count_num</em>
                         </p>";
