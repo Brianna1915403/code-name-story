@@ -34,13 +34,13 @@
                     }
                     if($favorite_story_profile === false){
                         echo "
-                        <a class='btn caution-btn float-right mt10' href='".BASE."/Story/subscribe/$story->story_id'>Subscribe</a>";
+                        <a class='btn caution-btn float-right mt10' href='".BASE."/Story/subscribe/$story->story_id'>Favorite</a>";
                     }else if($favorite_story_profile->profile_id !== $_SESSION['profile_id']){
                         echo "
-                        <a class='btn caution-btn float-right mt10' href='".BASE."/Story/subscribe/$story->story_id'>Subscribe</a>";
+                        <a class='btn caution-btn float-right mt10' href='".BASE."/Story/subscribe/$story->story_id'>Favorite</a>";
                     }else{
                         echo "
-                        <a class='btn caution-btn float-right mt10' href='".BASE."/Story/unsubscribe/$story->story_id'>Unsubscribe</a>";
+                        <a class='btn caution-btn float-right mt10' href='".BASE."/Story/unsubscribe/$story->story_id'>Unfavorite</a>";
                     }
                 }
 
@@ -49,7 +49,7 @@
                         <h3 class=\"subj\">$story->title</h3>
                         <p class=\"author\">$story->author</p>
                         <p class=\"grade_area\">
-                            <span class=\"ico_like3\">Subscribed: </span><em class=\"grade_num\">$count_num</em>
+                            <span class=\"ico_like3\">Favorites: </span><em class=\"grade_num\">$count_num</em>
                         </p>
                     <span class=\"genre\" style=\"position: unset\">GENRE</span>                    
                         <p class=\"summary\">Description: $story->description</p>

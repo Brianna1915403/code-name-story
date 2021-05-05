@@ -247,6 +247,9 @@
             if ($story->story_picture_id != null) {
                 $picture = new \App\models\Picture();
                 $picture = $picture->findByPictureID($story->story_picture_id);
+                $favorite_story = new \App\models\FavoriteStory();
+                $favorite_story = $favorite_story->getFavoritesStory($story->story_id);
+                $count_num = count($favorite_story);
             }
             echo "<li>";
                 echo "<a href='".BASE."/Story/viewStory/$story->story_id' class='card_item NPI=a:list,i:2574,r:2,g:en_en' >";
@@ -259,7 +262,7 @@
                                 echo "<h3 class='subj'>$story->title</h3>";
                                 echo "<p class='author'>$story->author</p>";
                                 echo "<p class='grade_area'>";
-                                    echo "<span class='ico_like3'>Likes: </span><em class='grade_num'>UNKNOWN</em>";
+                                    echo "<span class='ico_like3'>Favorites: </span><em class='grade_num'>$count_num</em>";
                                 echo "</p>";
                                 echo "<span class='genre'>";
                                     foreach($story_tags as $story_tag) {
