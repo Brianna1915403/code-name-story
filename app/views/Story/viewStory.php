@@ -21,9 +21,9 @@
                 if(isset($_SESSION['profile_id']))
                     if($story->profile_id == $_SESSION['profile_id']){
                         echo"
-                            <button class='btn caution-btn float-right mt10' href='".BASE."/Story/deleteStory/$story->story_id'>Delete Story</button>
-                            <button class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Chapter/addChapter/$story->story_id'>Add Chapter</button>
-                            <button class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Story/editStory/$story->story_id'>Edit Story Info</button>
+                            <a class='btn caution-btn float-right mt10' href='".BASE."/Story/deleteStory/$story->story_id'>Delete Story</a>
+                            <a class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Chapter/addChapter/$story->story_id'>Add Chapter</a>
+                            <a class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Story/editStory/$story->story_id'>Edit Story Info</a>
                         ";
                     }
 

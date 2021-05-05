@@ -40,6 +40,18 @@
              }
         }
 
+        function editStory($story_id) {
+            if(isset($_POST['action'])) {
+                var_dump($_FILES['upload']);
+            } else {
+                $story = new \App\models\Story();
+                $story = $story->findByID($story_id);
+                $picture = new \App\models\Picture();
+                $picture = $picture->findByPictureID($story->story_picture_id);
+                $this->view('Story/editStory', ['story'=>$story, 'picture'=>$picture]);                
+            }
+        }
+
         function viewStory($story_id){
             $story = new \App\models\Story();
             $story = $story->findByID($story_id);
@@ -53,12 +65,6 @@
             $story = $story->getAll();
             $story = $story[rand(0, (count($story) - 1))];
             header('location:'.BASE.'/Story/viewStory/'.$story->story_id);
-        }
-
-        function viewAllStoriesByProfile($profile_id){
-            $story = new \App\models\Story();
-            $story = $story->findByProfile($profile_id);
-            $this->view('Story/viewAllStoriesForUser', $story);
         }
 
         #[\App\core\LoginFilter]        
