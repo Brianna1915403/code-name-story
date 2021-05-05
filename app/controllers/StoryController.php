@@ -108,6 +108,7 @@
             $favorite_story->profile_id = $_SESSION['profile_id'];
             $favorite_story->story_id = $story_id;
             $favorite_story->insert();
+            header('location:'.BASE.'/Story/viewStory/'.$story_id);
         }
 
         function unsubscribe($story_id){
@@ -115,6 +116,7 @@
             $favorite_story->profile_id = $_SESSION['profile_id'];
             $favorite_story->story_id = $story_id;
             $favorite_story->delete();
+            header('location:'.BASE.'/Story/viewStory/'.$story_id);
         }
 
 

@@ -34,13 +34,13 @@
                     }
                     if($favorite_story_profile === false){
                         echo "
-                        <button class='btn caution-btn float-right mt10' href='".BASE."/Story/subscribe/$story->story_id'>Subscribe</button>";
+                        <a class='btn caution-btn float-right mt10' href='".BASE."/Story/subscribe/$story->story_id'>Subscribe</a>";
                     }else if($favorite_story_profile->profile_id !== $_SESSION['profile_id']){
                         echo "
-                        <button class='btn caution-btn float-right mt10' href='".BASE."/Story/subscribe/$story->story_id'>Subscribe</button>";
+                        <a class='btn caution-btn float-right mt10' href='".BASE."/Story/subscribe/$story->story_id'>Subscribe</a>";
                     }else{
                         echo "
-                        <button class='btn caution-btn float-right mt10' href='".BASE."/Story/unsubscribe/$story->story_id'>Unsubscribe</button>";
+                        <a class='btn caution-btn float-right mt10' href='".BASE."/Story/unsubscribe/$story->story_id'>Unsubscribe</a>";
                     }
                 }
 

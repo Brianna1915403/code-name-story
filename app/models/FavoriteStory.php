@@ -34,8 +34,8 @@
         }
 
         public function delete() {
-            $stmt = self::$connection->prepare("DELETE FROM favorite_story VALUES profile_id = :profile_id AND story_id = :story_id");
-            $stmt->execute(["profile_id"=>$this->profile_id, "story_id"=>$this->story_id]);
+            $stmt = self::$connection->prepare("DELETE FROM favorite_story WHERE profile_id = :profile_id AND story_id = :story_id");
+            $stmt->execute(['profile_id'=>$this->profile_id, 'story_id'=>$this->story_id]);
         }
     }
 ?>
