@@ -38,7 +38,7 @@
                 removeStyles: false,
                 maxlenght: 50000,
                 useSingleQuotes: true,
-                // code: false
+                code: false
             });
         })
     </script>

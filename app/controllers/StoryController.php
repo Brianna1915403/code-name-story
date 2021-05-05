@@ -5,6 +5,8 @@
 
         function home() { }
 
+        #[\App\core\LoginFilter]        
+        #[\App\core\ProfileFilter] 
         function createStory(){
         if(isset($_SESSION['profile_id'])){
             if($_SESSION['account_type'] == "writer"){
@@ -41,6 +43,8 @@
             }
         }
 
+        #[\App\core\LoginFilter]        
+        #[\App\core\ProfileFilter] 
         function editStory($story_id) {
         if(isset($_SESSION['profile_id'])){
             if($_SESSION['account_type'] == "writer"){
@@ -100,10 +104,14 @@
             header('location:'.BASE.'/Story/viewStory/'.$story->story_id);
         }
 
+        #[\App\core\LoginFilter]        
+        #[\App\core\ProfileFilter] 
         function delete($story_id) {
             $story = new \App\models\Story();
             $story = $story->findByID($story_id);
-            $story->delete();
+            if ($_SESSION['profile_id'] == $story->profile_id)
+                $story->delete();
+            header('location:'.BASE.'/Story/storyList');
         }
 
         #[\App\core\LoginFilter]        
@@ -149,7 +157,7 @@
             $favorite_story->insert();
             header('location:'.BASE.'/Story/viewStory/'.$story_id);
         }
-
+ 
         function unsubscribe($story_id){
             $favorite_story = new \App\models\FavoriteStory();
             $favorite_story->profile_id = $_SESSION['profile_id'];
@@ -157,7 +165,5 @@
             $favorite_story->delete();
             header('location:'.BASE.'/Story/viewStory/'.$story_id);
         }
-
-
     } 
 ?>
