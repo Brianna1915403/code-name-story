@@ -68,6 +68,10 @@
                     <ul id=\"_listUl\">";
         if($data['chapter'] != null){
         foreach($data['chapter'] as $chapter){
+            $liked_chapter = new \App\models\LikedChapter();
+            $liked_chapter = $liked_chapter->getLikesChapter($chapter->chapter_id);
+            $count_num = count($liked_chapter);
+
             echo"<li>
             
                 <a href='".BASE."/Chapter/viewChapter/$chapter->chapter_id' class=\"NPI=a:list,i=1022,r=133,g:en_en\">
@@ -78,7 +82,7 @@
                     
                     
                     
-                    <span class=\"like_area _likeitArea\"><em class=\"ico_like _btnLike _likeMark\">Likes</em>$chapter->likes</span>
+                    <span class=\"like_area _likeitArea\"><em class=\"ico_like _btnLike _likeMark\">Likes: </em>$count_num</span>
                 </a>
             </li>";
         }

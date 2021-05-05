@@ -3,7 +3,7 @@
 
     class ChapterController extends \App\core\Controller {
 
-        function index() {
+        function home() {
             
         }
 
@@ -47,6 +47,22 @@
                     $comment->insert();
                 }
             }
+        }
+
+        function like($chapter_id){
+            $liked_chapter = new \App\models\LikedChapter();
+            $liked_chapter->profile_id = $_SESSION['profile_id'];
+            $liked_chapter->chapter_id = $chapter_id;
+            $liked_chapter->insert();
+            header('location:'.BASE.'/Chapter/viewChapter/'.$chapter_id);
+        }
+
+        function unlike($chapter_id){
+            $liked_chapter = new \App\models\LikedChapter();
+            $liked_chapter->profile_id = $_SESSION['profile_id'];
+            $liked_chapter->chapter_id = $chapter_id;
+            $liked_chapter->delete();
+            header('location:'.BASE.'/Chapter/viewChapter/'.$chapter_id);
         }
     } 
 ?>

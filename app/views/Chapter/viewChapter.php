@@ -17,6 +17,10 @@
             $story = new \App\models\Story();
             $story = $story->findByID($chapter->story_id);
 
+            $liked_chapter = new \App\models\LikedChapter();
+            $liked_chapter = $liked_chapter->getLikesChapter($chapter->chapter_id);
+            $count_num = count($liked_chapter);
+
             if(isset($_SESSION['profile_id']))
                     if($story->profile_id == $_SESSION['profile_id']){
                         echo"
@@ -28,11 +32,25 @@
                     <div class=\"info\">
                         <h3 class=\"subj\">$chapter->chapter_title</h3>
                         <p class=\"date\">$chapter->date_created</p>
-                        <p class=\"text\">$chapter->chapter_text</p>
-                        <p class=\"grade_area\">
-                            <span class=\"ico_like3\">Likes: </span><em class=\"grade_num\">$chapter->likes</em>
-                        </p>
-                    </div>
+                        <p class=\"text\">$chapter->chapter_text</p><br>
+                        <p class=\"grade_area\" style=\"display: inline\">
+                            <span class=\"ico_like3\">Likes: </span><em class=\"grade_num\">$count_num</em>
+                        </p>";
+                    if(isset($_SESSION['profile_id'])){
+                            $like_chapter_profile = new \App\models\LikedChapter();    
+                            $like_chapter_profile = $like_chapter_profile->find($chapter->chapter_id, $_SESSION['profile_id']);
+                        if($like_chapter_profile === false){
+                            echo "
+                            <a class='btn caution-btn float-right mt10' href='".BASE."/Chapter/like/$chapter->chapter_id'>Like</a>";
+                        }else if($like_chapter_profile->profile_id !== $_SESSION['profile_id']){
+                            echo "
+                            <a class='btn caution-btn float-right mt10' href='".BASE."/Chapter/like/$chapter->chapter_id'>Like</a>";
+                        }else{
+                            echo "
+                            <a class='btn caution-btn float-right mt10' href='".BASE."/Chapter/unlike/$chapter->chapter_id'>Liked!</a>";
+                        }
+                    }
+                    echo"</div>
                 </div>";
             
             ;
