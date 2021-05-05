@@ -129,19 +129,20 @@
         echo "<a href='".BASE."/Search/browse' class='light-theme-link'>Browse</a>";
         echo "<div class='dropdown-menu light-theme-bg-main'  style='z-index: 30;'>";
         echo "<ul class='lg header light-theme-bg-accent'>";
-        echo "<li><a href='#' id='by-tags' class='browse-options-light selected-light'>By Tags</a></li>";
-        echo "<li><a href='#' id='by-numbers' class='browse-options-light'>By Numbers</a></li>";
+        echo "<li><a href='".BASE."/Search/browse' id='by-tags' class='browse-options-light selected-light'>Tags</a></li>";
+        echo "<li><a href='".BASE."/Search/browse' id='by-numbers' class='browse-options-light'>Sort</a></li>";
         echo "<li><a href='".BASE."/Search/browse' id='all' class='browse-options-light'>All</a></li>";
         echo "</ul><div class='drop-content-tags grid grid-3'>";         
         
         $tag = new \App\models\Tag();
         $tags = $tag->getAll();
         foreach ($tags as $tag) {
-            echo "<a href='".BASE."/Search/browseByTag/$tag->tag_id'>$tag->name</a>";
+            echo "<a href='".BASE."/Search/browse?tags=$tag->tag_id'>$tag->name</a>";
         }
                                 
         echo "</div><div class='drop-content-numbers grid grid-3' style='display: none;'>";
-        echo "<a href='#'>Most Popular</a><a href='#'>Most Recent</a></div></div></li>";
+        echo "<a href='".BASE."/Search/browse?sort=popular'>Most Popular</a><a href='".BASE."/Search/browse?sort=recent'>Most Recent</a>";
+        echo "<a href='".BASE."/Search/browse?sort=asc'>A-Z</a><a href='".BASE."/Search/browse?sort=desc'>Z-A</a></div></div></li>";
         echo "<li><a href='".BASE."/Story/storyList' class='light-theme-link'>Create</a></li></ul></nav>";
         echo "<input type='search' name='search' id='search' placeholder='Search'>";
         echo "<div class='dropdown'><i class='fas fa-user-circle fa-2x'></i>";

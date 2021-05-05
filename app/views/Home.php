@@ -18,8 +18,8 @@
                     </div>
                     <i class="fas fa-book-open fa-5x"></i>
                     <div class="options">
-                        <a href="#" class="btn light-theme-bg-accent light-theme-text">Browse</a>
-                        <a href="#" class="btn light-theme-bg-accent light-theme-text">Random Story</a>
+                        <a href="<?= BASE ?>/Search/browse" class="btn light-theme-bg-accent light-theme-text">Browse</a>
+                        <a href="<?= BASE ?>/Story/viewRandomStory" class="btn light-theme-bg-accent light-theme-text">Random Story</a>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                         <p> So why not give it a try?</p>
                     </div>
                     <i class="fas fa-pen fa-5x"></i>
-                    <a href="#" class="btn light-theme-bg-main light-theme-text">Create You Story!</a>                                       
+                    <a href="<?= BASE ?>/Story/storyList" class="btn light-theme-bg-main light-theme-text">Create Your Story!</a>                                       
                 </div>
             </div>
         </section>

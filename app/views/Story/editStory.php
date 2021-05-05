@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?= spawnDependenciesWithinView() ?>   
+    <?= spawnDependenciesWithinViewWithArgument() ?>   
     <script src="../js/createStory.js"></script>
     <title>Code Name: Story | Story List</title>
 </head>

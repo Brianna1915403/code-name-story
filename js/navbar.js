@@ -22,4 +22,13 @@ $(document).ready(function() {
         $('#by-numbers').removeClass('selected-light');
         $('#all').addClass('selected-light');
     });
+
+    $('#search').keypress(function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            var url = "https://localhost/code-name-story/";
+            var request = "Search/browse?search=" + $(this).val();
+            window.location = url + request;
+        }
+    })
 });

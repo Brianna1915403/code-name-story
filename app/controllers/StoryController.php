@@ -3,7 +3,7 @@
 
     class StoryController extends \App\core\Controller {
 
-        function index() { }
+        function home() { }
 
         function createStory(){
             if(isset($_POST['action'])){
@@ -15,11 +15,13 @@
                 $story->insert();
                 $stories = $story->findByProfile($_SESSION['profile_id']);
                 $story = $stories[count($stories) - 1];
-                foreach ($_POST['tag'] as $tag) {                    
-                    $story_tag = new \App\models\StoryTag();
-                    $story_tag->tag_id = $tag;
-                    $story_tag->story_id = $story->story_id;
-                    $story_tag->insert();
+                if (isset($_POST['tag'])) {
+                    foreach ($_POST['tag'] as $tag) {                    
+                        $story_tag = new \App\models\StoryTag();
+                        $story_tag->tag_id = $tag;
+                        $story_tag->story_id = $story->story_id;
+                        $story_tag->insert();
+                    }
                 }
                 $picture_controller = new \App\controllers\PictureController();
                 if ($picture_controller->upload($_FILES['upload'], "$story->title cover", $_SESSION['username'])) {
@@ -44,6 +46,13 @@
             $chapter = new \App\models\Chapter();
             $chapter = $chapter->selectEssentialInfoByStoryID($story_id);
             $this->view('Story/viewStory', ['story'=>$story, 'chapter'=>$chapter]);
+        }
+
+        function viewRandomStory(){
+            $story = new \App\models\Story();
+            $story = $story->getAll();
+            $story = $story[rand(0, (count($story) - 1))];
+            header('location:'.BASE.'/Story/viewStory/'.$story->story_id);
         }
 
         function viewAllStoriesByProfile($profile_id){

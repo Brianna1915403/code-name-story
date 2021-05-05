@@ -21,9 +21,9 @@
                 if(isset($_SESSION['profile_id']))
                     if($story->profile_id == $_SESSION['profile_id']){
                         echo"
-                            <button href='".BASE."/Chapter/addChapter/$story->story_id'>Add Chapter</button>
-                            <button href='".BASE."/Story/editStory/$story->story_id'>Edit Story Info</button>
-                            <button href='".BASE."/Story/deleteStory/$story->story_id'>Delete Story</button>
+                            <button class='btn caution-btn float-right mt10' href='".BASE."/Story/deleteStory/$story->story_id'>Delete Story</button>
+                            <button class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Chapter/addChapter/$story->story_id'>Add Chapter</button>
+                            <button class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Story/editStory/$story->story_id'>Edit Story Info</button>
                         ";
                     }
 
@@ -34,10 +34,9 @@
                         <p class=\"grade_area\">
                             <span class=\"ico_like3\">Likes: </span><em class=\"grade_num\">UNKNOWN</em>
                         </p>
-                    <span class=\"genre\" style=\"position: unset\">GENRE</span>
-                    
+                    <span class=\"genre\" style=\"position: unset\">GENRE</span>                    
                         <p class=\"summary\">Description: $story->description</p>
-                        <img src=\"../../uploads/$picture->filename\" alt=\"$picture->alt\" width=\"550\" height=\"550\">
+                        <img src=\"../../uploads/$picture->filename\" alt=\"$picture->alt\" width=\"210\" height=\"210\">
                     </div>
                 </div>";
             
