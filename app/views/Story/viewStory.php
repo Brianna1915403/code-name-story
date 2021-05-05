@@ -18,6 +18,7 @@
             $favorite_story = new \App\models\FavoriteStory();
             $favorite_story = $favorite_story->getFavoritesStory($story->story_id);
             $count_num = count($favorite_story);
+            echo"<a class='btn caution-btn float-right mt10' href='".BASE."/Profile/viewProfile/$story->profile_id'>View Profile</a>";
                 if ($story->story_picture_id != null) {
                     $picture = new \App\models\Picture();
                     $picture = $picture->findByPictureID($story->story_picture_id);

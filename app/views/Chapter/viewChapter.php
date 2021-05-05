@@ -24,8 +24,8 @@
             if(isset($_SESSION['profile_id']))
                     if($story->profile_id == $_SESSION['profile_id']){
                         echo"
-                            <button href='".BASE."/Chapter/editChapter/$chapter->chapter_id'>Edit Chapter</button>
-                            <button href='".BASE."/Chapter/deleteChapter/$chapter->chapter_id'>Delete Chapter</button>
+                        <a class='btn caution-btn float-right mt10' href='".BASE."/Chapter/editChapter/$chapter->chapter_id'>Edit Chapter</a>
+                        <a class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Chapter/deleteChapter/$chapter->chapter_id'>Delete Chapter</a>
                         ";
                     }
                 echo"

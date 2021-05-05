@@ -14,11 +14,12 @@
         <?php
         echo"<div class=\"container\" style=\"overflow: hidden\">";
             $comment = $data['original_comment'];
+            echo"<a class='btn caution-btn float-right mt10' href='".BASE."/Profile/viewProfile/$comment->profile_id'>View Profile</a>";
             if(isset($_SESSION['profile_id']))
                     if($comment->profile_id == $_SESSION['profile_id']){
                         echo"
-                            <button href='".BASE."/Comment/editComment/$comment->comment_id'>Edit Comment</button>
-                            <button href='".BASE."/Comment/deleteComment/$comment->comment_id'>Delete Comment</button>
+                        <a class='btn caution-btn float-right mt10' href='".BASE."/Comment/editComment/$comment->comment_id'>Edit Comment</a>
+                        <a class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Comment/deleteComment/$comment->comment_id'>Delete Comment</a>
                         ";
                     }
 
