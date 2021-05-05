@@ -14,11 +14,17 @@
         <?php
         echo"<div class=\"container\" style=\"overflow: hidden\">";
             $story = $data['story'];
+
+            $favorite_story = new \App\models\FavoriteStory();
+            $favorite_story = $favorite_story->getFavoritesStory($story->story_id);
+            $count_num = count($favorite_story);
                 if ($story->story_picture_id != null) {
                     $picture = new \App\models\Picture();
                     $picture = $picture->findByPictureID($story->story_picture_id);
                 }
-                if(isset($_SESSION['profile_id']))
+                if(isset($_SESSION['profile_id'])){
+                $favorite_story_profile = new \App\models\FavoriteStory();    
+                $favorite_story_profile = $favorite_story_profile->find($story->story_id, $_SESSION['profile_id']);
                     if($story->profile_id == $_SESSION['profile_id']){
                         echo"
                             <button class='btn caution-btn float-right mt10' href='".BASE."/Story/deleteStory/$story->story_id'>Delete Story</button>
@@ -26,17 +32,28 @@
                             <button class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Story/editStory/$story->story_id'>Edit Story Info</button>
                         ";
                     }
+                    if($favorite_story_profile === false){
+                        echo "
+                        <button class='btn caution-btn float-right mt10' href='".BASE."/Story/subscribe/$story->story_id'>Subscribe</button>";
+                    }else if($favorite_story_profile->profile_id !== $_SESSION['profile_id']){
+                        echo "
+                        <button class='btn caution-btn float-right mt10' href='".BASE."/Story/subscribe/$story->story_id'>Subscribe</button>";
+                    }else{
+                        echo "
+                        <button class='btn caution-btn float-right mt10' href='".BASE."/Story/unsubscribe/$story->story_id'>Unsubscribe</button>";
+                    }
+                }
 
                 echo"
                     <div class=\"info\">
                         <h3 class=\"subj\">$story->title</h3>
                         <p class=\"author\">$story->author</p>
                         <p class=\"grade_area\">
-                            <span class=\"ico_like3\">Likes: </span><em class=\"grade_num\">UNKNOWN</em>
+                            <span class=\"ico_like3\">Subscribed: </span><em class=\"grade_num\">$count_num</em>
                         </p>
                     <span class=\"genre\" style=\"position: unset\">GENRE</span>                    
                         <p class=\"summary\">Description: $story->description</p>
-                        <img src=\"../../uploads/$picture->filename\" alt=\"$picture->alt\" width=\"210\" height=\"210\">
+                        <img src=\"../../uploads/$picture->filename\" alt=\"$picture->alt\" width=\"500\" height=\"500\">
                     </div>
                 </div>";
             

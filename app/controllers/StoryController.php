@@ -97,6 +97,20 @@
             }
         }
 
+        function subscribe($story_id){
+            $favorite_story = new \App\models\FavoriteStory();
+            $favorite_story->profile_id = $_SESSION['profile_id'];
+            $favorite_story->story_id = $story_id;
+            $favorite_story->insert();
+        }
+
+        function unsubscribe($story_id){
+            $favorite_story = new \App\models\FavoriteStory();
+            $favorite_story->profile_id = $_SESSION['profile_id'];
+            $favorite_story->story_id = $story_id;
+            $favorite_story->delete();
+        }
+
 
     } 
 ?>
