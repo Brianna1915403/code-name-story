@@ -46,6 +46,7 @@
     border: none;
     border-radius: 5px;
     color: var(--text-colour-light);
+    background-color: var(--main-accent-colour-light);
 }
 
 .btn:hover {
