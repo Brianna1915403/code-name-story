@@ -42,5 +42,16 @@
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Comment");
             return $stmt->fetchAll();
         }
+
+        public function deleteRepliesForComment($comment_id){
+            $stmt = self::$connection->prepare("DELETE FROM comment WHERE comment_id IN 
+            (SELECT reply_id FROM reply WHERE original_comment_id = :original_comment_id) ORDER BY date_commented DESC");
+            $stmt->execute(['original_comment_id'=>$comment_id]);
+        }
+
+        public function delete(){
+            $stmt = self::$connection->prepare("DELETE FROM comment WHERE comment_id = :comment_id");
+            $stmt->execute(['comment_id'=>$this->comment_id]);
+        }
     }
 ?>
