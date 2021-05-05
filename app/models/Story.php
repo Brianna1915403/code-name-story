@@ -102,5 +102,10 @@
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Story");
             return $stmt->fetchAll();
         }
+
+        public function delete(){
+            $stmt = self::$connection->prepare("DELETE FROM story WHERE story_id = :story_id");
+            $stmt->execute(['story_id'=>$this->story_id]);
+        }
     }
 ?>

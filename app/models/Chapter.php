@@ -31,5 +31,10 @@
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Chapter");
             return $stmt->fetchAll();
         }
+
+        public function delete(){
+            $stmt = self::$connection->prepare("DELETE FROM chapter WHERE chapter_id = :chapter_id");
+            $stmt->execute(['chapter_id'=>$this->chapter_id]);
+        }
     }
 ?>
