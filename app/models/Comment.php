@@ -13,9 +13,9 @@
         }
 
         public function insertReply($original_comment_id){
-            $this.insert();
+            $this->insert();
             $comment = new \App\models\Comment();
-            $comment = $this.getCommentsIDForProfile($this->profile_id);
+            $comment = $this->getCommentsIDForProfile($this->profile_id);
             $reply = new \App\models\Reply();
             $reply->original_comment_id = $original_comment_id;
             $reply->reply_id = $comment[0]->comment_id;

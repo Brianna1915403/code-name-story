@@ -45,14 +45,13 @@
             </li>";
 
             if(isset($_SESSION['profile_id'])){
-                        echo"
-                    <form action=\"\" method=\"post\">                                  
-                        <textarea class='comment-textarea' name=\"text\" cols=\"50\" rows=\"5\" maxlength='1024' placeholder=\"Reply to this comment\"></textarea><br /><br />
-                        <input class='btn light-theme-bg-accent light-theme-text' type=\"submit\" name=\"action\" value=\"Comment\">
-                    </form>
-                        ";
-                    }
-
+                echo"
+                <form action=\"\" method=\"post\">                                  
+                    <textarea class='comment-textarea' name=\"text\" cols=\"50\" rows=\"5\" maxlength='1024' placeholder=\"Reply to this comment\"></textarea><br /><br />
+                    <input class='btn light-theme-bg-accent light-theme-text' type=\"submit\" name=\"reply\" value=\"Reply\">
+                </form>
+                    ";
+                }
         ?>
 
         <?php

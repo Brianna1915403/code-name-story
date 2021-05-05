@@ -33,6 +33,20 @@
             $comments = new \App\models\Comment();
             $comments = $comments->getCommentsForChapter($chapter_id);
             $this->view('Chapter/viewChapter', ['chapter'=>$chapter, 'comment'=>$comments]);
+
+            if(isset($_POST["comment"])){
+                $text = $_POST['text'];
+    
+                if($text == null){
+                    
+                } else {
+                    $comment = new \App\models\Comment();
+                    $comment->chapter_id = $chapter_id;
+                    $comment->profile_id = $_SESSION['profile_id'];
+                    $comment->text = $text;
+                    $comment->insert();
+                }
+            }
         }
     } 
 ?>

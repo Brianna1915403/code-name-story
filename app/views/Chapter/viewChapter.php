@@ -39,6 +39,7 @@
         ?>
 
         <?php
+        $chapter = $data['chapter'];
         echo"
         <div class=\"container\" style=\"overflow: hidden\">
             <div class=\"detail_body banner\" style=\"background:#fff ;background-size:306px\">
@@ -48,8 +49,8 @@
                     if(isset($_SESSION['profile_id'])){
                         echo"
                     <form action=\"\" method=\"post\">                                  
-                        <textarea class='comment-textarea' name=\"text\" cols=\"50\" rows=\"5\" maxlength='1024' placeholder=\"What is on your mind\"></textarea><br /><br />
-                        <input class='btn light-theme-bg-accent light-theme-text' type=\"submit\" name=\"action\" value=\"Comment\">
+                        <textarea class='comment-textarea' name=\"text\" cols=\"50\" rows=\"5\" maxlength='1024' placeholder=\"What is on your mind\"></textarea><br />
+                        <input class='btn light-theme-bg-accent light-theme-text' type=\"submit\" name=\"comment\" value=\"Comment\"><br /><br />
                     </form>
                         ";
                     }
