@@ -1,10 +1,11 @@
 <?php
     namespace App\controllers;
 
-    #[\App\core\LoginFilter]
+    
     class SettingsController extends \App\core\Controller {
         
         function index() {
+            if(isset($_SESSION['profile_id'])){
             $profile = new \App\models\Profile();
             $profile = $profile->findByID($_SESSION['profile_id']);
             $user = new \App\models\User();
@@ -57,6 +58,10 @@
             } else {                
                 $this->view('Settings/index', ['profile'=>$profile, 'user'=>$user]);
             }
+        }else{
+            header("location:".BASE."/home");
         }
+        }
+    
     }        
 ?>

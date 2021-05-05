@@ -7,8 +7,8 @@
             header('location:'.BASE.'/Login/login-register');
         }
         
-        #[\App\core\LoginFilter]
         function setup2fa() {
+        if(isset($_SESSION['profile_id'])){
             if(isset($_POST['action'])){
                 $currentcode = $_POST['currentCode'];
                 if(\App\core\TokenAuth::verify($_SESSION['token'], $currentcode)){
@@ -25,6 +25,9 @@
                 $url = \App\core\TokenAuth::getLocalCodeUrl($_SESSION['username'],'localhost', $token,'Code%20Name:%20Story');
                 $this->view('Login/setup2fa', $url);
             }
+        }else{
+            header('location:'.BASE.'/home');
+        }
         }
 
         #[\App\core\LoginFilter]
@@ -42,6 +45,10 @@
                     if ($user->token == null) {
                         $_SESSION['username'] = $_POST['username'];
                         $_SESSION['user_id'] = $user->user_id; 
+                        $profile = new \App\models\Profile();
+                        $profile = $profile->findByUserID($_SESSION['user_id']);
+                        $_SESSION['profile_id'] = $profile->profile_id;
+                        $_SESSION['account_type'] = $profile->account_type;
                         header('location:'.BASE.'/home');
                     } else {
                         $_SESSION['tmp_username'] = $_POST['username'];

@@ -8,6 +8,7 @@
         }
 
         function createChapter($story_id){
+        if(isset($_SESSION['profile_id']) && $_SESSION['account_type'] == "writer"){
             if(isset($_POST['action'])) {
                 $chapter = new \App\models\Chapter();
                 $chapter->story_id = $story_id;
@@ -23,6 +24,9 @@
                 $chapters = $chapter->findByStoryID($story_id);
                 $this->view('Chapter/createChapter', count($chapters));
             }
+        }else{
+            header("location:".BASE."/home");
+        }
         }
 
         function viewChapter($chapter_id){
@@ -48,6 +52,7 @@
         }
 
         function editChapter($chapter_id) {
+        if(isset($_SESSION['profile_id']) && $_SESSION['account_type'] == "writer"){
             if(isset($_POST['action'])) {
                 $chapter = new \App\models\Chapter();
                 $chapter = $chapter->findByID($chapter_id);
@@ -62,15 +67,23 @@
                 $chapter = $chapter->findByID($chapter_id);
                 $this->view('Chapter/editChapter', $chapter);
             }
+        }else{
+                header("location:".BASE."/home");
+            }
         }
 
         function deleteChapter($chapter_id) {
+            if(isset($_SESSION['profile_id']) && $_SESSION['account_type'] == "writer"){
             $chapter = new \App\models\Chapter();
             $chapter = $chapter->findByID($chapter_id);                
             $path = getcwd().DIRECTORY_SEPARATOR.'stories'.DIRECTORY_SEPARATOR.$chapter->chapter_text;
             unlink($path);
             $chapter->delete();
             header('location:'.BASE.'/Story/viewStory/'.$chapter->story_id);
+            }
+            else{
+                header("location:".BASE."/home");
+            }
         }
 
         function like($chapter_id){

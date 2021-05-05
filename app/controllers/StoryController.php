@@ -6,6 +6,8 @@
         function home() { }
 
         function createStory(){
+        if(isset($_SESSION['profile_id'])){
+            if($_SESSION['account_type'] == "writer"){
             if(isset($_POST['action'])){
                 $story = new \App\models\Story();                
                 $picture_controller = new \App\controllers\PictureController();
@@ -31,9 +33,17 @@
              } else {
                 $this->view('Story/createStory');
              }
+            }else{
+                header("location:".BASE."/Settings/index");
+            }
+            }else{
+                header("location:".BASE."/Login");
+            }
         }
 
         function editStory($story_id) {
+        if(isset($_SESSION['profile_id'])){
+            if($_SESSION['account_type'] == "writer"){
             if(isset($_POST['action'])) {
                 $story = new \App\models\Story();
                 $story = $story->findByID($story_id);
@@ -67,6 +77,12 @@
                 $picture = $picture->findByPictureID($story->story_picture_id);
                 $this->view('Story/editStory', ['story'=>$story, 'picture'=>$picture]);                
             }
+        }else{
+            header("location:".BASE."/Settings/index");
+        }
+        }else{
+            header("location:".BASE."/Login");
+        }
         }
 
         function viewStory($story_id){
