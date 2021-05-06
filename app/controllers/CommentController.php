@@ -29,6 +29,17 @@
                 }
             }
         }
+
+        public function editComment($comment_id){
+            $comment = new \App\models\Comment();
+            $comment = $comment->findCommentByID($comment_id);
+            $this->view('Comment/editComment', $comment);
+            if($_POST['update']){
+                $comment->text = $_POST['text'];
+                $comment->update();
+                header('location:'.BASE.'/Comment/viewComment/'.$comment_id);
+            }
+        }
     }
 
 ?>

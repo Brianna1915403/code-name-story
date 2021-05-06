@@ -53,5 +53,10 @@
             $stmt = self::$connection->prepare("DELETE FROM comment WHERE comment_id = :comment_id");
             $stmt->execute(['comment_id'=>$this->comment_id]);
         }
+
+        public function update(){
+            $stmt = self::$connection->prepare("UPDATE comment SET text = :text WHERE comment_id = :comment_id");
+            $stmt->execute(['comment_id'=>$this->comment_id, 'text'=>$this->text]);
+        }
     }
 ?>
