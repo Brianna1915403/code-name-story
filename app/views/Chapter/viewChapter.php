@@ -43,13 +43,13 @@
                             $like_chapter_profile = $like_chapter_profile->find($chapter->chapter_id, $_SESSION['profile_id']);
                         if($like_chapter_profile === false){
                             echo "
-                            <a class='btn caution-btn float-right mt10' href='".BASE."/Chapter/like/$chapter->chapter_id'>Like</a>";
+                            <a class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Chapter/like/$chapter->chapter_id'>Like</a>";
                         }else if($like_chapter_profile->profile_id !== $_SESSION['profile_id']){
                             echo "
-                            <a class='btn caution-btn float-right mt10' href='".BASE."/Chapter/like/$chapter->chapter_id'>Like</a>";
+                            <a class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Chapter/like/$chapter->chapter_id'>Like</a>";
                         }else{
                             echo "
-                            <a class='btn caution-btn float-right mt10' href='".BASE."/Chapter/unlike/$chapter->chapter_id'>Liked!</a>";
+                            <a class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Chapter/unlike/$chapter->chapter_id'>Liked!</a>";
                         }
                     }
                     echo"</div>
@@ -88,9 +88,13 @@
             
             
             echo"<li>
-            <a href='".BASE."/Comment/viewComment/$comment->comment_id'>
-            <img src=\"../../uploads/$picture->filename\" alt=\"$picture->alt\" width=\"50\" height=\"50\">
-            <h3 style=\"color: white; display: inline\">$user->username</h3>
+            <a href='".BASE."/Comment/viewComment/$comment->comment_id'>";
+            if ($profile->profile_picture_id == null) {
+                echo "<img src=\"../../uploads/DefaultPicture.png\" alt=\"Default Profile Picture\" width=\"50\" height=\"50\">";
+            } else {
+                echo "<img src=\"../../uploads/$picture->filename\" alt=\"$picture->alt\" width=\"50\" height=\"50\">";
+            }
+            echo "<h3 style=\"color: var(--text-colour-light); display: inline\">$user->username</h3>
                 <span class=\"subj\"><span>$comment->text</span></span>
                 <span class=\"manage_blank\"></span>
             <h3 class=\"date\">Commented on: $comment->date_commented</h3>

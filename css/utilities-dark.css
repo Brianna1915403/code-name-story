@@ -2,6 +2,10 @@
     color: var(--text-colour-light);
 }
 
+.dark-theme-text, .dark-theme-link {
+    color: var(--text-colour-light);
+}
+
 .light-theme-link:hover {    
     border-bottom: 2px var(--text-colour-light) solid;
 }
@@ -46,11 +50,14 @@
     border: none;
     border-radius: 5px;
     color: var(--text-colour-light);
-    background-color: var(--main-accent-colour-light);
 }
 
 .btn:hover {
     transform: scale(0.90);
+}
+
+.caution-btn {
+    background-color: rgba(255, 0, 0, 0.801);
 }
 
 .container {

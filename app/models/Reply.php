@@ -19,5 +19,10 @@
             $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Comment");
             return $stmt->fetchAll();
         }
+
+        public function delete() {
+            $stmt = self::$connection->prepare("DELETE FROM reply WHERE reply_id = :reply_id");
+            $stmt->execute(['reply_id'=>$this->reply_id]);
+        }
     }
 ?>

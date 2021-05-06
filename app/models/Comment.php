@@ -50,6 +50,11 @@
         }
 
         public function delete(){
+            $replies = new \App\models\Reply();
+            $replies = $replies->getRepliesForComment($this->comment_id);
+            foreach($replies as $reply) {
+                $reply->delete();
+            }
             $stmt = self::$connection->prepare("DELETE FROM comment WHERE comment_id = :comment_id");
             $stmt->execute(['comment_id'=>$this->comment_id]);
         }

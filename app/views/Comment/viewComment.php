@@ -14,12 +14,12 @@
         <?php
         echo"<div class=\"container\" style=\"overflow: hidden\">";
             $comment = $data['original_comment'];
-            echo"<a class='btn caution-btn float-right mt10' href='".BASE."/Profile/viewProfile/$comment->profile_id'>View Profile</a>";
+            echo"<a class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Profile/viewProfile/$comment->profile_id'>View Profile</a>";
             if(isset($_SESSION['profile_id']))
                     if($comment->profile_id == $_SESSION['profile_id']){
                         echo"
-                        <a class='btn caution-btn float-right mt10' href='".BASE."/Comment/editComment/$comment->comment_id'>Edit Comment</a>
-                        <a class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Comment/deleteComment/$comment->comment_id'>Delete Comment</a>
+                        <a class='btn light-theme-bg-accent float-right mt10' href='".BASE."/Comment/editComment/$comment->comment_id'>Edit Comment</a>
+                        <a class='btn caution-btn float-right mt10' href='".BASE."/Comment/deleteComment/$comment->comment_id'>Delete Comment</a>
                         ";
                     }
 
@@ -35,9 +35,13 @@
             
             
             echo"<li>
-            <a href='".BASE."/Comment/viewComment/$profile->profile_id'>
-            <img src=\"../../uploads/$picture->filename\" alt=\"$picture->alt\" width=\"50\" height=\"50\">
-            <h3 style=\"color: white; display: inline\">$user->username</h3><br>
+            <a href='".BASE."/Comment/viewComment/$profile->profile_id'>";
+            if ($profile->profile_picture_id == null) {
+                echo "<img src=\"../../uploads/DefaultPicture.png\" alt=\"Default Profile Picture\" width=\"50\" height=\"50\">";
+            } else {
+                echo "<img src=\"../../uploads/$picture->filename\" alt=\"$picture->alt\" width=\"50\" height=\"50\">";
+            }
+            echo "<h3 style=\"color: var(--text-colour-light); display: inline\">$user->username</h3><br>
                 <span class=\"subj\"><span>$comment->text</span></span>
                 <span class=\"manage_blank\"></span>
             <h3 class=\"date\">Commented on: $comment->date_commented</h3>
@@ -75,9 +79,13 @@
             
             
             echo"<li>
-            <a href='".BASE."/Comment/viewComment/$comment->comment_id'>
-            <img src=\"../../uploads/$picture->filename\" alt=\"$picture->alt\" width=\"50\" height=\"50\">
-            <h3 style=\"color: white; display: inline\">$user->username</h3>
+            <a href='".BASE."/Comment/viewComment/$comment->comment_id'>";
+            if ($profile->profile_picture_id == null) {
+                echo "<img src=\"../../uploads/DefaultPicture.png\" alt=\"Default Profile Picture\" width=\"50\" height=\"50\">";
+            } else {
+                echo "<img src=\"../../uploads/$picture->filename\" alt=\"$picture->alt\" width=\"50\" height=\"50\">";
+            }
+            echo "<h3 style=\"color: var(--text-colour-light); display: inline\">$user->username</h3>
                 <span class=\"subj\"><span>$comment->text</span></span>
                 <span class=\"manage_blank\"></span>
             <h3 class=\"date\">Commented on: $comment->date_commented</h3>
@@ -95,6 +103,7 @@
                     </ul>
                 </div>
             </div>
+        </div>
         </div>";
         
         

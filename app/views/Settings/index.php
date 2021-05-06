@@ -55,7 +55,7 @@
                                 <option value="reader" <?php echo $data['profile']->account_type == 'reader'? "selected" : ""; ?>>Reader</option>
                                 <option value="writer" <?php echo $data['profile']->account_type == 'reader'? "" : "selected"; ?>>Writer</option>
                             </select></label><br><br>
-                            <input class="btn btn-accent-light" type="submit" name='profile' value="Update Profile">
+                            <input class="btn light-theme-bg-accent" type="submit" name='profile' value="Update Profile">
                     </form>
                 </div>
                 <div id="account-settings" style="display:none;">
@@ -65,7 +65,7 @@
                         <label>Old Password <input type="password" name="old-password" id=""></label><br><br>
                         <label>New Password <input type="password" name="new-password" id=""></label><br><br>
                         <label>Confirm New Password <input type="password" name="confirm-new-password" id=""></label><br><br>
-                        <input class="btn btn-accent-light" type="submit" name='account' value="Change Password">
+                        <input class="btn light-theme-bg-accent" type="submit" name='account' value="Change Password">
                     </form>
                 </div>
                 <div id="theme-settings" style="display:none;">
@@ -101,7 +101,7 @@
                                 <input type="radio" name="color_scheme" id="green-theme-radio" value='green' <?php echo $data['profile']->theme == 'green'? "checked" : ""; ?>>
                             </div>
                         </div><br><br>
-                        <input class="btn btn-accent-light" type="submit" name='theme' value="Change Theme">
+                        <input class="btn light-theme-bg-accent" type="submit" name='theme' value="Change Theme">
                     </form>
                 </div>
                 <div id="2fa-settings" style="display:none;">
