@@ -34,7 +34,7 @@
 
             
             
-            echo"<li>
+            echo"<li>";
             if ($profile->profile_picture_id == null) {
                 echo "<img src=\"../../uploads/DefaultPicture.png\" alt=\"Default Profile Picture\" width=\"50\" height=\"50\">";
             } else {
@@ -45,6 +45,7 @@
                 <span class=\"manage_blank\"></span>
             <h3 class=\"date\">Commented on: $comment->date_commented</h3>
             
+            </a>
             </li>";
 
             if(isset($_SESSION['profile_id'])){
