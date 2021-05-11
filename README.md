@@ -333,7 +333,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
 ### **Story 014**
 #### **Card:** As a reader, I can reply to a comment using the reply form.
 #### **Conversation** By submission of the comment form beneath a comment, one creates a reply. 
-#### **Conformity** 
+#### **Conformity** While being logged in as an User, he navigates to a Chapter and selects a comment. The comment has no replies to it, he writes "I like you Comment!" and clicks the 'Reply' button. Going back to the same comment, now there is a reply under the comment that says "I like your Comment!".
 ```php
     //The delete is being called to the CommentController.php.
     public function deleteComment($comment_id){            
@@ -362,7 +362,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
 ### **Story 015**
 #### **Card:** As a reader, I can like other user’s chapters using a like button.
 #### **Conversation** By clicking the 'Like' button on the current chapter, its like counter will go up by one, and a chapter_like is added to the database.
-#### **Conformity** 
+#### **Conformity** While being logged in as an User, he navigates to a chapter that has no likes. The 'Like' button gives the option to like the chapter. Clicking the button will reload the page and increase the amount of likes for that chapter by 1, now the likes counter shows '1'. The 'Like' button now displays "Unlike", if pressed, will reduce the like count by one.
 ```php
     //The method is being called from the CommentController.
     if(isset($_POST["reply"])){
@@ -381,8 +381,8 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
 ```
 ### **Story 016**
 #### **Card:** As a reader, I can favorite other writer’s stories via a “favourite” button.
-#### **Conversation** By clicking the button will add the story into that reader’s favourite list.
-#### **Conformity** 
+#### **Conversation** By clicking the 'Favorite' button, it will add the story into that reader’s favourite list.
+#### **Conformity** While being logged in as an User. The list of favorite stories is empty. By navigating to a story and clicking to view its information, a button saying 'Favorite' is now available. When clicking the button, that story will be added to the favorites of the user and now will be accessible from favorite list.
 ```php
     //The favorite story system works the same way as like chapter, it is being called in StoryController.
     function subscribe($story_id){
@@ -404,7 +404,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
 ### **Story 017**
 #### **Card:** As a reader, I can change the look of the website, such as colours (e.g. Dark mode).
 #### **Conversation** The website will change the main colours used, selected from an already preset list of colour combinations. The selected theme will also be registered in the database for uses on different devices or browsers.
-#### **Conformity** 
+#### **Conformity** While logged in as a user, the default theme is set to 'Light'. By going in settings and clicking the appearance tab, the user is now able to select between the 4 available themes, the user selects the "Dark" theme and clicks the 'Confirm' button. The colours of the website are now dark, going to any page on the website will result in having this style. By logging out of the user, the theme gets set back to 'Light', logging back in into the user will switch the theme again to 'Dark'.
 ```php
     //The theme of the current user is updated.
     if (isset($_POST['theme'])) {
@@ -454,7 +454,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
 ### **Story 018**
 #### **Card:** As a writer, I can post my own stories on the website by filling the creation form.
 #### **Conversation** When the form is submitted it inserts the story into the database.
-#### **Conformity** 
+#### **Conformity** When searching for a story named "My Story", there are no results being displayed. While being logged in as a Writer, he can access the 'Create' page and then the Story Creation form. There the user fills in the form with the title "My Story", adds a description "My Story is finally here", an image of a Cat from his local files, and selects the tags "Adventure" and "Romance" by checking the appropriate checkboxes. After the user submits the Story Creation form, he searches again for 'My Story' in the browse menu and now the newly created story appears.
 ```php
     //The story creation is being called to the StoryController.php.
     #[\App\core\LoginFilter]        
@@ -503,7 +503,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
 ### **Story 019**
 #### **Card:** As a writer, I can modify my own stories on the website by clicking the ‘Edit’ button.
 #### **Conversation** Once the user saves their changes it will be updated in the database.
-#### **Conformity** 
+#### **Conformity** While being logged in as a Writer and also the owner of that story with the title "My Story" and the description "My Story is finally here", it has the tags "Adventure" and "Romance", and the picture of the story is a Cat. By going into the Story Info, the user has now access to a button 'Edit Story'. Clicking it brings the user to an "Edit Story" page. The user changes the title to "My Story 1", the description to "I am happy with the story", the image to a dog, and adds a "Horror" tag. Clicking the 'Confirm' button will send the user back to the Story Info page, and now the information about the story read "My Story 1" for title, "I am happy with the story" for description, the picture is now a Dog, the tags showing "Adventure", "Romance", and "Horror".
 ```php
     //The Edit method is being called from the StoryController.php.
     #[\App\core\LoginFilter]        
@@ -569,7 +569,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
 ### **Story 020**
 #### **Card:** As a writer, I can delete my own stories on the website by navigating to the story in question and clicking the ‘Delete’ button.
 #### **Conversation** When the delete button is clicked, it will delete the picture and all the chapters related to that story, and finally the story itself from the database.
-#### **Conformity** 
+#### **Conformity** While being logged in as a Writer and also the owner of that story with the title "My Story". Searching for the Story "My Story", will display the story. Going into the Story Info, the user has a button 'Delete Story' available. By clicking the button, the story is deleted, going back and searching "My Story" will not longer display the story.
 ```php
     //The delete is being called in the StoryController.
     #[\App\core\LoginFilter]        
@@ -598,7 +598,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
 ### **Story 021**
 #### **Card:** As a Writer, I can add chapters to my own stories using the Chapter creation form.
 #### **Conversation** Upon submission of the form it will create a new chapter, adding it into the database, and linking it to the story.
-#### **Conformity** 
+#### **Conformity** While being logged in as a Writer, he can access the 'Add Chapter' page when looking at his own story "My Story". There the user fills in the form with the title "My Chapter 1" and adds the text "This is my first chapter". After submitting the Chapter Creation form, going back to the Story Info of "My Story" will now display a clickable chapter, when clicking on it, it brings the user to the Chapter View page that will display the title as "My Chapter 1" and the text underneath will say "This is my first chapter".
 ```php
     //The adding chapter method gets called in ChapterController.php.
     //The story gets saved in a .txt file, and only the path to that file gets sen to the database.
@@ -632,7 +632,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
 ### **Story 022**
 #### **Card:** As a writer, I can modify my own chapters on the website by clicking the ‘Edit’ button.
 #### **Conversation** By submission of the edit form the chapter's information will be altered.
-#### **Conformity** 
+#### **Conformity** While being logged in as a Writer and also the owner of that story with the title "My Story". By going into the Story Info, selecting the chapter with the title "My Chapter 1" the user has now access to a button 'Edit Chapter'. Clicking it brings the user to an "Edit Chapter" page. The user changes the title to "My Chapter 2", the text to "This is my second chapter". Clicking the 'Confirm' button will send the user back to the Story Info page, and now the information about the chapter reads "My Chapter 2" for title, "This is my second chapter" for text.
 ```php
     //The edit method gets called in the ChapterController.php.
     function editChapter($chapter_id) {
@@ -664,7 +664,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
 ### **Story 023**
 #### **Card:** As a writer, I can delete my own chapters on the website by navigating to the story in question and clicking the ‘Delete’ button.
 #### **Conversation** By clicking the 'Delete' Button it will delete all the comments, and their subsequent replies, as well as chapter_likes, and finally the chapter itself.
-#### **Conformity** 
+#### **Conformity** While being logged in as a Writer and also the owner of that story with the title "My Story". Viewing the Story Info of "My Story", it will display the clickable chapter with the title "My Chapter 1" . Going into the Chapter View, the User has access to a button "Delete Chapter". Clicking it will bring you back to the Story Info page of "My Story" and the chapter with the title "Chapter 1" is no longer displayed. 
 ```php
     //The delete method gets called in the ChapterController.php.
     function deleteChapter($chapter_id) {
