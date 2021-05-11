@@ -7,6 +7,7 @@ A community platform centered around sharing stories.
 This folder (`code-name-story`) should be directly in `htdocs`. The database shares the same name as the main folder `code-name-story`.
 
 The way to get to the home page is as simple as typing `localhost/code-name-story` and you will be brought to the home page.
+If the page does not load please verify that line 7 of `.htaccess` reads as follows: `RewriteBase /code-name-story`.
 
 ## User Stories
 ### **Story 001**
