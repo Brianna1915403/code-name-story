@@ -418,29 +418,227 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 018**
-### **Card:** 
+### **Card:** As a writer, I can post my own stories on the website by filling the creation form.
 ```php
-
+    //The story creation is being called to the StoryController.php.
+    #[\App\core\LoginFilter]        
+    #[\App\core\ProfileFilter] 
+    function createStory(){
+    if(isset($_SESSION['profile_id'])){
+        if($_SESSION['account_type'] == "writer"){
+        if(isset($_POST['action'])){
+            $story = new \App\models\Story();                
+            $picture_controller = new \App\controllers\PictureController();
+            if ($picture_controller->upload($_FILES['upload'], $_POST['title']." cover", $_SESSION['username'])) {
+                $picture = new \App\models\Picture();
+                $pictures = $picture->getAllByProfileID($_SESSION['profile_id']);
+                $story->profile_id = $_SESSION['profile_id'];
+                $story->title = $_POST['title'];
+                $story->description = $_POST['description'];
+                $story->author = $_POST['author'];
+                $story->insert();
+                $stories = $story->findByProfile($_SESSION['profile_id']);
+                $story = $stories[count($stories) - 1];
+                if (isset($_POST['tag'])) {                   
+                    $story->addTagsToStory($story->story_id, $_POST['tag']);
+                }
+                $story->story_picture_id = $pictures[0]->picture_id;
+                $story->updateCoverPicture();                    
+            } else {
+                header('location:'.BASE.'/Story/createStory?error=Invalid Picture, allowed extensions are: .png, .jpg/.jpeg and .gif.');
+            }
+            $this->view('Story/storyList', $stories);
+            } else {
+            $this->view('Story/createStory');
+            }
+        }else{
+            header("location:".BASE."/Settings/index");
+        }
+        }else{
+            header("location:".BASE."/Login");
+        }
+    }
+    //The story is being inserted through the Story.php.
+    public function insert() {
+        $stmt = self::$connection->prepare("INSERT INTO story(profile_id, title, description, author) VALUES (:profile_id, :title, :description, :author)");
+        $stmt->execute(["profile_id"=>$this->profile_id, "title"=>$this->title, "description"=>$this->description, "author"=>$this->author]);
+    }
 ```
 ### **Story 019**
-### **Card:** 
+### **Card:** As a writer, I can modify my own stories on the website by clicking the ‘Edit’ button.
 ```php
+    //The Edit method is being called from the StoryController.php.
+    #[\App\core\LoginFilter]        
+    #[\App\core\ProfileFilter] 
+    function editStory($story_id) {
+    if(isset($_SESSION['profile_id'])){
+        if($_SESSION['account_type'] == "writer"){
+        if(isset($_POST['action'])) {
+            $story = new \App\models\Story();
+            $story = $story->findByID($story_id);
+            $story->title = $_POST['title'];
+            $story->author = $_POST['author'];
+            $story->description = $_POST['description'];
+            $story->update();
+            if (isset($_POST['tag'])) {
+                $story->addTagsToStory($story_id, $_POST['tag']);
+            }
+            if ($_FILES['upload']['tmp_name'] != "") {
+                if ($picture_controller->upload($_FILES['upload'], $_POST['title']." cover", $_POST['author'])) {
+                    $picture = new \App\models\Picture();
+                    if ($story->story_picture_id != null ) {
+                        $picture_id = $story->story_picture_id;
+                        $story->unsetCoverPicture();
+                        $picture_controller->delete($picture_id);
+                    }
+                    $pictures = $picture->getAllByProfileID($_SESSION['profile_id']);
+                    $story->story_picture_id = $pictures[0]->picture_id;
+                    $story->updateCoverPicture();          
+                } else {
+                    header('location:'.BASE.'/Story/editStory/'.$story_id.'?error=Picture Invalid');
+                }
+            }
+            header('location:'.BASE.'/Story/viewStory/'.$story_id.'?success=Story Editied');
+        } else {
+            $story = new \App\models\Story();
+            $story = $story->findByID($story_id);
+            $picture = new \App\models\Picture();
+            $picture = $picture->findByPictureID($story->story_picture_id);
+            $this->view('Story/editStory', ['story'=>$story, 'picture'=>$picture]);                
+        }
+    }else{
+        header("location:".BASE."/Settings/index");
+    }
+    }else{
+        header("location:".BASE."/Login");
+    }
+    }
+    //The story update happens inside the Story.php Object.
+    public function update() {
+        $stmt = self::$connection->prepare("UPDATE story SET title = :title, author = :author, description = :description WHERE story_id = :story_id");
+        $stmt->execute(['title'=>$this->title, 'author'=>$this->author, 'description'=>$this->description, 'story_id'=>$this->story_id]);
+        $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Story");
+        return $stmt->fetchAll();
+    }
 
+    public function updateCoverPicture() {
+        $stmt = self::$connection->prepare("UPDATE story SET story_picture_id = :story_picture_id WHERE story_id = :story_id");
+        $stmt->execute(['story_picture_id'=>$this->story_picture_id, 'story_id'=>$this->story_id]);
+        $stmt->setFetchMode(\PDO::FETCH_GROUP|\PDO::FETCH_CLASS, "App\\models\\Story");
+        return $stmt->fetchAll();
+    }
 ```
 ### **Story 020**
-### **Card:** 
+### **Card:** As a writer, I can delete my own stories on the website by navigating to the story in question and clicking the ‘Delete’ button.
 ```php
-
+    //The delete is being called in the StoryController.
+    #[\App\core\LoginFilter]        
+    #[\App\core\ProfileFilter] 
+    function deleteStory($story_id) {
+        $story = new \App\models\Story();
+        $story = $story->findByID($story_id);
+        if ($_SESSION['profile_id'] == $story->profile_id)
+            $story->delete();
+        header('location:'.BASE.'/Story/storyList');
+    }
+    //The removal of the data happens in the Story.php Object.
+    public function delete() {
+        $tag = new \App\models\StoryTag();
+        $tag->deleteAllTagsForStory($this->story_id);
+        if ($this->story_picture_id != null) {
+            $this->unsetCoverPicture();
+            $picture = new \App\models\Picture();
+            $picture->findByPictureID($this->story_picture_id);
+            $picture->delete();
+        }
+        $stmt = self::$connection->prepare("DELETE FROM story WHERE story_id = :story_id");
+        $stmt->execute(['story_id'=>$this->story_id]);
+    }
 ```
 ### **Story 021**
-### **Card:** 
+### **Card:** As a Writer, I can add chapters to my own stories using the Chapter creation form.
 ```php
-
+    //The adding chapter method gets called in ChapterController.php.
+    //The story gets saved in a .txt file, and only the path to that file gets sen to the database.
+    function createChapter($story_id){
+        if(isset($_SESSION['profile_id']) && $_SESSION['account_type'] == "writer"){
+            if(isset($_POST['action'])) {
+                $chapter = new \App\models\Chapter();
+                $chapter->story_id = $story_id;
+                $chapter->chapter_title = $_POST['chapter_title'];
+                $targetFolder = 'stories/';
+                $targetFile = uniqid().'.txt';
+                file_put_contents($targetFolder.$targetFile, $_POST['chapter_text']);
+                $chapter->chapter_text = $targetFile;
+                $chapter->insert();
+                header('location:'.BASE.'/Story/viewStory/'.$story_id);
+            } else {
+                $chapter = new \App\models\Chapter();
+                $chapters = $chapter->findByStoryID($story_id);
+                $this->view('Chapter/createChapter', count($chapters));
+            }
+        }else{
+            header("location:".BASE."/home");
+        }
+    }
+    //The insertion of the chapter happens in the Chapter.php Object.
+    public function insert(){
+        $stmt = self::$connection->prepare("INSERT INTO chapter(story_id, chapter_title, chapter_text) VALUES (:story_id, :chapter_title, :chapter_text)");
+        $stmt->execute(["story_id"=>$this->story_id, "chapter_title"=>$this->chapter_title,"chapter_text"=>$this->chapter_text]);
+    }
 ```
 ### **Story 022**
-### **Card:** 
+### **Card:** As a writer, I can modify my own chapters on the website by clicking the ‘Edit’ button.
 ```php
-
+    //The edit method gets called in the ChapterController.php.
+    function editChapter($chapter_id) {
+    if(isset($_SESSION['profile_id']) && $_SESSION['account_type'] == "writer"){
+        if(isset($_POST['action'])) {
+            $chapter = new \App\models\Chapter();
+            $chapter = $chapter->findByID($chapter_id);
+            $chapter->chapter_title = $_POST['chapter_title'];
+            $targetFolder = 'stories/';
+            $targetFile = $chapter->chapter_text;
+            file_put_contents($targetFolder.$targetFile, $_POST['chapter_text']);
+            $chapter->update();
+            header('location:'.BASE.'/Story/viewStory/'.$chapter->story_id);
+        } else {
+            $chapter = new \App\models\Chapter();
+            $chapter = $chapter->findByID($chapter_id);
+            $this->view('Chapter/editChapter', $chapter);
+        }
+    }else{
+            header("location:".BASE."/home");
+        }
+    }
+    //The story gets updated in the Chapter.php Object.
+    public function update() {
+        $stmt = self::$connection->prepare("UPDATE chapter SET chapter_title = :chapter_title WHERE chapter_id = :chapter_id");
+        $stmt->execute(["chapter_id"=>$this->chapter_id, "chapter_title"=>$this->chapter_title]);
+    }
+```
+### **Story 023**
+### **Card:** As a writer, I can delete my own chapters on the website by navigating to the story in question and clicking the ‘Delete’ button.
+```php
+    //The delete method gets called in the ChapterController.php.
+    function deleteChapter($chapter_id) {
+    if(isset($_SESSION['profile_id']) && $_SESSION['account_type'] == "writer"){
+        $chapter = new \App\models\Chapter();
+        $chapter = $chapter->findByID($chapter_id);                
+        $path = getcwd().DIRECTORY_SEPARATOR.'stories'.DIRECTORY_SEPARATOR.$chapter->chapter_text;
+        unlink($path);
+        $chapter->delete();
+        header('location:'.BASE.'/Story/viewStory/'.$chapter->story_id);
+        }
+    else{
+            header("location:".BASE."/home");
+    }
+    }
+    //The deletion of the data from the database happens in the Chapter.php Object.
+    public function delete() {
+        $stmt = self::$connection->prepare("DELETE FROM chapter WHERE chapter_id = :chapter_id");
+        $stmt->execute(['chapter_id'=>$this->chapter_id]);
+    }
 ```
 
 ## User Guide (Examples of functionality)
