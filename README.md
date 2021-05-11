@@ -1,16 +1,14 @@
-<img src='images/logo-dark.png' height=200 style="margin-bottom: 20px;" >
+<img src='images/logo-dark.png' height=100>
 
 # Code Name: Story
 A community platform centered around sharing stories.
 
 ## Installation Guide
----
 This folder (`code-name-story`) should be directly in `htdocs`. The database shares the same name as the main folder `code-name-story`.
 
 The way to get to the home page is as simple as typing `localhost/code-name-story` and you will be brought to the home page.
 
 ## User Stories
----
 ### **Story 001**
 ### **Card:** As a user, I can search up a story or a writer by direct string input.
 
@@ -444,7 +442,6 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
 ```
 
 ## User Guide (Examples of functionality)
----
 
 ### **Browse by Tag, Sort and Search**
 ![Browse gif](README/browse.gif)
