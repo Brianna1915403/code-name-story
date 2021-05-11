@@ -10,9 +10,8 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
 
 ## User Stories
 ### **Story 001**
-### **Card:** As a user, I can search up a story or a writer by direct string input.
+#### **Card:** As a user, I can search up a story or a writer by direct string input.
 
-### **Implementation:** 
 ```php
     //Inside the Story.php Object.
     public function findBySearch($search) {
@@ -24,7 +23,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 002**
-### **Card:** As a user, I can filter stories by tags by checkbox selection.
+#### **Card:** As a user, I can filter stories by tags by checkbox selection.
 ```php
     //Inside Story.php Object.
     //Search By Individual Tag.
@@ -76,7 +75,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 003**
-### **Card:** As a user, I can sort stories by alphabetical order, and likes by dropdown menu selection.
+#### **Card:** As a user, I can sort stories by alphabetical order, and likes by dropdown menu selection.
 ```php
     public function getAllOrdered($order_by) {
         switch($order_by) {
@@ -92,12 +91,12 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 004**
-### **Card:** As a user, I can sort a story by ascending or descending order by date.
+#### **Card:** As a user, I can sort a story by ascending or descending order by date.
 ```php
     //Implementation was made in the same section as the sort by alphabetical order, and likes by dropdown menu selection.
 ```
 ### **Story 005**
-### **Card:** As a reader or a writer, I can register by submission of a registration form.
+#### **Card:** As a reader or a writer, I can register by submission of a registration form.
 ```php
     //Registration is a part of the login method, which checks for both login form submission and registration form submission.
     //Inside LoginController.php.
@@ -127,7 +126,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 006**
-### **Card:** As a reader or writer, I can login by submission of login form.
+#### **Card:** As a reader or writer, I can login by submission of login form.
 ```php
     //Login method in the LoginController.
     function login(){
@@ -163,7 +162,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 007**
-### **Card:** As a reader or writer, I can logout.
+#### **Card:** As a reader or writer, I can logout.
 ```php
     //Logout method in the LoginController.
     function logout(){
@@ -172,7 +171,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
         }        
 ```
 ### **Story 008**
-### **Card:** As a reader or writer, I can create my profile by submission of profile creation form.
+#### **Card:** As a reader or writer, I can create my profile by submission of profile creation form.
 ```php
     //The creation form being sent to the ProfileController.php.
     #[\App\core\LoginFilter]
@@ -204,7 +203,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 009**
-### **Card:** As a reader or writer, I can modify my profile by submission of the profile edit form.
+#### **Card:** As a reader or writer, I can modify my profile by submission of the profile edit form.
 ```php
     //The index of SettingsController is responsible for a lot of profile and user modifications, this snippet is responsible for modification of profile information.
     function index() {
@@ -249,7 +248,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 010**
-### **Card:** As a reader, I can upgrade my private to become a writer. And go back as being a reader when switching back.
+#### **Card:** As a reader, I can upgrade my private to become a writer. And go back as being a reader when switching back.
 ```php
     //The account type is being updated by the same SettingsController.
     //The update is being updated by the same Profile.php update method.
@@ -259,7 +258,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 011**
-### **Card:** As a reader, I can comment on other user’s stories by submission of the comment form.
+#### **Card:** As a reader, I can comment on other user’s stories by submission of the comment form.
 ```php
     if(isset($_POST["comment"])){
         $text = $_POST['text'];
@@ -276,7 +275,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 012**
-### **Card:** As a reader, I can edit my comments using an edit form.
+#### **Card:** As a reader, I can edit my comments using an edit form.
 ```php
     public function editComment($comment_id){            
         $comment = new \App\models\Comment();
@@ -291,7 +290,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 013**
-### **Card:** As a reader, I can delete my comments using a delete button.
+#### **Card:** As a reader, I can delete my comments using a delete button.
 ```php
     //The delete is being called to the CommentController.php.
     public function deleteComment($comment_id){            
@@ -303,7 +302,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     //The deletion of the comment from the database happens in the Comment.php Object.
 ```
 ### **Story 014**
-### **Card:** As a reader, I can reply to a comment using the reply form.
+#### **Card:** As a reader, I can reply to a comment using the reply form.
 ```php
     //The delete is being called to the CommentController.php.
     public function deleteComment($comment_id){            
@@ -330,7 +329,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 015**
-### **Card:** As a reader, I can like other user’s chapters using a like button.
+#### **Card:** As a reader, I can like other user’s chapters using a like button.
 ```php
     //The method is being called from the CommentController.
     if(isset($_POST["reply"])){
@@ -348,7 +347,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 016**
-### **Card:** As a reader, I can favorite other writer’s stories via a “favourite” button.
+#### **Card:** As a reader, I can favorite other writer’s stories via a “favourite” button.
 ```php
     //The favorite story system works the same way as like chapter, it is being called in StoryController.
     function subscribe($story_id){
@@ -368,7 +367,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 017**
-### **Card:** As a reader, I can change the look of the website, such as colours (e.g. Dark mode).
+#### **Card:** As a reader, I can change the look of the website, such as colours (e.g. Dark mode).
 ```php
     //The theme of the current user is updated.
     if (isset($_POST['theme'])) {
@@ -416,7 +415,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 018**
-### **Card:** As a writer, I can post my own stories on the website by filling the creation form.
+#### **Card:** As a writer, I can post my own stories on the website by filling the creation form.
 ```php
     //The story creation is being called to the StoryController.php.
     #[\App\core\LoginFilter]        
@@ -463,7 +462,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 019**
-### **Card:** As a writer, I can modify my own stories on the website by clicking the ‘Edit’ button.
+#### **Card:** As a writer, I can modify my own stories on the website by clicking the ‘Edit’ button.
 ```php
     //The Edit method is being called from the StoryController.php.
     #[\App\core\LoginFilter]        
@@ -527,7 +526,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 020**
-### **Card:** As a writer, I can delete my own stories on the website by navigating to the story in question and clicking the ‘Delete’ button.
+#### **Card:** As a writer, I can delete my own stories on the website by navigating to the story in question and clicking the ‘Delete’ button.
 ```php
     //The delete is being called in the StoryController.
     #[\App\core\LoginFilter]        
@@ -554,7 +553,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 021**
-### **Card:** As a Writer, I can add chapters to my own stories using the Chapter creation form.
+#### **Card:** As a Writer, I can add chapters to my own stories using the Chapter creation form.
 ```php
     //The adding chapter method gets called in ChapterController.php.
     //The story gets saved in a .txt file, and only the path to that file gets sen to the database.
@@ -586,7 +585,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 022**
-### **Card:** As a writer, I can modify my own chapters on the website by clicking the ‘Edit’ button.
+#### **Card:** As a writer, I can modify my own chapters on the website by clicking the ‘Edit’ button.
 ```php
     //The edit method gets called in the ChapterController.php.
     function editChapter($chapter_id) {
@@ -616,7 +615,7 @@ The way to get to the home page is as simple as typing `localhost/code-name-stor
     }
 ```
 ### **Story 023**
-### **Card:** As a writer, I can delete my own chapters on the website by navigating to the story in question and clicking the ‘Delete’ button.
+#### **Card:** As a writer, I can delete my own chapters on the website by navigating to the story in question and clicking the ‘Delete’ button.
 ```php
     //The delete method gets called in the ChapterController.php.
     function deleteChapter($chapter_id) {
