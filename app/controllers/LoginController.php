@@ -90,6 +90,7 @@
                     $profile = new \App\models\Profile();
                     $profile = $profile->findByUserID($_SESSION['user_id']);
                     $_SESSION['profile_id'] = $profile->profile_id;
+                    $_SESSION['account_type'] = $profile->account_type;
                     header('location:'.BASE.'/home');
                 } else {
                     session_destroy();

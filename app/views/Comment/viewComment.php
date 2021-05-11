@@ -44,8 +44,6 @@
                 <span class=\"subj\"><span>$comment->text</span></span>
                 <span class=\"manage_blank\"></span>
             <h3 class=\"date\">Commented on: $comment->date_commented</h3>
-            
-            </a>
             </li>";
 
             if(isset($_SESSION['profile_id'])){

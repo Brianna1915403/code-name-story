@@ -42,30 +42,6 @@
             } else {
                 return false;
             }
-        }
-
-        // TODO: Refactor 
-        function edit($picture_id) {
-            if (isset($_POST['action'])) {
-                $picture = new \App\models\Picture();
-                $picture = $picture->findByPictureID($picture_id);
-                $picture->caption = $_POST['caption'];
-                $picture->update();
-                header('location:'.BASE.'/Profile/viewProfile/'.$_SESSION['user_id']);
-            } if (isset($_POST['delete'])) {
-                $picture = new \App\models\Picture();
-                $picture = $picture->findByPictureID($picture_id);
-                
-                $path = getcwd().DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.$picture->filename;
-                unlink($path);
-                $picture->delete();
-                header('location:'.BASE.'/Profile/viewProfile/'.$_SESSION['user_id']);
-            } else {
-                $picture = new \App\models\Picture();
-                $picture = $picture->findByPictureID($picture_id);
-                $this->view('Picture/modifyPicture', $picture);
-            }
-        }
-        
+        }        
     }
 ?>

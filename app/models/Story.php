@@ -117,6 +117,14 @@
         }
 
         public function delete() {
+            $tag = new \App\models\StoryTag();
+            $tag->deleteAllTagsForStory($this->story_id);
+            if ($this->story_picture_id != null) {
+                $this->unsetCoverPicture();
+                $picture = new \App\models\Picture();
+                $picture->findByPictureID($this->story_picture_id);
+                $picture->delete();
+            }
             $stmt = self::$connection->prepare("DELETE FROM story WHERE story_id = :story_id");
             $stmt->execute(['story_id'=>$this->story_id]);
         }

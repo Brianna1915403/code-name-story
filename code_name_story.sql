@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2021 at 12:53 PM
+-- Generation Time: May 11, 2021 at 02:46 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -81,7 +81,8 @@ INSERT INTO `comment` (`comment_id`, `chapter_id`, `profile_id`, `text`, `date_c
 (10, 5, 5, 'Totally know what you mean I just can out a finger on it!', '2021-05-06 12:43:01'),
 (11, 5, 3, 'NoNoNoNONONOnOnONoNonOnOnONONoNoN!', '2021-05-06 12:44:14'),
 (12, 5, 3, 'It\'s a totaly origanl idea I didn\'t get it from anywhere! OK >:(', '2021-05-06 12:45:27'),
-(13, 4, 5, 'I\'ve been waiting all week to read this! made my day!', '2021-05-06 12:46:52');
+(13, 4, 5, 'I\'ve been waiting all week to read this! made my day!', '2021-05-06 12:46:52'),
+(16, 4, 9, 'I love this story!!!', '2021-05-11 01:13:10');
 
 -- --------------------------------------------------------
 
@@ -102,6 +103,7 @@ CREATE TABLE `favorite_story` (
 INSERT INTO `favorite_story` (`story_id`, `profile_id`) VALUES
 (1, 3),
 (1, 5),
+(1, 9),
 (2, 5);
 
 -- --------------------------------------------------------
@@ -125,7 +127,9 @@ INSERT INTO `liked_chapter` (`chapter_id`, `profile_id`) VALUES
 (1, 3),
 (2, 3),
 (3, 3),
+(3, 9),
 (4, 5),
+(4, 9),
 (5, 3),
 (5, 5),
 (6, 3),
@@ -156,7 +160,11 @@ INSERT INTO `picture` (`picture_id`, `filename`, `alt`, `artist`, `profile_id`) 
 (3, '6093dda5cbeb6.png', 'Galactic Hairy Gun Wars cover', 'superhelladude99', 3),
 (4, '6093e176e55af.png', 'Two Vile Uncles Jogging to the Beat cover', 'E', 4),
 (5, '6093e2b94d1a3.png', 'Bold Mo Smith cover', 'E', 4),
-(6, '6093e417defba.jpg', 'E\'s Profile Picture', '', 4);
+(6, '6093e417defba.jpg', 'E\'s Profile Picture', '', 4),
+(7, '609415952bb14.png', 'kyle\'s Profile Picture', '', 6),
+(9, '6099d7b545895.jpg', 'User\'s Profile Picture', '', 9),
+(10, '6099dc5147bec.jpg', 'My Story cover', 'User', 9),
+(11, '6099de410379d.jpg', 'My Story cover', 'User', 9);
 
 -- --------------------------------------------------------
 
@@ -182,7 +190,9 @@ INSERT INTO `profile` (`profile_id`, `user_id`, `account_type`, `description`, `
 (2, 2, 'writer', 'I love writing fanfics!', 'light', 2),
 (3, 3, 'writer', 'I\'m kind of a super hella cool dude 99x times over!', 'light', NULL),
 (4, 4, 'writer', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE', 'light', 6),
-(5, 5, 'reader', 'Reading is my only joy in life.......', 'light', NULL);
+(5, 5, 'writer', 'Reading is my only joy in life.......', 'light', NULL),
+(6, 6, 'reader', 'I like books!!!!!\r\n', 'light', 7),
+(9, 9, 'writer', 'I am a User', 'light', 9);
 
 -- --------------------------------------------------------
 
@@ -328,7 +338,9 @@ INSERT INTO `user` (`user_id`, `username`, `password_hash`, `token`) VALUES
 (2, 'Émily Mayodon', '$2y$10$P.1tAHWVu9FGY6jYNfGIU.eRaQbECyJ81c2dPFEHcMrQC5ucdhO2y', ''),
 (3, 'superhelladude99', '$2y$10$gCOckkoz7lOFoSbP1sh6yOfifMZ6QGUR1ry2mKQLUOFQBYstBvaWu', ''),
 (4, 'E', '$2y$10$ujw5CCxsSntwi6KT3EJ1mutMezsWcL0UMgpihbss2KrQXAZACihVW', ''),
-(5, 'Jane', '$2y$10$na5ZvVy6UZaotChA3qRumu6mY7.EU65HkMifnW/NQNeOLLU9zA7de', '');
+(5, 'Jane', '$2y$10$na5ZvVy6UZaotChA3qRumu6mY7.EU65HkMifnW/NQNeOLLU9zA7de', ''),
+(6, 'kyle', '$2y$10$Wlss7SwFPWJwfOVx/WUsq.dSRsXBAaTws9P1ABE2WIxFKWHKWRAXi', ''),
+(9, 'User', '$2y$10$qBynaVAUzlCHcagxCcZWkO8i3EeVcZMimJ3k6Kg2d625rCOKVXb..', '26UP32NC6QBXOXLM');
 
 --
 -- Indexes for dumped tables
@@ -421,31 +433,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `chapter`
 --
 ALTER TABLE `chapter`
-  MODIFY `chapter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `chapter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `picture`
 --
 ALTER TABLE `picture`
-  MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `story`
 --
 ALTER TABLE `story`
-  MODIFY `story_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `story_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tag`
@@ -457,7 +469,7 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

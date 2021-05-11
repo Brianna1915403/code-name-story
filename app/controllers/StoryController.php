@@ -106,7 +106,7 @@
 
         #[\App\core\LoginFilter]        
         #[\App\core\ProfileFilter] 
-        function delete($story_id) {
+        function deleteStory($story_id) {
             $story = new \App\models\Story();
             $story = $story->findByID($story_id);
             if ($_SESSION['profile_id'] == $story->profile_id)
